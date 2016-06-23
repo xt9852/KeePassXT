@@ -486,7 +486,6 @@
     </ResourceCompile>
     <Link>
       <AdditionalDependencies>winmm.lib;gdiplus.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
-      <OutputFile>D:\Program Files (x86)\KeePass Password Safe\KeePass.exe</OutputFile>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ProgramDatabaseFile>$(IntDir)KeePass.pdb</ProgramDatabaseFile>
@@ -495,6 +494,7 @@
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalLibraryDirectories>E:\OpenSource\boost_1_61_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <OutputFile>$(OutDir)KeePass.exe</OutputFile>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>

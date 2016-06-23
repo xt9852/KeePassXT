@@ -615,18 +615,30 @@ void CPasswordDlg::OnOK()
 {
 	UpdateData(TRUE);
 
-	ASSERT((m_lpKey == NULL) && (m_lpKey2 == NULL));
-
-	m_lpKey =  m_pEditPw.GetPassword();
-
     //------------------------------------------------
-    // XT-20160623
+    // XT+20160623
 
     if (!m_bCheckUserSuccess)
     {
         return;
     }
 
+    if (NULL != m_lpKey)
+    {
+        delete m_lpKey;
+        m_lpKey = NULL;
+    }
+
+    //------------------------------------------------
+
+	ASSERT((m_lpKey == NULL) && (m_lpKey2 == NULL));
+
+	m_lpKey =  m_pEditPw.GetPassword();
+
+    //------------------------------------------------
+    // XT+20160623
+
+    delete m_lpKey;
     m_lpKey = new char[128];
     strcpy(m_lpKey, "K7hta+ds+KeePass.c0m");
 
