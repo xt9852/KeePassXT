@@ -1,0 +1,1361 @@
+﻿2016-03-3 01:31
+|~LANGUAGENAME|
+|简体中文|
+|~LANGUAGEVERSION|
+|1.30|
+|~LANGUAGEAUTHOR|
+|Leo Dou @ CCF|
+|~LANGUAGEAUTHOREMAIL|
+|leodou at users.sourceforge.net|
+|~LANGISO6391CODE|
+|zh|
+|OK|
+|确定|
+|&Close|
+|关闭(&C)|
+|&Generate Random Password|
+|生成随机密码(&G)|
+|General|
+|常规|
+|Windows|
+|窗口|
+|Network|
+|网络|
+|Internet|
+|因特网|
+|eMail|
+|电子邮件|
+|Homebanking|
+|网上银行|
+|Entry|
+|记录|
+|&Title|
+|标题(&T)|
+|User &Name|
+|用户名(&N)|
+|&URL|
+|网址(&U)|
+|&Password|
+|密码(&P)|
+|N&otes|
+|备注(&O)|
+|&Case sensitive|
+|大小写不同(&C)|
+|Search in|
+|查找于|
+|Find what:|
+|查找内容：|
+|Find|
+|查找|
+|&Find|
+|查找(&F)|
+|Find a string in the entry list.|
+|在记录列表中查找一个字串|
+|About KeePass|
+|关于 KeePass|
+|Group|
+|群组|
+|Title|
+|标题|
+|User Name|
+|用户名|
+|URL|
+|网址|
+|Password|
+|密码|
+|Notes|
+|备注|
+|Ready.|
+|就绪。|
+|Enter Password:|
+|输入密码：|
+|Master Password:|
+|管理密码：|
+|Create New Password Database|
+|创建新的密码数据库|
+|Set Composite Master Key|
+|设置管理密码/密匙|
+|Specify the composite master key.|
+|确认管理密码|
+|Repeat Master Password|
+|确认管理密码|
+|Repeat the master password for the new database.|
+|确认新建数据库的管理密码|
+|Open Database|
+|打开数据库|
+|Enter Composite Master Key|
+|输入管理密码/密匙|
+|Enter the composite master key.|
+|输入管理密码/密匙|
+|(No key file selected)|
+|(未选择密匙文件)|
+|Key File|
+|密匙文件|
+|Password Generator|
+|密码生成器|
+|Here you can generate a random password.|
+|在这里可以生成一个随机的密码。|
+|Options|
+|选项|
+|Current settings|
+|当前配置|
+|Collect additional &entropy|
+|收集附加熵(&E)|
+|Generated password|
+|生成的密码|
+|&Generate|
+|生成(&G)|
+|&Accept|
+|接受(&A)|
+|Upper-case (A, B, C, ...)|
+|大写字母 (A, B, C, ...)|
+|Lower-case (a, b, c, ...)|
+|小写字母 (a, b, c, ...)|
+|Digits (0, 1, 2, ...)|
+|数字 (1, 2, 3, ...)|
+|Underline (_)|
+|底线符号 (_)|
+|Minus (-)|
+|减号 (-)|
+|Space ( )|
+|空格 ( )|
+|Special|
+|特殊字符|
+|High ANSI characters|
+|高位ANSI字符|
+|Brackets ([, ], {, }, (, ), <, >)|
+|括号 ([, ], {, }, (, ), <, >)|
+|Group:|
+|群组：|
+|Title:|
+|标题：|
+|User name:|
+|用户名：|
+|URL:|
+|网址：|
+|Icon:|
+|图标|
+|Password:|
+|密码：|
+|Repeat:|
+|确认密码：|
+|Notes:|
+|备注：|
+|***|
+|***|
+|Add Entry|
+|添加记录|
+|Create a new password entry.|
+|创建一个新的密码记录|
+|Edit Entry|
+|编辑记录|
+|Modify existing password entry.|
+|修改已有密码记录|
+|Group name:|
+|群组名称：|
+|Add Group|
+|添加群组|
+|Create a new password group.|
+|添加一个新的密码群组|
+|Edit Group|
+|编辑群组|
+|Modify existing password group.|
+|修改已有密码群组|
+|Random mouse input|
+|随机鼠标输入|
+|Click to begin:|
+|点击这里开始：|
+|Use &Mouse as Random Source|
+|使用鼠标作为随机数据来源(&M)|
+|Move the mouse in the field above until this is full:|
+|在上面的区域内移动鼠标至进度条结束：|
+|Hint: It is best to use both mouse and keyboard random sources.|
+|提示：最好同时使用鼠标和键盘作为随机数据来源。|
+|Random keyboard input|
+|随机键盘输入|
+|Just hack some random keys into the edit box above.|
+|随意在上面的编辑框中击键。|
+|You don't have to remember the keys you type in. They are used to generate a random value.|
+|你无须记住你打的字，它们只是用来生成随机数据的。|
+|So, the more the better. The different, the better.|
+|因此，输入越多越好、越复杂越好。|
+|The random the better.|
+|随机性越强越好。|
+|Get Random|
+|取得随机数据|
+|Get Random Data for Key Generation|
+|取得生成密匙所需的随机数据|
+|Move the mouse and type some random text to generate random values.|
+|移动鼠标并用键盘输入随机文本来产生随机值。|
+|Choose an icon.|
+|选择图标|
+|Pick an Icon|
+|选择图标|
+|Choose an icon from the list of available entry and group icons.|
+|从记录和群组图标列表中选择一个图标。|
+|&File|
+|文件(&F)|
+|&Edit|
+|编辑(&E)|
+|&View|
+|显示(&V)|
+|&?|
+|帮助(&H)|
+|&New...|
+|新建(&N)...|
+|&Open...|
+|打开(&O)...|
+|&Save|
+|保存(&S)|
+|Save &As...|
+|另存为(&A)...|
+|Change &Master Key...|
+|更改管理密码/密匙(&M)...|
+|&Print...|
+|打印(&P)...|
+|&Export|
+|导出(&E)|
+|&Lock Workspace|
+|锁定工作区(&L)|
+|&Unlock Workspace|
+|解锁工作区(&U)|
+|E&xit|
+|退出(&X)|
+|&Lock/Unlock Workspace|
+|锁定/解锁工作区(&L)|
+|&Options...|
+|选项(&O)...|
+|Add &Group...|
+|添加群组(&G)...|
+|Add Su&bgroup...|
+|添加子群组(&B)...|
+|Ed&it Group...|
+|编辑群组(&I)...|
+|&Delete Group...|
+|删除群组(&D)...|
+|Pr&int Group...|
+|打印群组(&I)...|
+|Copy User &Name|
+|复制用户名(&N)|
+|Copy &Password|
+|复制密码(&P)|
+|Open &URL(s)|
+|打开网址(&U)|
+|&Find in Database...|
+|在数据库中查找(&F)...|
+|Find in t&his Group...|
+|在此群组内查找(&H)...|
+|&Add Entry...|
+|添加记录(&A)...|
+|&Edit/View Entry...|
+|编辑/查看记录(&E)...|
+|&Delete Entry|
+|删除记录(&D)|
+|Dupli&cate Entry|
+|复制记录(&C)|
+|Move Entry to &Top|
+|移到顶部(&T)|
+|Move Entry &One Up|
+|向上移动(&O)|
+|Mo&ve Entry One Down|
+|向下移动(&V)|
+|Move Entry to &Bottom|
+|移到底部(&B)|
+|Move Group to &Top|
+|移到顶部(&T)|
+|Move Group One &Up|
+|向上移动(&O)|
+|Move Group &One Down|
+|向下移动(&V)|
+|Move Group to &Bottom|
+|移到底部(&B)|
+|Change &Language...|
+|选择语言(&L)...|
+|User &name|
+|用户名(&N)|
+|&Always on Top|
+|总在最前(&A)|
+|Hide &Passwords Behind Asterisks (***)|
+|隐藏密码为***(&P)|
+|Hide passwords behind asterisks (***).|
+|隐藏密码为***(&P)|
+|Password &Generator...|
+|密码生成器(&G)...|
+|KeePass &Website|
+|&KeePass 网站|
+|&About KeePass...|
+|关于 KeePass(&A)...|
+|&Database Settings...|
+|数据库设置(&D)...|
+|&Tray/Untray|
+|缩至托盘/显示窗口(&T)|
+|Version|
+|版本 |
+|Password and repeated password aren't identical!|
+|两次输入密码不一致!|
+|Stop|
+|停止|
+|Enter a group name!|
+|输入群组名！|
+|You must generate some random values using the random mouse input box or the edit field before you can close this dialog.|
+|在关闭此对话框前，你必须用鼠标或键盘产生随机数据。|
+|No random input|
+|没有随机数据输入|
+|EITHER enter a master password OR select a key file.|
+|输入密码或选择密匙文件。|
+|The password must consist of at least one character!|
+|密码至少要包含 1 个字符！|
+|Select at least one of the options in the list above!|
+|至少选择上面列表中的一项！|
+|The following self-tests failed:|
+|自检失败：|
+|- SHA 32-bit variables|
+|- SHA 32位变量|
+|- SHA 64-bit variables|
+|- SHA 64位变量|
+|- SHA-256 test vector(s)|
+|- SHA-256 测试向量|
+|- SHA-512 test vector(s)|
+|- SHA-512 测试向量|
+|- Rijndael encryption|
+|- Rijndael 加密|
+|- Rijndael decryption|
+|- Rijndael 解密|
+|- Arcfour crypto routine|
+|- Arcfour crypto routine|
+|- Twofish algorithm|
+|- Twofish 算法|
+|The program will exit now.|
+|现在将退出程序。|
+|Self-Test(s) Failed|
+|自检失败|
+|Clipboard cleared.|
+|剪贴板已清空。|
+|Field copied to clipboard. Clipboard will be cleared in %d seconds.|
+|字段已复制到剪贴板。剪贴板将在 %d 秒后清空。|
+|Failed to set the master key!|
+|设置管理密码/密匙失败！|
+|File cannot be opened!|
+|无法打开文件！|
+|File cannot be saved!|
+|无法保存文件！|
+|KeePass Password Safe Files|
+|KeePass Password Safe 文件|
+|All Files|
+|所有文件|
+|The current database file has been modified|
+|当前数据文件已更改。|
+|Do you want to save the changes before closing?|
+|关闭前保存更改吗？|
+|KeePass - Save Before Close/Lock?|
+|KeePass - 关闭/锁定前保存？|
+|Deleting a group will delete all items and subgroups in that group, too.|
+|删除群组将删除其下所有记录及子群组。|
+|Are you sure you want to delete this group?|
+|你确定要删除这个群组吗？|
+|Delete Group Confirmation|
+|确认删除群组|
+|Cannot open temporary file for printing!|
+|无法为打印打开临时文件！|
+|Load Language File|
+|载入语言文件|
+|Load a Language File|
+|载入一个语言文件|
+|Select one of the languages in the list below.|
+|选择列表中的一个语言文件。|
+|Available Languages|
+|可用的语言|
+|Open &Help File|
+|打开帮助(&H)|
+|Open &License File|
+|打开授权文件(&L)|
+|Newline sequence:|
+|换行：|
+|Windows newline sequence (\r\n)|
+|Windows 换行 (\r\n)|
+|Unix newline sequence (\n)|
+|Unix 换行 (\n)|
+|Clipboard auto-clear time (seconds):|
+|自动清空剪贴板时间(秒)：|
+|Settings|
+|设置|
+|Here you can configure KeePass.|
+|你可以在这里设置 KeePass。|
+|Automatically open last used database on startup|
+|启动时自动打开上次使用的数据库|
+|Automatically save when closing/locking the database|
+|退出和锁定数据库时自动保存|
+|Display images on buttons|
+|显示按钮图标|
+|Show grid lines in the entry list|
+|在密码记录列表上显示格线|
+|Workspace is locked.|
+|工作区已被锁定。|
+|Workspace locked|
+|工作区已锁定|
+|Loading error|
+|加载错误|
+|Language file cannot be opened!|
+|无法打开语言文件！|
+|Language file cannot be registered!|
+|无法注册语言文件！|
+|The language file has been installed.|
+|成功加载语言文件。|
+|You must restart KeePass in order to use the new language.|
+|必须重启 KeePass 才能使用新的语言。|
+|Do you wish to restart KeePass now?|
+|现在重启吗？|
+|Restart KeePass?|
+|重启 KeePass？|
+|Application cannot be restarted automatically!|
+|程序无法自动重新启动！|
+|Please restart KeePass manually.|
+|请手动重启 KeePass。|
+|CSV Files|
+|CSV文件|
+|Text Files|
+|文本文件|
+|An error occurred while importing the file. File cannot be imported.|
+|在导入文件时发生错误。文件无法导入。|
+|&CSV File...|
+|&CSV文件...|
+|&PwSafe v2 TXT File...|
+|&PwSafe v2 TXT文件...|
+|Select &Font|
+|选取字体(&F)|
+|Select &Password Font|
+|选取密码字体(&P)|
+|Select &Notes Font|
+|选取备注字体(&N)|
+|Select a new font for the list controls:|
+|为列表记录选取新字体：|
+|Code&Wallet TXT File...|
+|Code&Wallet TXT文件...|
+|&TXT File...|
+|&TXT文件...|
+|&HTML File...|
+|&HTML文件...|
+|&XML File...|
+|&XML文件...|
+|&CSV File...|
+|&CSV文件...|
+|&Import|
+|导入(&I)|
+|&Get more languages...|
+|获取更多语言(&G)...|
+|Start and exit|
+|启动与退出|
+|Interface (GUI)|
+|界面(GUI)|
+|Files|
+|文件|
+|Memory|
+|剪贴板|
+|Lock workspace when minimizing the main window|
+|最小化主窗口时锁定工作区|
+|Minimize to tray instead of taskbar|
+|最小化到系统托盘（而不是任务栏）|
+|Encryption algorithm to use (for this database):|
+|使用的加密算法(当前数据库)：|
+|Advanced Encryption Standard (AES) (128-bit block cipher using 256-bit key)|
+|Advanced Encryption Standard (AES) (128-bit block cipher using 256-bit key)|
+|Twofish (128-bit block cipher using 256-bit key)|
+|Twofish (128-bit block cipher using 256-bit key)|
+|Security|
+|安全|
+|KeePass is OSI Certified Open Source Software.|
+|KeePass 是 OSI 认证的开放源码软件。|
+|Lock workspace after the following idle time (seconds):|
+|空闲超过指定时间（秒）后锁定工作区：|
+|&Group name|
+|群组名(&G)|
+|Every second row has a different background color. Use this color:|
+|偶数行使用不同的背景色。选择颜色：|
+|Default|
+|默认|
+|More Colors...|
+|更多颜色...|
+|Search Results|
+|查找结果|
+|Creation Time|
+|创建时间|
+|Last Modification|
+|最后修改|
+|Last Access|
+|最后访问|
+|Expires|
+|失效|
+|UUID|
+|唯一标识码(UUID)|
+|&Creation Time|
+|创建时间(&C)|
+|Last &Modification Time|
+|修改时间(&M)|
+|&Last Access Time|
+|访问时间(&L)|
+|&Expiration Time|
+|有效期(&E)|
+|UU&ID|
+|唯一标识码(UU&ID)|
+|&Tools|
+|工具(&T)|
+|Show &Toolbar|
+|显示工具栏(&T)|
+|KeePass Website|
+|KeePass 网站|
+|Field copied to clipboard.|
+|字段已复制到剪贴板。|
+|A key file already exists on this drive. Do you want to overwrite or reuse it?|
+|该盘已有一个密匙文件，你想覆盖它还是使用它？|
+|Click [Yes] to overwrite the key file.|
+|点“是”覆盖。|
+|Click [No] to reuse the selected key file for this database.|
+|点“否”使用该密匙。|
+|Click [Cancel] to abort changing the key.|
+|点“取消”终止更换密匙。|
+|Overwrite?|
+|覆盖？|
+|Expires:|
+|失效：|
+|&Modify All Selected...|
+|修改已选记录(多项)(&M)...|
+|Change group:|
+|改变群组：|
+|Change entry icon:|
+|改变记录图标：|
+|Change expiration time:|
+|改变失效时间|
+|Mass Modify|
+|批量修改|
+|Change fields of all selected entries|
+|更改所有选择记录的属性|
+|Show &Columns|
+|显示列(&C)|
+|Show &Entry View|
+|显示内容(&E)|
+|Automatically resize table columns when resizing the main window|
+|改变窗口大小时自动调整列宽|
+|&Copy|
+|复制(&C)|
+|Copy &All|
+|复制所有(&C)|
+|&Undo|
+|撤销(&U)|
+|&Paste|
+|粘贴(&P)|
+|Cu&t|
+|剪切(&T)|
+|&Select All|
+|全选(&S)|
+|&Delete|
+|删除(&D)|
+|&TAN Wizard...|
+|&TAN 向导...|
+|TAN Wizard|
+|TAN 向导|
+|Using this wizard you can easily add TAN entries.|
+|通过本向导你可以轻松的添加 TAN 记录。|
+|Paste your TANs into the edit box below. All characters that are not explicitly specified as TAN characters are treated as separators, and only substrings consisting of TAN characters are added as TAN entries.|
+|将你的 TAN 粘贴到下面的编辑框。所有未明确定义为 TAN 字符的字符将被当作分隔符，并且只有由 TAN 字符组成的字串才能被添加为 TAN 记录。|
+|TANs consist of the following characters:|
+|TAN 包含下列字符：|
+|<TAN>|
+|<TAN>|
+|Print Pre&view...|
+|打印预览(&V)...|
+|About &Translation...|
+|关于语言文件(&T)...|
+|Translation information|
+|语言文件信息|
+|Currently Used Language|
+|当前语言|
+|Language File Version|
+|语言文件版本|
+|Author|
+|作者|
+|Translation Author Contact|
+|联系翻译作者|
+|&Rearrange|
+|排序(&R)|
+|&Sort Group List|
+|排序群组(&S)|
+|Sort List by &Title|
+|按标题(&T)|
+|Sort List by User &Name|
+|按用户名(&N)|
+|Sort List by &URL|
+|按网址(&U)|
+|Sort List by &Password|
+|按密码(&P)|
+|Sort List by Note&s|
+|按备注(&S)|
+|Sort List by &Creation Time|
+|按创建时间(&C)|
+|Sort List by Last &Modify Time|
+|按修改时间(&M)|
+|Sort List by Last &Access Time|
+|按访问时间(&A)|
+|Sort List by &Expiration Time|
+|按有效期(&E)|
+|Move Group One &Left|
+|向左移动(&L)|
+|Move Group One &Right|
+|向右移动(&R)|
+|Hide &User Names Behind Asterisks (***)|
+|隐藏用户名为***(&U)|
+|Attachment:|
+|附件：|
+|Attachment|
+|附件|
+|Attachment Description|
+|附件描述|
+|&Attachment|
+|附件(&A)|
+|Generate a random password...|
+|生成随机密码...|
+|Open file and set as attachment...|
+|浏览...|
+|Save attached file to disk...|
+|保存附件至磁盘...|
+|There already is a file attached with this entry.|
+|本记录已经有一个附件了。|
+|Do you want to overwrite the current attachment?|
+|覆盖当前附件吗？|
+|&Save Attached File To...|
+|附件另存为(&S)...|
+|There is no file attached with this entry.|
+|此记录没有附件。|
+|Remove the currently attached file|
+|移除当前附件|
+|Close button [X] minimizes the main window instead of terminating the application|
+|按 关闭 按钮 [X] 时，最小化程序|
+|KeePass Password Database|
+|KeePass 密码数据库|
+|&Open with KeePass|
+|用 KeePass 打开(&O)|
+|Here you can associate .kdb files with KeePass (so KeePass opens the file when double-clicking on it):|
+|设定 KeePass 与 .kdb 文件关联：|
+|Successfully associated KeePass with .kdb files! A double-click on a .kdb file will now start KeePass automatically.|
+|KeePass 与 .kdb 文件关联成功！双击 .kdb 文件时将自动用 KeePass 打开。|
+|Successfully removed association! KeePass won't be started anymore when double-clicking on a .kdb file.|
+|成功解除 KeePass 与 .kdb 文件的关联！双击 .kdb 文件不会再启动 KeePass。|
+|Create &Association|
+|建立关联(&A)|
+|&Remove Association|
+|解除关联(&R)|
+|Setup|
+|设置|
+|Entry List|
+|记录列表|
+|Exit?|
+|退出？|
+|The file couldn't be saved.|
+|文件无法保存。|
+|Maybe it's read-only or the storage media has been removed.|
+|可能文件是只读的，或存储设备已移除。|
+|If you exit now, all changes to the current database will be lost.|
+|如果现在退出，当前数据库的所有修改将会丢失。|
+|Would you like to exit anyway?|
+|仍然要退出吗？|
+|Cannot access the selected drive.|
+|无法访问所选的驱动器。|
+|Make sure a writable medium is inserted.|
+|请确定已经放入可存取的设备。|
+|Not enough free disk space!|
+|磁盘空间不足！|
+|Disable unsafe (security-critical) operations like exports, etc.|
+|禁止不安全的操作（严重影响安全的），比如导出等。|
+|Unsafe operations are disabled.|
+|不安全的操作已被禁止。|
+|To execute this operation you must enable unsafe operations in the options dialog.|
+|要执行该操作，你必须在“选项”中设定允许不安全的操作。|
+|You have changed an option that requires restarting KeePass to get active.|
+|您所修改的选项需要重启 KeePass 才能生效。|
+|Expired Entries|
+|失效记录|
+|This is a list of all expired entries|
+|这是所有失效记录的列表。|
+|Show &Expired Entries|
+|显示失效记录(&E) |
+|Click on an entry to jump to it.|
+|在其上点击来跳到该记录。|
+|Quality:|
+|密码质量：|
+|Database Settings|
+|数据库配置|
+|Here you can configure the current database.|
+|在此配置当前数据库。|
+|Database Summary|
+|数据库概要|
+|Your key is encrypted several times to make up the final database encryption key. This adds a constant time factor and makes guessing and dictionary attacks much harder.|
+|你的密匙被加密数次来形成最终的数据库密匙，这增加了时间因素来有效对抗猜解和词典类破解。|
+|The higher this number, the harder are dictionary attacks. But also the higher this number, the slower the database loading and saving.|
+|（数字越大，使用字典破解越困难，但也将使打开和保存数据库的时间加长。）|
+|Number of key encryption rounds:|
+|设置密匙加密次数：|
+|bits|
+|位|
+|Personal &Vault TXT File...|
+|Personal &Vault TXT文件...|
+|Imported from Password Safe|
+|从 Password Safe 导入|
+|Remember last opened file|
+|记住上次打开的文件|
+|Total number of groups / entries|
+|组/记录总计|
+|Total: %u groups / %u entries|
+|总共：%u群组，%u记录|
+|%u of %u selected|
+|选择了%u记录，共%u记录|
+|Number of selected entries (number of entries in the list)|
+|选择的记录数量（列表中的记录数量）|
+|Status|
+|状态|
+|The database file has been modified!|
+|数据库文件已改变！|
+|Most probably someone has changed the file while you were editing it.|
+|很可能是有人在你编辑该文件时修改了它。|
+|Do you want to overwrite it?|
+|你要覆盖它吗？|
+|The group you selected cannot store entries. Please select a different group.|
+|你所选择的群组无法储存记录，请选择其它群组。|
+|This will remove all selected entries unrecoverably!|
+|这将将永久移除所有选择的记录！|
+|Are you sure you want to delete all selected entries?|
+|确定要删除所有选择的记录吗？|
+|Delete Entries Confirmation|
+|确认删除记录|
+|Use PuTTY for ssh: and telnet: URLs|
+|使用 PuTTY 处理 ssh: 和 telnet: 网址|
+|Mark database as modified on last access time change|
+|在最后访问时间改变时，将数据库标记为已修改|
+|Se&lect All|
+|全选(&L)|
+|Auto-&Sort Entry List|
+|自动排序(&S)|
+|N&o Auto-Sort|
+|不自动排序(&O)|
+|Auto-sorting of the entry list is enabled; you cannot move entries manually.|
+|已启用自动排序，无法手动移动记录。|
+|Perform Auto-&Type|
+|执行自动输入|
+|Auto-sorting of the entry list is enabled; you cannot sort the list manually now.|
+|已启用自动排序，无法手动排序记录。|
+|Select key file manually...|
+|选择密匙文件...|
+|Save key file manually to...|
+|保存密匙文件...|
+|Enter the new composite master key.|
+|输入新的管理密码。|
+|Repeat the new master password for this database.|
+|确认当前数据库的新管理密码|
+|Change Composite Master Key|
+|更改管理密码|
+|Plugin|
+|插件|
+|Plugins|
+|插件管理器|
+|&Plugins...|
+|插件管理器(&P)...|
+|Here you can configure all installed KeePass plugins.|
+|在此设置所有已安装的 KeePass 插件。|
+|Enabled, loaded|
+|已启用，已载入|
+|&Enable|
+|启用(&E)|
+|&Disable|
+|停用(&D)|
+|About &Plugin...|
+|关于插件(&P)...|
+|An error occurred|
+|发生错误|
+|Error code|
+|错误代码|
+|Unknown error|
+|未知的错误|
+|Success|
+|成功|
+|Invalid parameter|
+|无效的参数|
+|Too little memory (RAM) available|
+|内存不足|
+|Invalid/wrong key|
+|无效/错误的密匙|
+|File access error: failed to open file in read mode|
+|文件访问错误：无法以只读模式打开文件|
+|File access error: failed to open file in write mode|
+|文件访问错误：无法以可写模式打开文件|
+|File error: error while reading from the file|
+|文件错误：读取文件时发生错误|
+|File error: error while writing to the file|
+|文件错误：写入文件时发生错误|
+|Internal error|
+|内部错误|
+|Invalid random source|
+|无效的随机数据来源|
+|Invalid/corrupted file structure|
+|无效/损坏的文件结构|
+|Encryption/decryption error|
+|加密/解密错误|
+|Get more plugins...|
+|获取更多插件...|
+|Global auto-type hot key combination:|
+|全局自动输入快捷键：|
+|Cannot register the global hot key.|
+|无法注册全局快捷键。|
+|Most probably another application has reserved this hot key already.|
+|可能其它应用程序已经占用了该快捷键。|
+|You can choose a different hot key combination in 'Tools' - 'Options' - 'Advanced' - 'Auto-Type'.|
+|你可以在“工具-选项-高级-自动输入”中更改快捷键。|
+|&Use master password and key file|
+|同时使用密码和密匙文件(&U)|
+|You've selected the AND key mode, so you must enter a password AND select a key file.|
+|你已经选择了“同时使用”模式，请输入密码并选择密匙文件。|
+|Timed: copy data to the clipboard and clear it automatically after some seconds|
+|定时清空：复制数据到剪贴板，并在一段时间后自动清除|
+|Enhanced: allow pasting only once and protect against clipboard spies|
+|增强保护：只允许粘贴一次，并保护剪贴板不被探查|
+|Clipboard behavior:|
+|剪贴板属性：|
+|Warning! It is possible that this option won't work correctly on your system, especially if you are using any clipboard enhancing or clipboard backup tools.|
+|警告！该选项可能在你的系统中无法正确工作，尤其是当你使用剪贴板增强工具类的软件时。|
+|If you notice any problems with the enhanced method, switch back to the timed clipboard clearing method.|
+|如果你在使用此增强模式时发现任何问题，请将其改为“定时清空”模式。|
+|Failed to change the .kdb file association. Make sure you have the rights to write to the registry and change file associations.|
+|更改 .kdb文件关联失败。请确定你有写注册表以及更改文件关联的权限。|
+|Number the TANs consecutively, starting from this value|
+|从这个值开始，将 TAN 当作连续的|
+|Never expires|
+|永不失效|
+|Auto-Type|
+|自动输入|
+|Help:|
+|帮助：|
+|Advanced|
+|高级|
+|Start minimized and locked|
+|启动时最小化并锁定|
+|Immediately after opening a database|
+|在打开数据库后立即显示|
+|Show expired entries (if any)|
+|显示失效记录（如果有）|
+|Show entries that will expire soon (if any)|
+|显示将要失效的记录（如果有）|
+|Integration|
+|整合|
+|Start KeePass at Windows startup (for current user)|
+|系统启动时运行 KeePass（当前用户）|
+|Unable to create/remove the auto-start key of KeePass in the Windows registry!|
+|无法在Windows注册表中创建/移除自动启动键值！|
+|Backup|
+|备份|
+|Save backups of modified entries into the 'Backup' group|
+|备份修改过的记录到“备份”群组|
+|Failed to create backup of this entry!|
+|无法备份该记录！|
+|The composite master key has been changed!|
+|管理密码已更改！|
+|Save the database now in order to get the new key applied.|
+|保存数据库以使新的密匙生效。|
+|Fields to export|
+|要导出的字段|
+|Fields to print|
+|要打印的字段|
+|Icon|
+|图标|
+|Group Tree|
+|树状群组|
+|Export Options|
+|导出选项|
+|Print Options|
+|打印选项|
+|Here you can customize the printed sheet.|
+|在此自定义打印表|
+|Here you can customize the exported files.|
+|在此自定义导出文件|
+|Encode/replace newline characters by '\n'|
+|用 '\n' 编码/代替换行符|
+|Export backup entries (entries in the 'Backup' group)|
+|导出备份记录(“备份”群组中的记录)|
+|Print backup entries (entries in the 'Backup' group)|
+|打印备份记录(“备份”群组中的记录)|
+|&Get More Import Plugins...|
+|获取更多的导入插件(&G)...|
+|1 Month|
+|1 月|
+|1 Week|
+|1 周|
+|2 Weeks|
+|2 周|
+|3 Months|
+|3 月|
+|6 Months|
+|6 月|
+|1 Year|
+|1 年|
+|By default, new entries expire in the following number of days:|
+|默认情况下，新的记录在以下天数后失效:|
+|Calculate rounds for a 1-second delay on this computer|
+|计算本机一秒延迟时间的循环加密次数|
+|Click to expire the entry in %u days|
+|单击使记录在 %u 天后失效|
+|Exclude entries in the '&Backup' group|
+|不包括在“备份”群组中的记录(&B)|
+|Exclude &expired entries|
+|排除失效记录(&E)|
+|Field has been pasted.|
+|字段已粘贴。|
+|Limit to single instance|
+|只允许运行一个KeePass进程|
+|Paste operation completed.|
+|粘贴完成。|
+|Single left click instead of double-click for default tray icon action|
+|从托盘图标呼出主窗口时默认使用单击左键方式（而非双击）|
+|The program is distributed under the terms of the GNU General Public License v2 or later.|
+|本程序的发布遵循 GNU 通用公共授权许可 V2 或新版的条款。|
+|Use more secure password edit controls|
+|使用更安全的密码编辑控件|
+|Press Shift+Home or Shift+End to clear this edit control|
+|按 Shift+Home 或 Shift+End 清除当前编辑框内容|
+|Waiting for paste command.|
+|等待粘贴命令。|
+|&Donate...|
+|捐助(&D)...|
+|Use alternative auto-type method (minimize window)|
+|使用不同于默认（后台窗口）的自动输入模式（最小化窗口）|
+|Quick search (toolbar)|
+|快速查找（工具栏）|
+|Include backup entries in quick searches|
+|快速查找时包含备份记录|
+|Include expired entries in quick searches|
+|快速查找时包含失效记录|
+|Delete all backup entries before saving the database|
+|保存数据前删除所有备份记录|
+|&Repair Database File...|
+|修复数据库文件(&R)...|
+|&KeePass Database...|
+|&KeePass 数据库...|
+|Acknowledgements|
+|鸣谢|
+|Click [No] to set a new key for the exported file.|
+|点击 [否] 为导出的数据库文件设置新的密码/密匙。|
+|Click [Yes] to use the same key as the currently opened database.|
+|点击 [是] 使用当前打开数据库的密码/密匙。|
+|Create new IDs|
+|新建标识|
+|If you select this option, KeePass will create new IDs for all groups and entries. Consequently no existing groups and entries of the currently opened database will be modified or overwritten.|
+|KeePass 将会为 导入的群组和记录 创建新的名称标识，因此不会修改或覆盖 当前打开数据库中的群组和记录 。|
+|KeePass will compare the last-modified times of the groups/entries and replace the existing ones only if the ones to import are newer.|
+|KeePass 将会对比 群组/记录 的最后修改时间，并且仅当导入项时间更新时，才替换当前项。|
+|KeePass will replace all existing groups and entries by the ones in the file to import, if they have the same ID.|
+|注意：KeePass 将会用 导入数据库中的群组和记录 替换 当前数据库中的 [同名] 群组和记录！（经试验，同名群组包括其下不同名的记录都将被覆盖。）|
+|Overwrite|
+|覆盖|
+|Overwrite if newer|
+|更新|
+|Please choose if KeePass should use the key of the currently opened database or ask you to define a new key to encrypt the exported file.|
+|请选择新数据库是否继续使用当前打开数据库的密码/密匙？或者是否需要为其建立新的密码/密匙？|
+|Reuse the current key/password?|
+|继续使用当前的密码/密匙？|
+|Show full path in the title bar (instead of file name only)|
+|在标题栏显示完整的路径（而不是只显示文件名）|
+|Enable auto-type features|
+|启用自动输入功能|
+|The file format that you have selected to import supports group and/or entry IDs. Please choose an import behaviour.|
+|你所选择的导入文件格式支持群组 和/或 记录名称标识，请设置导入选项。|
+|Copy &URL to Clipboard|
+|复制网址(&U)|
+|Copy URLs to clipboard instead of launching them (exception: cmd:// URLs)|
+|复制网址 但 不打开网址（例外：cmd:// URLs 格式的网址仍会打开）|
+|&Help|
+|帮助(&H)|
+|&Help Contents|
+|帮助内容(&H)|
+|Auto-Type Entry Selection|
+|选取自动输入记录|
+|Click [No] to open the file in normal writing mode.|
+|点 [否] 以正常的可写方式打开。|
+|Click [Yes] to open the file in read-only mode.|
+|点 [确定] 以只读方式打开文件。|
+|Click on an entry to auto-type it.|
+|点击一条记录进行自动输入。|
+|Exit program instead of locking the workspace after the specified time|
+|在指定时间后退出程序，而不是自动锁定工作区|
+|Multiple entries exist for the current window. Please select the entry to auto-type.|
+|存在多条记录匹配当前窗口，请选择一条需自动输入的记录。|
+|Now|
+|现在|
+|Open the file in read-only mode?|
+|以只读方式打开文件？|
+|Show TAN &Indices in Entry Titles|
+|在记录标题显示 TAN 索引(&I)|
+|TAN View &Options|
+|TAN 显示设置(&O)|
+|The file you are trying to open is locked, i.e. someone else has currently opened the file and is editing it.|
+|你要打开的文件被锁定，可能正被另一进程打开和编辑。|
+|Use &Simple List View for TAN-Only Groups|
+|对只包含 TAN 的群组使用简单列表(&S)|
+|Disable 'Save' button if the database hasn't been modified|
+|若数据库未被修改，禁用“保存”功能|
+|Check For Updates|
+|检查更新|
+|Check for Updates|
+|检查更新|
+|New version available.|
+|发现新版本！|
+|You have the latest version.|
+|目前已是最新版。|
+|Connect failed, cannot check for updates.|
+|连接失败，无法检查升级。|
+|1 update is available!|
+|已有1个可用更新！|
+|%u updates are available!|
+|%u 更新可用！|
+|No updates available.|
+|无可用更新。|
+|Component|
+|组件|
+|Installed|
+|已安装|
+|Available|
+|可用的|
+|Plugin unknown.|
+|未知插件|
+|Up to date.|
+|更新|
+|Pre-release version.|
+|预发布版本。|
+|Check for updates at KeePass startup|
+|启动时检查升级|
+|'Keyfile' or 'preselect' option is already specified|
+|已指定 'Keyfile' 或 'preselect' 参数|
+|Path is invalid|
+|路径无效|
+|Filename not found|
+|文件名不存在|
+|'Pw' option is already specified|
+|已指定 'Pw' 参数|
+|Password is empty|
+|密码为空|
+|Option not recognized|
+|参数无法识别|
+|Database is already specified|
+|已选定数据库|
+|It contains an unmatched quote|
+|包含一个不匹配的引用|
+|Command line argument|
+|命令行参数|
+|ignored|
+|忽略|
+|Reason|
+|原因|
+|KeePass Initialization|
+|初始化 KeePass|
+|Lock workspace when locking Windows, switching user or sleeping|
+|锁定 Windows、切换用户或休眠时锁定 工作区|
+|&Deny|
+|拒绝(&D)|
+|&Full|
+|完全(&F)|
+|&Read-Only|
+|只读(&R)|
+|An application requests access through inter-process communication|
+|正有一程序请求通过进程间通信访问|
+|An entry already exists for the current URL.|
+|当前 URL 的记录已存在|
+|Application|
+|程序|
+|Do you grant the application access to your KeePass database?|
+|允许该程序访问 KeePass 数据库吗？|
+|Fields to remember|
+|记忆字段|
+|Incoming IPC Request|
+|收到 IPC 请求|
+|Note that the application title has been supplied by the requesting application and may therefore be incorrect (a malicious program could try to access your database).|
+|注意程序标题是由请求程序添加的，因此可能不正确（恶意程序可能会试图访问数据库）|
+|Select the fields KeePass should remember|
+|选择 KeePass 需要记住的字段|
+|The following application requests access to your currently opened KeePass database:|
+|下面程序请求访问当前打开的 KeePass 数据库:|
+|Unknown|
+|未知|
+|Value|
+|值|
+|Enable remote control (allow applications to communicate with KeePass)|
+|启用远程控制（允许其他程序与 KeePass 通信）|
+|Make sure the media that contains the key file is inserted and that KeePass has the rights to access it (check file access rights, ensure that no other application is blocking the file, ...).|
+|请确保已插入了包含密匙文件的介质，并且 KeePass 有权访问该文件（检查文件访问权限，确保没有其他程序阻止对文件的访问，……）。|
+|URL Field: Help|
+|网址: 帮助|
+|There are too few characters in the character set to build up a password matching the specified rules|
+|所选字符集中字符数太少，无法生成满足指定条件的密码|
+|(Custom)|
+|（自定义）|
+|Save current settings as a profile.|
+|将当前设置保存为方案|
+|Delete currently selected profile.|
+|删除所选方案|
+|(Automatically generated passwords for new entries)|
+|（为新记录自动生成密码）|
+|Profile|
+|方案|
+|Length of generated password:|
+|所需密码长度:|
+|Generate using character set:|
+|使用字符集生成:|
+|Generate using pattern:|
+|使用样式生成:|
+|Also include the following characters:|
+|同时包括下列字符:|
+|Exclude look-alike characters|
+|排除象形字符|
+|Use local date/time format instead of ISO notation|
+|使用系统 日期/时间 格式（而非 ISO 标记方式）|
+|Save as Profile|
+|保存为方案|
+|Save current settings as password generator profile.|
+|保存当前设置为密码生成方案。|
+|Please enter a name for the new password generator profile, or select an existing profile to overwrite it:|
+|请为新的密码生成方案输入名称，或选择覆盖一个已有的方案：|
+|Randomly permute characters of password|
+|随机排序|
+|Locked|
+|已锁定|
+|The help file contains detailed information about the expected input format. Do you want to open the help file?|
+|帮助文件中包含所需输入格式的详细信息，你想打开帮助吗？|
+|Failed to save the configuration.|
+|保存配置失败。|
+|Arguments|
+|参数|
+|&Export Group|
+|导出群组(&E)|
+|in "Minimal functionality" mode|
+|处于"最小化功能"模式|
+|Regular expression|
+|正则表达式|
+|Default user name for new entries:|
+|新建记录的默认用户名:|
+|Advanced Password Generator Options|
+|高级密码生成器选项|
+|Exclude the following characters:|
+|排除下列字符:|
+|Options/rules marked with an asterisk reduce the security of generated passwords. Only enable them if you are forced to follow such rules by the website, application or password policy.|
+|带星号的 选项/规则 降低了生成密码的安全性。请仅在 网站/程序/密码规则 强制使用此类规则时启用。|
+|Each character must occur at most once|
+|每个字符仅出现一次|
+|Provider|
+|提供者|
+|The key provider plugin did not supply a valid key|
+|密匙提供插件未提供一个有效密匙|
+|Register Ctrl-Alt-K hot key (brings the KeePass window to front)|
+|注册热键 Ctrl-Alt-K （激活 KeePass 窗口）|
+|Type to search the database|
+|键入以搜索数据库|
+|Search...|
+|搜索...|
+|Clear Search History|
+|清除搜索历史|
+|TANs are imported into the currently selected group|
+|TANs 被导出到当前选定组|
+|The selected key file already exists|
+|所选密匙文件已经存在|
+|Generate a new key and overwrite the existing key file. The key currently stored in the existing key file will be lost.|
+|生成一个新密匙并覆盖已有的密匙文件。原密匙文件中保存的密匙将丢失。|
+|Reuse|
+|重复使用|
+|Load the existing key file and use it as key for the current database. The key file will not be modified.|
+|载入已有的密匙文件并用它作为当前数据库的密匙。密匙文件将不被更改。|
+|Cancel|
+|取消|
+|Abort specifying a new key for the current database.|
+|放弃为当前数据库指定新密匙文件。|
+|Overwrite existing key file?|
+|覆盖已有的密匙文件？|
+|Save|
+|保存|
+|&Discard changes|
+|不保存更改(&D)|
+|Save database changes before closing the file?|
+|关闭文件前保存数据库更改？|
+|Save database changes before exiting KeePass?|
+|退出 KeePass 前保存数据库更改？|
+|Save database changes before locking the workspace?|
+|锁定 工作区 前保存数据库更改？|
+|Save all changes made to the database and close the file.|
+|保存所有数据库更改并关闭文件。|
+|Save all changes made to the database and exit KeePass.|
+|保存所有数据库更改并退出 KeePass。|
+|Save all changes made to the database and lock the KeePass workspace.|
+|保存所有数据库更改并锁定 KeePass 工作区。|
+|Discard all changes made to the database and close the file.|
+|放弃所有数据库更改并关闭文件。|
+|Discard all changes made to the database and exit KeePass.|
+|放弃所有数据库更改并退出 KeePass。|
+|Discard all changes made to the database and lock the KeePass workspace.|
+|放弃所有数据库更改并锁定 KeePass 工作区。|
+|Abort the current operation.|
+|终止当前操作。|
+|The KeePass workspace will not be locked.|
+|KeePass 工作区将不会被锁定。|
+|KeePass will not be closed.|
+|KeePass 将不会退出。|
+|The file will not be closed.|
+|文件将不会被关闭。|
+|The master password must be at least %u characters long!|
+|管理密码长度必须至少 %u 字符！|
+|The estimated quality of the master password must be at least %u bits!|
+|管理密码的评估质量必须至少 %u 位！|
+|Copy [of an item]|
+|复制 [条目的]|
+|Focus entry list after a successful quick search|
+|当成功进行快速查找后，定位到记录列表|
+|Always grant full access through remote control (not recommended)|
+|远程控制时总是允许完全控制（不推荐）|
+|URL Field: Select Application...|
+|网址: 选择程序...|
+|URL Field: Select Document...|
+|网址: 选择文档...|
+|URL Field: Insert Placeholder|
+|网址: 插入占位符|
+|Auto-Type: Help|
+|自动输入: 帮助|
+|Auto-Type: Customize Sequence|
+|自动输入: 自定义规则|
+|Auto-Type: Select Target Window...|
+|自动输入: 选择目标窗口...|
+|Select the target window for the current entry.|
+|为当前记录选择目标窗口|
+|To specify the target window, either select an existing currently-opened window from the drop-down list, or enter the window title manually:|
+|从下拉列表中选择当前打开的窗口，或者手工输入窗口标题:|
+|Default auto-type sequence for standard entries:|
+|标准记录的默认自动输入规则|
+|Prepend special initialization sequence for Internet Explorer windows|
+|为 IE 窗口预设特殊初始规则|
+|Here you can configure auto-type.|
+|在此设置自动输入|
+|The target file might be in a corrupted state. Please try saving again, and if that fails, save the database to a different location.|
+|目标文件或处于出错状态，请重试，若仍然失败，请保存数据文件至新的路径。|
+|Drop to background when copying data to the clipboard|
+|复制数据到剪贴板时程序切换至后台|
+|Insert Field Reference|
+|插入字段引用|
+|In Title Field|
+|标题字段|
+|In User Name Field|
+|用户名字段|
+|In URL Field|
+|URL 字段|
+|In Password Field|
+|密码字段|
+|In Notes Field|
+|备注字段|
+|Field to reference|
+|引用的字段|
+|Identify source entry by|
+|源记录识别字段|
+|Source field to reference|
+|引用源字段|
+|The selected field, which identifies the source entry, contains illegal characters (like '{', '}', newline characters, ...).|
+|用于识别源记录的字段包含非法字符（如大括号{}、换行符等...）。|
+|Multiple entries match the specified identifying field.|
+|指定的识别字段匹配到多条记录|
+|To avoid ambiguity, entries can be identified by their UUIDs, which are unique.|
+|为精确匹配，可以通过唯一标识码来识别|
+|Read-only|
+|只读|
+|Normal|
+|正常|
+|Take ownership of the file and open it in normal writing mode.|
+|取得文件所有权并以正常写入模式打开它。|
+|Open the file in read-only mode. Changes to the database can be saved to a different file.|
+|以只读模式打开文件，对数据库所做的更改可以保存到另外的文件。|
+|Sort items in the auto-type entry selection dialog|
+|在自动输入字段选择对话框中排序|
+|Clear clipboard when closing/locking the database|
+|关闭/锁定数据库时清空剪贴板|
+|Help Source|
+|帮助源|
+|Use the following help source when a "Help" button within KeePass is clicked:|
+|在 KeePass 中点击帮助按钮时，使用如下的帮助源:|
+|Local help file|
+|本地帮助文件|
+|The local help file is a snapshot of the product documentation at the point when this product version was published. It is not updated automatically.|
+|本地帮助文件是当前版本发布时帮助文档的拷贝，它不能自动升级。|
+|Online help center|
+|在线帮助中心|
+|The online help center always contains the latest version of the product documentation. Internet connection is required.|
+|在线帮助中心总是保持最新的帮助文档，它需要连接到网络。|
+|This option is disabled, because local help is not installed.|
+|由于没有安装本地帮助文件，该选项无法生效。|
+|Choose between local help and online help center.|
+|选择本地帮助或在线帮助|
+|Help &Source...|
+|帮助源(&S)...|
+|Use advanced memory protection (DPAPI, only Windows Vista and higher)|
+|启用高级内存保护（DPAPI，仅支持 Vista 及以上系统）|
+|Use CNG/BCrypt for key transformations (only Windows Vista and higher)|
+|密匙转换时使用 CNG/BCrypt（仅支持 Vista 或更高系统）|
+|Delete TAN entries immediately after using them|
+|使用 TAN 记录之后立即将之删除|
+|KeePass 1.x cannot open KDBX files.|
+|KeePass 1.x 无法打开 KDBX 文件。|
+|Use the KeePass 2.x 'Export' feature to migrate this file|
+|使用 KeePass 2.x '导出'功能转换此文件|
+|The specified name is reserved.|
+|指定名称已存在。|
+|Please choose a different name.|
+|请选择其它名称。|
+|see the <A HREF="h">help manual</A> for details.|
+|查看 <A HREF="h">帮助手册</A> 获取详细信息。|
+|Use file transactions for writing databases|
+|写入数据库时使用文件置换（成功写入临时文件后再替换原文件）|
+|Ctrl|
+|Ctrl|
+|Remember key sources (key file paths, provider names, ...)|
+|记住密匙源（文件路径、提供者名称等...）|
+|Custom database color:|
+|自定义数据库颜色：|
+|&Yes|
+|是(&Y)|
+|&No|
+|否(&N)|
+|Minimize main window after locking the workspace|
+|锁定工作区后最小化主窗口|
+|Ensure same keyboard layouts during auto-type|
+|确保在自动输入中保持同样的键盘布局|
+|{PARAM} more entries|
+|{PARAM} 条未显示记录|
+|The database is empty|
+|数据库是空的|
+|Show tray icon only if main window has been sent to tray|
+|托盘图标仅在主窗口被发送至托盘时才显示|
+|KeePass can automatically check for updates on each program start.|
+|KeePass 可在每次程序启动时自动检查更新|
+|Automatic update checks are performed unintrusively in the background. A notification is only displayed when an update is available. Updates are not downloaded or installed automatically.|
+|自动更新检查在后台执行，仅当有可用更新时提示。不自动下载或安装更新。|
+|No personal information is sent to the KeePass web server. KeePass just downloads a small version information file and compares the available version with the installed version.|
+|在检查过程中不会发送任何私人信息至KeePass网络服务器，仅仅是下载一个很小的版本信息文件用来与已安装版本进行比对。|
+|Enable automatic update check?|
+|启用自动更新检查？|
+|recommended|
+|推荐|
+|Database files cannot be used as key files.|
+|数据文件不能被用作密匙文件。|
+|Warning|
+|警告|
+|In repair mode, the integrity of the data is not checked (in order to rescue as much data as possible). When no integrity checks are performed, corrupted/malicious data might be incorporated into the database.|
+|修复模式下不检查数据的完整性（以最大限度的恢复数据）。在不检查数据完整性的情况下，被损坏的数据可能会被合并到数据库中。|
+|Thus the repair functionality should only be used when there really is no other solution. If you use it, afterwards you should thoroughly check your whole database for corrupted/malicious data.|
+|因此修复功能应在确实没有其它解决办法的时候才使用。如果你使用了这个功能，稍候你应该检查整个数据库来排查损坏的数据。|
+|Are you sure you want to attempt to repair a database file?|
+|你确定想要修复一个数据文件吗？|
+|ch.|
+|字符|
+|Saving database...|
+|正在保存数据库...|
+|Delete &attachments|
+|删除附件(&A)|
+|The generated password contains a placeholder. When using this password (e.g. by copying it to the clipboard or auto-typing it), the placeholder will be replaced, i.e. effectively a different password might be used.|
+|生成的密码包含一个占位符，当使用该密码时（比如复制到剪贴板或自动输入），占位符会被替换，也就是说一个不同的密码会被使用。|
+|Accept this password?|
+|接受此密码？|

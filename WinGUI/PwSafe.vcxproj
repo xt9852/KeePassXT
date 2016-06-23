@@ -1,0 +1,941 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug Unicode|Win32">
+      <Configuration>Debug Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug Unicode|x64">
+      <Configuration>Debug Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Unicode|Win32">
+      <Configuration>Release Unicode</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release Unicode|x64">
+      <Configuration>Release Unicode</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{C739C9F5-288C-4A5B-B9D8-38A406796A75}</ProjectGuid>
+    <RootNamespace>PwSafe</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>Static</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="$(VCTargetsPath)Microsoft.CPP.UpgradeFromVC60.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>14.0.24730.2</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
+    <OutDir>..\Build\WinGUI_Bin\Debug_Unicode\</OutDir>
+    <IntDir>..\Build\WinGUI_Bin\Debug_Unicode\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
+    <OutDir>..\Build\WinGUI_Bin\Debug_Unicode_x64\</OutDir>
+    <IntDir>..\Build\WinGUI_Bin\Debug_Unicode_x64\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>..\Build\WinGUI_Bin\Release\</OutDir>
+    <IntDir>..\Build\WinGUI_Bin\Release\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>..\Build\WinGUI_Bin\Release_x64\</OutDir>
+    <IntDir>..\Build\WinGUI_Bin\Release_x64\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
+    <OutDir>..\Build\WinGUI_Bin\Release_Unicode\</OutDir>
+    <IntDir>..\Build\WinGUI_Bin\Release_Unicode\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
+    <OutDir>..\Build\WinGUI_Bin\Release_Unicode_x64\</OutDir>
+    <IntDir>..\Build\WinGUI_Bin\Release_Unicode_x64\</IntDir>
+    <LinkIncremental>false</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>..\Build\WinGUI_Bin\Debug\</OutDir>
+    <IntDir>..\Build\WinGUI_Bin\Debug\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>..\Build\WinGUI_Bin\Debug_x64\</OutDir>
+    <IntDir>..\Build\WinGUI_Bin\Debug_x64\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+    <GenerateManifest>true</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Debug_Unicode/PwSafe.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)PwSafe.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;gdiplus.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)KeePass.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)KeePass.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
+      <RandomizedBaseAddress />
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug_Unicode/PwSafe.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <TypeLibraryName>.\Debug_Unicode/PwSafe.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)PwSafe.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;gdiplus.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)KeePass.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)KeePass.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
+      <RandomizedBaseAddress />
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug_Unicode/PwSafe.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Release/PwSafe.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)PwSafe.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;gdiplus.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)KeePass.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)KeePass.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AllowIsolation>true</AllowIsolation>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release/PwSafe.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <TypeLibraryName>.\Release/PwSafe.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <ExceptionHandling>Sync</ExceptionHandling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)PwSafe.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;gdiplus.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)KeePass.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)KeePass.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AllowIsolation>true</AllowIsolation>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release/PwSafe.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Release_Unicode/PwSafe.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)PwSafe.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;gdiplus.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)KeePass.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ProgramDatabaseFile>$(IntDir)KeePass.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX86</TargetMachine>
+      <AllowIsolation>true</AllowIsolation>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release_Unicode/PwSafe.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <TypeLibraryName>.\Release_Unicode/PwSafe.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <InlineFunctionExpansion>OnlyExplicitInline</InlineFunctionExpansion>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;UNICODE;_UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
+      <FunctionLevelLinking>false</FunctionLevelLinking>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)PwSafe.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;UNICODE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;gdiplus.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)KeePass.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <ProgramDatabaseFile>$(IntDir)KeePass.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <EntryPointSymbol>wWinMainCRTStartup</EntryPointSymbol>
+      <RandomizedBaseAddress>true</RandomizedBaseAddress>
+      <DataExecutionPrevention>true</DataExecutionPrevention>
+      <TargetMachine>MachineX64</TargetMachine>
+      <AllowIsolation>true</AllowIsolation>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Release_Unicode/PwSafe.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <TypeLibraryName>.\Debug/PwSafe.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)PwSafe.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <AdditionalIncludeDirectories>E:\OpenSource\boost_1_61_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;gdiplus.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>D:\Program Files (x86)\KeePass Password Safe\KeePass.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)KeePass.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress />
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX86</TargetMachine>
+      <AdditionalLibraryDirectories>E:\OpenSource\boost_1_61_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug/PwSafe.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Midl>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>X64</TargetEnvironment>
+      <TypeLibraryName>.\Debug/PwSafe.tlb</TypeLibraryName>
+      <HeaderFileName />
+    </Midl>
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MinimalRebuild>true</MinimalRebuild>
+      <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>stdafx.h</PrecompiledHeaderFile>
+      <PrecompiledHeaderOutputFile>$(IntDir)PwSafe.pch</PrecompiledHeaderOutputFile>
+      <AssemblerListingLocation>$(IntDir)</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <Culture>0x0409</Culture>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>winmm.lib;gdiplus.lib;wininet.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>$(OutDir)KeePass.exe</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)KeePass.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <RandomizedBaseAddress />
+      <DataExecutionPrevention />
+      <TargetMachine>MachineX64</TargetMachine>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>.\Debug/PwSafe.bsc</OutputFile>
+    </Bscmake>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\KeePassLibCpp\Crypto\ARCFour.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Crypto\KeyTransform.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Crypto\KeyTransform_BCrypt.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Crypto\MemoryProtectionEx.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Crypto\Rijndael.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Crypto\SHA2\SHA2.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Crypto\TestImpl.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Crypto\Twofish.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Crypto\TwofishClass.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\DataExchange\PwExport.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\DataExchange\PwImport.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Details\PwCompatImpl.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Details\PwFileImpl.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Details\PwFindImpl.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\IO\KpInternetStream.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\IO\KpMemoryStream.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\IO\KpStream.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\PasswordGenerator\CharSetBasedGenerator.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\PasswordGenerator\PasswordGenerator.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\PasswordGenerator\PatternBasedGenerator.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\PasswordGenerator\PwCharSet.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\PwCompat.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\PwManager.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\SysSpec_Windows\AppUtil.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\SysSpec_Windows\NewRandom.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\SysSpec_Windows\StrUtilEx.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Util\Base64.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Util\ComUtil.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Util\EntryUtil.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Util\FileTransactionEx.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Util\MemUtil.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Util\PopularPasswords.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Util\PwQualityEst.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Util\PwUtil.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Util\StrUtil.cpp" />
+    <ClCompile Include="..\KeePassLibCpp\Util\TranslateEx.cpp" />
+    <ClCompile Include="AddEntryDlg.cpp" />
+    <ClCompile Include="AddGroupDlg.cpp" />
+    <ClCompile Include="CheckOptionsDlg.cpp" />
+    <ClCompile Include="DbSettingsDlg.cpp" />
+    <ClCompile Include="EntryListDlg.cpp" />
+    <ClCompile Include="EntryPropertiesDlg.cpp" />
+    <ClCompile Include="FieldRefDlg.cpp" />
+    <ClCompile Include="FindInDbDlg.cpp" />
+    <ClCompile Include="GetRandomDlg.cpp" />
+    <ClCompile Include="HelpSourceDlg.cpp" />
+    <ClCompile Include="IconPickerDlg.cpp" />
+    <ClCompile Include="ImportOptionsDlg.cpp" />
+    <ClCompile Include="LanguagesDlg.cpp" />
+    <ClCompile Include="NewGUI\AMSEdit.cpp" />
+    <ClCompile Include="NewGUI\AutoRichEditCtrlFx.cpp" />
+    <ClCompile Include="NewGUI\BCMenu.cpp" />
+    <ClCompile Include="NewGUI\BtnST.cpp" />
+    <ClCompile Include="NewGUI\ColorStaticEx.cpp" />
+    <ClCompile Include="NewGUI\ColourPickerXP.cpp" />
+    <ClCompile Include="NewGUI\CustomComboBoxEx.cpp" />
+    <ClCompile Include="NewGUI\CustomListCtrlEx.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="NewGUI\CustomTreeCtrlEx.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="NewGUI\DwmUtil.cpp" />
+    <ClCompile Include="NewGUI\FontUtil.cpp" />
+    <ClCompile Include="NewGUI\GlobalWindowManager.cpp" />
+    <ClCompile Include="NewGUI\GradientUtil.cpp" />
+    <ClCompile Include="NewGUI\ImageUtilEx.cpp" />
+    <ClCompile Include="NewGUI\KCSideBannerWnd.cpp" />
+    <ClCompile Include="NewGUI\MsgRelayWnd.cpp" />
+    <ClCompile Include="NewGUI\NewColorizerEx.cpp" />
+    <ClCompile Include="NewGUI\NewDialogsEx.cpp" />
+    <ClCompile Include="NewGUI\NewGUICommon.cpp" />
+    <ClCompile Include="NewGUI\OptionsList.cpp">
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="NewGUI\QualityProgressCtrl.cpp" />
+    <ClCompile Include="NewGUI\SecureEditEx.cpp" />
+    <ClCompile Include="NewGUI\StatusDialogEx.cpp" />
+    <ClCompile Include="NewGUI\SystemTray.cpp" />
+    <ClCompile Include="NewGUI\SystemTrayEx.cpp" />
+    <ClCompile Include="NewGUI\TaskbarListEx\TaskbarListEx.cpp" />
+    <ClCompile Include="NewGUI\TaskDialog\VistaTaskDialog.cpp" />
+    <ClCompile Include="NewGUI\ThemeHelperST.cpp" />
+    <ClCompile Include="NewGUI\VistaMenu\VistaMenu.cpp" />
+    <ClCompile Include="NewGUI\WindowGroups.cpp" />
+    <ClCompile Include="NewGUI\XHyperLink.cpp" />
+    <ClCompile Include="NewGUI\XPStyleButtonST.cpp" />
+    <ClCompile Include="OptionsAutoTypeDlg.cpp" />
+    <ClCompile Include="OptionsDlg.cpp" />
+    <ClCompile Include="PasswordDlg.cpp" />
+    <ClCompile Include="PermissionDlg.cpp" />
+    <ClCompile Include="PluginsDlg.cpp" />
+    <ClCompile Include="Plugins\KpApiImpl.cpp" />
+    <ClCompile Include="Plugins\KpCommandLineImpl.cpp" />
+    <ClCompile Include="Plugins\KpCommandLineOptionImpl.cpp" />
+    <ClCompile Include="Plugins\KpDatabaseImpl.cpp" />
+    <ClCompile Include="Plugins\KpFileTransactionImpl.cpp" />
+    <ClCompile Include="Plugins\KpFullPathNameImpl.cpp" />
+    <ClCompile Include="Plugins\KpUtilitiesImpl.cpp" />
+    <ClCompile Include="Plugins\PluginMgr.cpp" />
+    <ClCompile Include="PwGeneratorAdvDlg.cpp" />
+    <ClCompile Include="PwGeneratorExDlg.cpp" />
+    <ClCompile Include="PwSafe.cpp" />
+    <ClCompile Include="PwSafeDlg.cpp" />
+    <ClCompile Include="SingleLineEditDlg.cpp" />
+    <ClCompile Include="StdAfx.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TanWizardDlg.cpp" />
+    <ClCompile Include="UpdateInfoDlg.cpp" />
+    <ClCompile Include="Util\AppLocator.cpp" />
+    <ClCompile Include="Util\CmdLine\CmdArgs.cpp" />
+    <ClCompile Include="Util\CmdLine\CommandLineOption.cpp" />
+    <ClCompile Include="Util\CmdLine\CommandLineTokens.cpp" />
+    <ClCompile Include="Util\CmdLine\Executable.cpp" />
+    <ClCompile Include="Util\CmdLine\FullPathName.cpp" />
+    <ClCompile Include="Util\FileLock.cpp" />
+    <ClCompile Include="Util\KeySourcesPool.cpp" />
+    <ClCompile Include="Util\PrivateConfig.cpp" />
+    <ClCompile Include="Util\PrivateConfigEx.cpp" />
+    <ClCompile Include="Util\RemoteControl.cpp" />
+    <ClCompile Include="Util\RestartManagerEx.cpp" />
+    <ClCompile Include="Util\SendKeys.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|x64'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release Unicode|x64'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+      </PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+      </PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="Util\SendKeysEx.cpp" />
+    <ClCompile Include="Util\SessionNotify.cpp" />
+    <ClCompile Include="Util\ShutdownBlocker.cpp" />
+    <ClCompile Include="Util\SInstance.cpp" />
+    <ClCompile Include="Util\SprEngine\SprEncoding.cpp" />
+    <ClCompile Include="Util\SprEngine\SprEngine.cpp" />
+    <ClCompile Include="Util\UpdateCheck.cpp" />
+    <ClCompile Include="Util\UpdateCheckEx.cpp" />
+    <ClCompile Include="Util\VersionInfo.cpp" />
+    <ClCompile Include="Util\WinUtil.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="PwSafe.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\KeePassLibCpp\Crypto\ARCFour.h" />
+    <ClInclude Include="..\KeePassLibCpp\Crypto\KeyTransform.h" />
+    <ClInclude Include="..\KeePassLibCpp\Crypto\KeyTransform_BCrypt.h" />
+    <ClInclude Include="..\KeePassLibCpp\Crypto\MemoryProtectionEx.h" />
+    <ClInclude Include="..\KeePassLibCpp\Crypto\Rijndael.h" />
+    <ClInclude Include="..\KeePassLibCpp\Crypto\SHA2\EDefs.h" />
+    <ClInclude Include="..\KeePassLibCpp\Crypto\SHA2\SHA2.h" />
+    <ClInclude Include="..\KeePassLibCpp\Crypto\SHA2\TDefs.h" />
+    <ClInclude Include="..\KeePassLibCpp\Crypto\TestImpl.h" />
+    <ClInclude Include="..\KeePassLibCpp\Crypto\Twofish.h" />
+    <ClInclude Include="..\KeePassLibCpp\Crypto\TwofishClass.h" />
+    <ClInclude Include="..\KeePassLibCpp\DataExchange\PwExport.h" />
+    <ClInclude Include="..\KeePassLibCpp\DataExchange\PwImport.h" />
+    <ClInclude Include="..\KeePassLibCpp\Details\PwCompatImpl.h" />
+    <ClInclude Include="..\KeePassLibCpp\IO\KpInternetStream.h" />
+    <ClInclude Include="..\KeePassLibCpp\IO\KpMemoryStream.h" />
+    <ClInclude Include="..\KeePassLibCpp\IO\KpStream.h" />
+    <ClInclude Include="..\KeePassLibCpp\PasswordGenerator\CharSetBasedGenerator.h" />
+    <ClInclude Include="..\KeePassLibCpp\PasswordGenerator\PasswordGenerator.h" />
+    <ClInclude Include="..\KeePassLibCpp\PasswordGenerator\PatternBasedGenerator.h" />
+    <ClInclude Include="..\KeePassLibCpp\PasswordGenerator\PwCharSet.h" />
+    <ClInclude Include="..\KeePassLibCpp\PwCompat.h" />
+    <ClInclude Include="..\KeePassLibCpp\PwManager.h" />
+    <ClInclude Include="..\KeePassLibCpp\PwStructs.h" />
+    <ClInclude Include="..\KeePassLibCpp\PwStructsEx.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpAPI.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpAPI2.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpAPI3.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpCommandLine.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpCommandLineOption.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpConfig.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpDatabase.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpFileTransaction.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpFullPathName.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpPlugin.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpUnknown.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\IKpUtilities.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\KpDefs.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\Details\KpGuids.h" />
+    <ClInclude Include="..\KeePassLibCpp\SDK\KpSDK.h" />
+    <ClInclude Include="..\KeePassLibCpp\SysDefEx.h" />
+    <ClInclude Include="..\KeePassLibCpp\SysSpec_Windows\SysSpecWin.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\AppUtil.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\Base64.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\ComUtil.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\EntryUtil.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\FileTransactionEx.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\MemUtil.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\NewRandom.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\PopularPasswords.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\PwQualityEst.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\PwUtil.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\StrUtil.h" />
+    <ClInclude Include="..\KeePassLibCpp\Util\TranslateEx.h" />
+    <ClInclude Include="AddEntryDlg.h" />
+    <ClInclude Include="AddGroupDlg.h" />
+    <ClInclude Include="CheckOptionsDlg.h" />
+    <ClInclude Include="DbSettingsDlg.h" />
+    <ClInclude Include="EntryListDlg.h" />
+    <ClInclude Include="EntryPropertiesDlg.h" />
+    <ClInclude Include="FieldRefDlg.h" />
+    <ClInclude Include="FindInDbDlg.h" />
+    <ClInclude Include="GetRandomDlg.h" />
+    <ClInclude Include="HelpSourceDlg.h" />
+    <ClInclude Include="IconPickerDlg.h" />
+    <ClInclude Include="ImportOptionsDlg.h" />
+    <ClInclude Include="LanguagesDlg.h" />
+    <ClInclude Include="NewGUI\AMSEdit.h" />
+    <ClInclude Include="NewGUI\AutoRichEditCtrlFx.h" />
+    <ClInclude Include="NewGUI\BCMenu.h" />
+    <ClInclude Include="NewGUI\BtnST.h" />
+    <ClInclude Include="NewGUI\ColorStaticEx.h" />
+    <ClInclude Include="NewGUI\ColourPickerXP.h" />
+    <ClInclude Include="NewGUI\CustomComboBoxEx.h" />
+    <ClInclude Include="NewGUI\CustomListCtrlEx.h" />
+    <ClInclude Include="NewGUI\CustomTreeCtrlEx.h" />
+    <ClInclude Include="NewGUI\DwmUtil.h" />
+    <ClInclude Include="NewGUI\FontUtil.h" />
+    <ClInclude Include="NewGUI\GlobalWindowManager.h" />
+    <ClInclude Include="NewGUI\GradientUtil.h" />
+    <ClInclude Include="NewGUI\ImageUtilEx.h" />
+    <ClInclude Include="NewGUI\KCSideBannerWnd.h" />
+    <ClInclude Include="NewGUI\KCWndUtil.h" />
+    <ClInclude Include="NewGUI\MemDCEx.h" />
+    <ClInclude Include="NewGUI\MsgRelayWnd.h" />
+    <ClInclude Include="NewGUI\NewColorizerEx.h" />
+    <ClInclude Include="NewGUI\NewDialogsEx.h" />
+    <ClInclude Include="NewGUI\NewGUICommon.h" />
+    <ClInclude Include="NewGUI\OptionsList.h" />
+    <ClInclude Include="NewGUI\QualityProgressCtrl.h" />
+    <ClInclude Include="NewGUI\SecureEditEx.h" />
+    <ClInclude Include="NewGUI\StatusDialogEx.h" />
+    <ClInclude Include="NewGUI\SystemTray.h" />
+    <ClInclude Include="NewGUI\SystemTrayEx.h" />
+    <ClInclude Include="NewGUI\TaskbarListEx\TaskbarListEx.h" />
+    <ClInclude Include="NewGUI\TaskbarListEx\TaskbarListExIdl.h" />
+    <ClInclude Include="NewGUI\TaskDialog\VistaTaskDialog.h" />
+    <ClInclude Include="NewGUI\ThemeHelperST.h" />
+    <ClInclude Include="NewGUI\VistaMenu\VistaMenu.h" />
+    <ClInclude Include="NewGUI\WindowGroups.h" />
+    <ClInclude Include="NewGUI\XHyperLink.h" />
+    <ClInclude Include="NewGUI\XPStyleButtonST.h" />
+    <ClInclude Include="OptionsAutoTypeDlg.h" />
+    <ClInclude Include="OptionsDlg.h" />
+    <ClInclude Include="PasswordDlg.h" />
+    <ClInclude Include="PermissionDlg.h" />
+    <ClInclude Include="PluginsDlg.h" />
+    <ClInclude Include="Plugins\KpApiImpl.h" />
+    <ClInclude Include="Plugins\KpCommandLineImpl.h" />
+    <ClInclude Include="Plugins\KpCommandLineOptionImpl.h" />
+    <ClInclude Include="Plugins\KpDatabaseImpl.h" />
+    <ClInclude Include="Plugins\KpFileTransactionImpl.h" />
+    <ClInclude Include="Plugins\KpFullPathNameImpl.h" />
+    <ClInclude Include="Plugins\KpUtilitiesImpl.h" />
+    <ClInclude Include="Plugins\PluginMgr.h" />
+    <ClInclude Include="PwGeneratorAdvDlg.h" />
+    <ClInclude Include="PwGeneratorExDlg.h" />
+    <ClInclude Include="PwSafe.h" />
+    <ClInclude Include="PwSafeDlg.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="SingleLineEditDlg.h" />
+    <ClInclude Include="StdAfx.h" />
+    <ClInclude Include="TanWizardDlg.h" />
+    <ClInclude Include="UpdateInfoDlg.h" />
+    <ClInclude Include="Util\AppLocator.h" />
+    <ClInclude Include="Util\CmdLine\CmdArgs.h" />
+    <ClInclude Include="Util\CmdLine\CommandLineOption.h" />
+    <ClInclude Include="Util\CmdLine\CommandLineTokens.h" />
+    <ClInclude Include="Util\CmdLine\Executable.h" />
+    <ClInclude Include="Util\CmdLine\FullPathName.h" />
+    <ClInclude Include="Util\FileLock.h" />
+    <ClInclude Include="Util\KeySourcesPool.h" />
+    <ClInclude Include="Util\PrivateConfig.h" />
+    <ClInclude Include="Util\PrivateConfigEx.h" />
+    <ClInclude Include="Util\RemoteControl.h" />
+    <ClInclude Include="Util\RestartManagerEx.h" />
+    <ClInclude Include="Util\SendKeys.h" />
+    <ClInclude Include="Util\SendKeysEx.h" />
+    <ClInclude Include="Util\SessionNotify.h" />
+    <ClInclude Include="Util\ShutdownBlocker.h" />
+    <ClInclude Include="Util\SInstance.h" />
+    <ClInclude Include="Util\SprEngine\SprEncoding.h" />
+    <ClInclude Include="Util\SprEngine\SprEngine.h" />
+    <ClInclude Include="Util\UpdateCheck.h" />
+    <ClInclude Include="Util\UpdateCheckEx.h" />
+    <ClInclude Include="Util\VersionInfo.h" />
+    <ClInclude Include="Util\WinUtil.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="res\autotype.bmp" />
+    <Image Include="res\cancel.bmp" />
+    <Image Include="res\clienticex.bmp" />
+    <Image Include="res\clock.bmp" />
+    <Image Include="res\disk.bmp" />
+    <Image Include="res\document.bmp" />
+    <Image Include="res\entry_ed.ico" />
+    <Image Include="res\file.bmp" />
+    <Image Include="res\help_sma.bmp" />
+    <Image Include="res\help_smp.bmp" />
+    <Image Include="res\iconpic.ico" />
+    <Image Include="res\infoicon.bmp" />
+    <Image Include="res\infoiconex.bmp" />
+    <Image Include="res\KeePass.png" />
+    <Image Include="res\key.ico" />
+    <Image Include="res\keyhole.ico" />
+    <Image Include="res\key_smal.bmp" />
+    <Image Include="res\language.bmp" />
+    <Image Include="res\locked.ico" />
+    <Image Include="res\lock_ovr.ico" />
+    <Image Include="res\mouse_sm.bmp" />
+    <Image Include="res\ok.bmp" />
+    <Image Include="res\optionicex.bmp" />
+    <Image Include="res\options.ico" />
+    <Image Include="res\plugins.ico" />
+    <Image Include="res\PwSafe.ico" />
+    <Image Include="res\randomke.bmp" />
+    <Image Include="res\random_b.bmp" />
+    <Image Include="res\search.ico" />
+    <Image Include="res\tb_about.bmp" />
+    <Image Include="res\tb_adden.bmp" />
+    <Image Include="res\tb_copyp.bmp" />
+    <Image Include="res\tb_copyu.bmp" />
+    <Image Include="res\tb_defau.bmp" />
+    <Image Include="res\tb_delet.bmp" />
+    <Image Include="res\tb_edite.bmp" />
+    <Image Include="res\tb_find.bmp" />
+    <Image Include="res\tb_lock.bmp" />
+    <Image Include="res\tb_new.bmp" />
+    <Image Include="res\tb_open.bmp" />
+    <Image Include="res\tb_save.bmp" />
+    <Image Include="res\tb_save1.bmp" />
+    <Image Include="res\tb_saved.bmp" />
+    <Image Include="res\toolssma.bmp" />
+    <Image Include="res\unlocked.ico" />
+    <Image Include="res\winprops.bmp" />
+    <Image Include="res\world.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="res\MostPopularPasswords.bin" />
+    <None Include="res\PwSafe.rc2" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="PwSafe.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
