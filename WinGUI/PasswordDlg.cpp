@@ -157,12 +157,10 @@ void check_user(void *param)
     WINBIO_REJECT_DETAIL rejectDetail = 0;
     WINBIO_BIOMETRIC_SUBTYPE subFactor = WINBIO_SUBTYPE_ANY;
 
-    
+    pthis->m_bCheckUserSuccess = FALSE;
 
     do
     {
-        pthis->m_bCheckUserSuccess = FALSE;
-
         // Verify a biometric sample.
         hr = WinBioVerify(
             sessionHandle,
@@ -173,14 +171,17 @@ void check_user(void *param)
             &rejectDetail
             );
 
-        DWORD base64_len = identity.Value.AccountSid.Size * 2;
-        BYTE *base64 = new BYTE[base64_len];
+        if (SUCCEEDED(hr))
+        {
+            DWORD base64_len = identity.Value.AccountSid.Size * 2;
+            BYTE *base64 = new BYTE[base64_len];
 
-        CBase64Codec::Encode(identity.Value.AccountSid.Data, identity.Value.AccountSid.Size,
-            base64, &base64_len);
+            CBase64Codec::Encode(identity.Value.AccountSid.Data, identity.Value.AccountSid.Size,
+                base64, &base64_len);
 
-        pthis->m_lpCheckUserKey = (LPTSTR)base64;
-        pthis->m_bCheckUserSuccess = SUCCEEDED(hr);
+            pthis->m_lpCheckUserKey = (LPTSTR)base64;
+            pthis->m_bCheckUserSuccess = TRUE;
+        }
 
     } while (!pthis->m_bCheckUserSuccess);
 
