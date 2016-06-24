@@ -61,6 +61,7 @@ public:
 
 	CString m_strSelectedKeyProv;
 
+    LPTSTR m_lpCheckUserKey;
     BOOL m_bCheckUserSuccess; // XT+20160623
 
 private:

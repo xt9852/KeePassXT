@@ -157,6 +157,8 @@ void check_user(void *param)
     WINBIO_REJECT_DETAIL rejectDetail = 0;
     WINBIO_BIOMETRIC_SUBTYPE subFactor = WINBIO_SUBTYPE_ANY;
 
+    
+
     do
     {
         pthis->m_bCheckUserSuccess = FALSE;
@@ -170,8 +172,14 @@ void check_user(void *param)
             &match,
             &rejectDetail
             );
-        wprintf_s(L"\n Swipe processed - Unit ID: %d\n", unitId);
 
+        DWORD base64_len = identity.Value.AccountSid.Size * 2;
+        BYTE *base64 = new BYTE[base64_len];
+
+        CBase64Codec::Encode(identity.Value.AccountSid.Data, identity.Value.AccountSid.Size,
+            base64, &base64_len);
+
+        pthis->m_lpCheckUserKey = (LPTSTR)base64;
         pthis->m_bCheckUserSuccess = SUCCEEDED(hr);
 
     } while (!pthis->m_bCheckUserSuccess);
@@ -638,9 +646,7 @@ void CPasswordDlg::OnOK()
     //------------------------------------------------
     // XT+20160623
 
-    delete m_lpKey;
-    m_lpKey = new char[128];
-    strcpy(m_lpKey, "K7hta+ds+KeePass.c0m");
+    m_lpKey = m_lpCheckUserKey;
 
     //------------------------------------------------
 
