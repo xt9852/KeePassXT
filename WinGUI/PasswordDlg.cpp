@@ -157,8 +157,6 @@ void check_user(void *param)
     WINBIO_REJECT_DETAIL rejectDetail = 0;
     WINBIO_BIOMETRIC_SUBTYPE subFactor = WINBIO_SUBTYPE_ANY;
 
-    pthis->m_bCheckUserSuccess = FALSE;
-
     do
     {
         // Verify a biometric sample.
@@ -179,11 +177,11 @@ void check_user(void *param)
             CBase64Codec::Encode(identity.Value.AccountSid.Data, identity.Value.AccountSid.Size,
                 base64, &base64_len);
 
-            pthis->m_lpCheckUserKey = (LPTSTR)base64;
-            pthis->m_bCheckUserSuccess = TRUE;
+            pthis->m_lpKey = (LPTSTR)base64;
+            pthis->PostMessage(WM_COMMAND, IDOK, (LPARAM)pthis->m_btOK.m_hWnd);
         }
 
-    } while (!pthis->m_bCheckUserSuccess);
+    } while (!match);
 
     if (sessionHandle != NULL)
     {
@@ -627,27 +625,12 @@ void CPasswordDlg::OnOK()
     //------------------------------------------------
     // XT+20160623
 
-    if (!m_bCheckUserSuccess)
+	//ASSERT((m_lpKey == NULL) && (m_lpKey2 == NULL));
+
+    if (NULL == m_lpKey)
     {
-        return;
+        m_lpKey = m_pEditPw.GetPassword();
     }
-
-    if (NULL != m_lpKey)
-    {
-        delete m_lpKey;
-        m_lpKey = NULL;
-    }
-
-    //------------------------------------------------
-
-	ASSERT((m_lpKey == NULL) && (m_lpKey2 == NULL));
-
-	m_lpKey =  m_pEditPw.GetPassword();
-
-    //------------------------------------------------
-    // XT+20160623
-
-    m_lpKey = m_lpCheckUserKey;
 
     //------------------------------------------------
 
