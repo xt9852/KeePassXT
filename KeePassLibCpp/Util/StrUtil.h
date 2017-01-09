@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -67,7 +67,8 @@ CString CsRemoveMeta(CString *psString);
 char* _StringToAnsi(const WCHAR* lptString);
 WCHAR* _StringToUnicode(const char* pszString);
 
-std::basic_string<WCHAR> _StringToUnicodeStl(const TCHAR *pszString);
+std::basic_string<char> _StringToAnsiStl(const TCHAR* pszString);
+std::basic_string<WCHAR> _StringToUnicodeStl(const TCHAR* pszString);
 
 // Convert UCS-2 to UTF-8 and the other way round
 UTF8_BYTE *_StringToUTF8(const TCHAR *pszSourceString);

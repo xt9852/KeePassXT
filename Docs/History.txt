@@ -1,3 +1,27 @@
+17/01/02 - 1.32
+- When trying to search using an invalid regular expression, an
+  error message is displayed now
+- Context menus can now be displayed by pressing the Apps key
+  or Shift+F10
+- Changed keyboard shortcut for closing KeePass to Ctrl+Q
+- During a drag&drop operation, KeePass now additionally
+  provides the text in Unicode form
+- HTML export/printing: the notes and attachment data columns
+  now are twice as wide as the other columns
+- The version information file (which the optional update check
+  downloads to see if there exists a newer version) is now
+  downloaded over HTTPS
+- Changed some ICO files such that higher resolution images are
+  used
+- CHM help file: improved high DPI support
+- Upgraded to Boost libraries version 1.62.0
+- Upgraded installer
+- Various minor code improvements developed within the scope of
+  the European Commission's Free and Open Source Software
+  Auditing (EU-FOSSA) project
+- Various code optimizations
+- Minor other improvements
+
 16/03/02 - 1.31
 - The quick search box (in the toolbar of the main window) now
   supports searching using a regular expression; in order to

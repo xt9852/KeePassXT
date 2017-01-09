@@ -447,6 +447,9 @@
     <ClCompile Include="Plugins\PluginMgr.cpp">
       <Filter>Plugins</Filter>
     </ClCompile>
+    <ClCompile Include="bio.cpp">
+      <Filter>NewGUI</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="PwSafe.rc">
@@ -894,6 +897,9 @@
     </ClInclude>
     <ClInclude Include="Plugins\PluginMgr.h">
       <Filter>Plugins</Filter>
+    </ClInclude>
+    <ClInclude Include="bio.h">
+      <Filter>NewGUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -314,12 +314,10 @@ BEGIN_MESSAGE_MAP(CPwSafeDlg, CDialog)
 	ON_COMMAND(ID_PWLIST_ADD, OnPwlistAdd)
 	ON_COMMAND(ID_PWLIST_EDIT, OnPwlistEdit)
 	ON_COMMAND(ID_PWLIST_DELETE, OnPwlistDelete)
-	ON_NOTIFY(NM_RCLICK, IDC_PWLIST, OnRclickPwlist)
 	ON_NOTIFY(NM_CLICK, IDC_GROUPLIST, OnClickGroupList)
 	ON_COMMAND(ID_PWLIST_COPYPW, OnPwlistCopyPw)
 	ON_WM_TIMER()
 	ON_NOTIFY(NM_DBLCLK, IDC_PWLIST, OnDblclkPwlist)
-	ON_NOTIFY(NM_RCLICK, IDC_GROUPLIST, OnRclickGroupList)
 	ON_COMMAND(ID_PWLIST_COPYUSER, OnPwlistCopyUser)
 	ON_COMMAND(ID_PWLIST_VISITURL, OnPwlistVisitUrl)
 	ON_COMMAND(ID_FILE_NEW, OnFileNew)
@@ -530,6 +528,7 @@ BEGIN_MESSAGE_MAP(CPwSafeDlg, CDialog)
 	ON_WM_QUERYENDSESSION()
 	ON_WM_ENDSESSION()
 	ON_WM_COPYDATA()
+	ON_WM_CONTEXTMENU()
 
 	ON_MESSAGE(WM_WTSSESSION_CHANGE, OnWTSSessionChange)
 
@@ -563,7 +562,7 @@ BOOL CAboutDlg::OnInitDialog()
 	str += _T(" ");
 	str += PWM_VERSION_STR;
 #ifdef PWM_DEVSNAPSHOT
-	str += _T(" (Dev)");
+	str += _T(" (Dev.)");
 #endif
 	if(CPwSafeDlg::m_bMiniMode == TRUE)
 	{
@@ -1777,7 +1776,7 @@ const TCHAR *CPwSafeDlg::_GetCmdAccelExt(const TCHAR *psz)
 	if(_tcsicmp(psz, _T("&Print...")) == 0) return _T("Ctrl+P");
 	if(_tcsicmp(psz, _T("&Database Settings...")) == 0) return _T("Ctrl+I");
 	if(_tcsicmp(psz, _T("&Lock Workspace")) == 0) return _T("Ctrl+L");
-	if(_tcsicmp(psz, _T("E&xit")) == 0) return _T("Ctrl+X");
+	if(_tcsicmp(psz, _T("E&xit")) == 0) return _T("Ctrl+Q");
 
 	if(_tcsicmp(psz, _T("&Add Entry...")) == 0) return _T("Ctrl+Y");
 	if(_tcsicmp(psz, _T("&Edit/View Entry...")) == 0) return _T("Return");
@@ -3663,36 +3662,6 @@ void CPwSafeDlg::DeleteContextMenus()
 	m_pEntryViewTrackableMenu = NULL;
 }
 
-void CPwSafeDlg::OnRclickPwlist(NMHDR* pNMHDR, LRESULT* pResult)
-{
-	NotifyUserActivity();
-
-	POINT pt;
-
-	UNREFERENCED_PARAMETER(pNMHDR);
-	*pResult = 0;
-
-	if(m_bFileOpen == FALSE) return;
-
-	_SetDisplayDialog(true);
-
-	ASSERT(m_pPwListTrackableMenu != NULL);
-	if(m_pPwListTrackableMenu == NULL) { _SetDisplayDialog(false); return; }
-
-	GetCursorPos(&pt);
-
-	if(_CallPlugins(KPM_PWLIST_RCLICK, (LPARAM)m_pPwListTrackableMenu, 0) == FALSE)
-		{ _SetDisplayDialog(false); return; }
-
-	_SetDisplayMenu(true);
-	m_pPwListTrackableMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON,
-		pt.x, pt.y, AfxGetMainWnd());
-	_SetDisplayMenu(false);
-
-	_UpdateToolBar();
-	_SetDisplayDialog(false);
-}
-
 void CPwSafeDlg::OnClickGroupList(NMHDR* pNMHDR, LRESULT* pResult)
 {
 	NotifyUserActivity();
@@ -3960,42 +3929,6 @@ void CPwSafeDlg::OnDblclkPwlist(NMHDR* pNMHDR, LRESULT* pResult)
 
 	_TouchEntry(dwSel, FALSE);
 	_UpdateToolBar();
-}
-
-void CPwSafeDlg::OnRclickGroupList(NMHDR* pNMHDR, LRESULT* pResult)
-{
-	NotifyUserActivity();
-
-	*pResult = 0;
-
-	if(m_bFileOpen == FALSE) return;
-
-	_SetDisplayDialog(true);
-	if(_CallPlugins(KPM_GROUPLIST_RCLICK, (LPARAM)pNMHDR, 0) == FALSE)
-		{ _SetDisplayDialog(false); return; }
-
-	POINT pt;
-	GetCursorPos(&pt);
-
-	UINT uFlags = 0;
-	POINT ptClient = pt;
-	m_cGroups.ScreenToClient(&ptClient);
-	// HTREEITEM hItem = m_cGroups.HitTest(CPoint(ptClient), &uFlags);
-	// if(uFlags & (TVHT_ONITEM | TVHT_ONITEMINDENT)) m_cGroups.SelectItem(hItem);
-	// else m_cGroups.SelectItem(NULL);
-	HTREEITEM h = m_cGroups.HitTest(CPoint(ptClient), &uFlags);
-	if(h != NULL) m_cGroups.SelectItem(h);
-
-	ASSERT(m_pGroupListTrackableMenu != NULL);
-	if(m_pGroupListTrackableMenu == NULL) { _SetDisplayDialog(false); return; }
-
-	_SetDisplayMenu(true);
-	m_pGroupListTrackableMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON,
-		pt.x, pt.y, AfxGetMainWnd());
-	_SetDisplayMenu(false);
-
-	_UpdateToolBar();
-	_SetDisplayDialog(false);
 }
 
 void CPwSafeDlg::OnPwlistCopyUser()
@@ -6216,10 +6149,12 @@ void CPwSafeDlg::_Find(DWORD dwFindGroupId)
 
 		DWORD cnt = 0;
 		PW_ENTRY *pwFirst = NULL;
+		std_string strError;
 
 		while(true)
 		{
-			const DWORD dw = m_mgr.FindEx(dlg.m_strFind, dlg.m_bCaseSensitive, dwFlags, cnt);
+			const DWORD dw = m_mgr.FindEx(dlg.m_strFind, dlg.m_bCaseSensitive,
+				dwFlags, cnt, &strError);
 
 			if(dw == DWORD_MAX) break;
 			else
@@ -6293,6 +6228,9 @@ void CPwSafeDlg::_Find(DWORD dwFindGroupId)
 		else ShowEntryDetails(NULL);
 
 		m_cList.SetFocus();
+
+		if(strError.size() > 0)
+			MessageBox(strError.c_str(), PWM_PRODUCT_NAME_SHORT, MB_ICONWARNING | MB_OK);
 	}
 
 	_UpdateToolBar();
@@ -6708,94 +6646,124 @@ void CPwSafeDlg::OnBeginDragPwlist(NMHDR* pNMHDR, LRESULT* pResult)
 	COleDataSource *pDataSource = new COleDataSource;
 	// DROPEFFECT de = DROPEFFECT_NONE;
 
+	HGLOBAL hgDataA = NULL;
+	HGLOBAL hgDataW = NULL;
+
 	TRY
 	{
-		CSharedFile fileShared;
-		TRY
+		CString strData;
+		bool bDereferenceData = false;
+
+		switch(pNMListView->iSubItem)
 		{
-			CArchive ar(&fileShared, CArchive::store);
-			TRY
-			{
-				CString strData;
-				bool bDereferenceData = false;
-
-				switch(pNMListView->iSubItem)
-				{
-				case 0:
-					strData = p->pszTitle;
-					bDereferenceData = true;
-					break;
-				case 1:
-					strData = p->pszUserName;
-					bDereferenceData = true;
-					break;
-				case 2:
-					strData = p->pszURL;
-					bDereferenceData = true;
-					break;
-				case 3:
-					m_mgr.UnlockEntryPassword(p);
-					strData = p->pszPassword;
-					m_mgr.LockEntryPassword(p);
-					bDereferenceData = true;
-					break;
-				case 4:
-					strData = p->pszAdditional;
-					bDereferenceData = true;
-					break;
-				case 5:
-					_PwTimeToStringEx(p->tCreation, strData, CPwSafeDlg::m_bUseLocalTimeFormat);
-					break;
-				case 6:
-					_PwTimeToStringEx(p->tLastMod, strData, CPwSafeDlg::m_bUseLocalTimeFormat);
-					break;
-				case 7:
-					_PwTimeToStringEx(p->tLastAccess, strData, CPwSafeDlg::m_bUseLocalTimeFormat);
-					break;
-				case 8:
-					_PwTimeToStringEx(p->tExpire, strData, CPwSafeDlg::m_bUseLocalTimeFormat);
-					break;
-				case 9:
-					_UuidToString(p->uuid, &strData);
-					break;
-				case 10:
-					strData = p->pszBinaryDesc;
-					bDereferenceData = true;
-					break;
-				default:
-					ASSERT(FALSE);
-					break;
-				}
-
-				CString strToTransfer;
-				if(bDereferenceData == false) strToTransfer = strData;
-				else strToTransfer = SprCompile(strData, false, p, &m_mgr, false, false);
-
-				// if(bAutoType)
-				// {
-				//	strToTransfer.Empty();
-				//	DropToBackgroundIfOptionEnabled(true);
-				// }
-
-				ar.Write((LPCTSTR)strToTransfer, (strToTransfer.GetLength() + 1) *
-					sizeof(TCHAR));
-				ar.Close();
-			}
-			CATCH_ALL(eInner) { ASSERT(FALSE); }
-			END_CATCH_ALL;
+		case 0:
+			strData = p->pszTitle;
+			bDereferenceData = true;
+			break;
+		case 1:
+			strData = p->pszUserName;
+			bDereferenceData = true;
+			break;
+		case 2:
+			strData = p->pszURL;
+			bDereferenceData = true;
+			break;
+		case 3:
+			m_mgr.UnlockEntryPassword(p);
+			strData = p->pszPassword;
+			m_mgr.LockEntryPassword(p);
+			bDereferenceData = true;
+			break;
+		case 4:
+			strData = p->pszAdditional;
+			bDereferenceData = true;
+			break;
+		case 5:
+			_PwTimeToStringEx(p->tCreation, strData, CPwSafeDlg::m_bUseLocalTimeFormat);
+			break;
+		case 6:
+			_PwTimeToStringEx(p->tLastMod, strData, CPwSafeDlg::m_bUseLocalTimeFormat);
+			break;
+		case 7:
+			_PwTimeToStringEx(p->tLastAccess, strData, CPwSafeDlg::m_bUseLocalTimeFormat);
+			break;
+		case 8:
+			_PwTimeToStringEx(p->tExpire, strData, CPwSafeDlg::m_bUseLocalTimeFormat);
+			break;
+		case 9:
+			_UuidToString(p->uuid, &strData);
+			break;
+		case 10:
+			strData = p->pszBinaryDesc;
+			bDereferenceData = true;
+			break;
+		default:
+			ASSERT(FALSE);
+			break;
 		}
-		CATCH_ALL(eMiddle) { ASSERT(FALSE); }
-		END_CATCH_ALL;
 
-		pDataSource->CacheGlobalData(((sizeof(TCHAR) == 1) ? CF_TEXT : CF_UNICODETEXT),
-			fileShared.Detach());
+		CString strToTransfer;
+		if(!bDereferenceData) strToTransfer = strData;
+		else strToTransfer = SprCompile(strData, false, p, &m_mgr, false, false);
+
+		// if(bAutoType)
+		// {
+		//	strToTransfer.Empty();
+		//	DropToBackgroundIfOptionEnabled(true);
+		// }
+
+		std::basic_string<char> bsA = _StringToAnsiStl(strToTransfer);
+		std::basic_string<WCHAR> bsW = _StringToUnicodeStl(strToTransfer);
+
+		const size_t cbA = (bsA.size() + 1) * sizeof(char);
+		const size_t cbW = (bsW.size() + 1) * sizeof(WCHAR);
+
+		hgDataA = GlobalAlloc(GHND, cbA);
+		hgDataW = GlobalAlloc(GHND, cbW);
+
+		if(hgDataA != NULL)
+		{
+			LPVOID lp = GlobalLock(hgDataA);
+			if(lp != NULL)
+			{
+				memcpy(lp, bsA.c_str(), cbA);
+				GlobalUnlock(hgDataA);
+
+				pDataSource->CacheGlobalData(CF_TEXT, hgDataA);
+			}
+			else { ASSERT(FALSE); }
+		}
+		else { ASSERT(FALSE); }
+
+		if(hgDataW != NULL)
+		{
+			LPVOID lp = GlobalLock(hgDataW);
+			if(lp != NULL)
+			{
+				memcpy(lp, bsW.c_str(), cbW);
+				GlobalUnlock(hgDataW);
+
+				pDataSource->CacheGlobalData(CF_UNICODETEXT, hgDataW);
+			}
+			else { ASSERT(FALSE); }
+		}
+		else { ASSERT(FALSE); }
+
 		pDataSource->DoDragDrop(DROPEFFECT_MOVE | DROPEFFECT_COPY, NULL, pDropSource);
 	}
-	CATCH_ALL(eOuter) { ASSERT(FALSE); }
+	CATCH_ALL(eEx) { ASSERT(FALSE); }
 	END_CATCH_ALL;
 
 	SAFE_DELETE(pDataSource);
 	SAFE_DELETE(pDropSource);
+
+	// pDataSource was the owner of the HGLOBALs
+	ASSERT(GlobalSize(hgDataA) == 0);
+	ASSERT(GlobalSize(hgDataW) == 0);
+	// ASSERT(GlobalSize(hgDataA) > 0);
+	// ASSERT(GlobalSize(hgDataW) > 0);
+	// if(hgDataA != NULL) { VERIFY(GlobalFree(hgDataA) == NULL); }
+	// if(hgDataW != NULL) { VERIFY(GlobalFree(hgDataW) == NULL); }
 
 	m_cGroups.m_drop._RemoveDropSelection();
 	m_cGroups.m_drop.SetDragAccept(FALSE);
@@ -7421,16 +7389,20 @@ BOOL CPwSafeDlg::PreTranslateMessage(MSG* pMsg)
 		if(pFocusWnd == &m_reEntryView)
 		{
 			if((pMsg->wParam != 'C') && (pMsg->wParam != 'A'))
+			{
 				if(TranslateAccelerator(this->m_hWnd, m_hAccel, pMsg) != FALSE)
 					return TRUE;
+			}
 		}
 		// else if(pFocusWnd == &m_cQuickFind)
 		else if(NewGUI_ComboBox_HasFocus(m_cQuickFind.m_hWnd,
 			(pFocusWnd != NULL) ? pFocusWnd->m_hWnd : NULL))
 		{
 			if((pMsg->wParam != 'C') && (pMsg->wParam != 'A') && (pMsg->wParam != 'V') && (pMsg->wParam != 'X'))
+			{
 				if(TranslateAccelerator(this->m_hWnd, m_hAccel, pMsg) != FALSE)
 					return TRUE;
+			}
 		}
 		else
 		{
@@ -8429,28 +8401,13 @@ void CPwSafeDlg::OnViewEntryView()
 
 BOOL CPwSafeDlg::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 {
-	MSGFILTER *lpMsgFilter = (MSGFILTER *)lParam;
+	// MSGFILTER *lpMsgFilter = (MSGFILTER *)lParam;
 	ENLINK *pEL = (ENLINK *)lParam;
 
 	if(lParam != 0)
 	{
-		if((LOWORD(wParam) == IDC_RE_ENTRYVIEW) && (lpMsgFilter->nmhdr.code == EN_MSGFILTER)
-			&& (lpMsgFilter->msg == WM_RBUTTONDOWN))
-		{
-			POINT pt;
-			GetCursorPos(&pt);
-
-			ASSERT(m_pEntryViewTrackableMenu != NULL);
-
-			if(m_pEntryViewTrackableMenu != NULL)
-			{
-				_SetDisplayMenu(true);
-				m_pEntryViewTrackableMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON,
-					pt.x, pt.y, AfxGetMainWnd());
-				_SetDisplayMenu(false);
-			}
-		}
-		else if((LOWORD(wParam) == IDC_RE_ENTRYVIEW) && (pEL->nmhdr.code == EN_LINK) && (pEL->msg == WM_LBUTTONDOWN))
+		if((LOWORD(wParam) == IDC_RE_ENTRYVIEW) && (pEL->nmhdr.code == EN_LINK) &&
+			(pEL->msg == WM_LBUTTONDOWN))
 		{
 			CHARRANGE cr;
 			m_reEntryView.GetSel(cr); // Push current user selection
@@ -8491,7 +8448,8 @@ BOOL CPwSafeDlg::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 			}
 			else OpenUrlEx(strSelectedURL, this->m_hWnd);
 
-			// OnPwlistVisitUrl();
+			if(pResult != NULL) *pResult = 0;
+			return TRUE;
 		}
 		else if((LOWORD(wParam) == IDC_RE_ENTRYVIEW) && (pEL->msg == WM_MOUSEMOVE))
 		{
@@ -8499,13 +8457,13 @@ BOOL CPwSafeDlg::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 		}
 		else if((wParam == 0) && (((NMHDR *)lParam)->code == NM_RCLICK))
 		{
-			POINT pt, ptList;
+			POINT pt;
+			ZeroMemory(&pt, sizeof(POINT));
 			GetCursorPos(&pt);
-			ptList = pt;
+			POINT ptList = pt;
 			m_cList.ScreenToClient(&ptList);
 
 			HDHITTESTINFO hitTest;
-
 			hitTest.pt.x = ptList.x + m_cList.GetScrollPos(SB_HORZ);
 			hitTest.pt.y = ptList.y;
 
@@ -8536,6 +8494,9 @@ BOOL CPwSafeDlg::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult)
 				else { ASSERT(FALSE); }
 				m_menuColView.DestroyMenu();
 				_SetDisplayDialog(false);
+
+				if(pResult != NULL) *pResult = 1;
+				return TRUE;
 			}
 		}
 	}
@@ -9756,9 +9717,10 @@ void CPwSafeDlg::_DoQuickFind(LPCTSTR lpText)
 	m_bTANsOnly = TRUE;
 
 	DWORD cnt = 0;
+	std_string strError;
 	while(true)
 	{
-		const DWORD dw = m_mgr.FindEx(lpSearch, FALSE, dwFlags, cnt);
+		const DWORD dw = m_mgr.FindEx(lpSearch, FALSE, dwFlags, cnt, &strError);
 
 		if(dw == DWORD_MAX) break;
 		else
@@ -9827,6 +9789,9 @@ void CPwSafeDlg::_DoQuickFind(LPCTSTR lpText)
 
 	if((m_bFocusResAfterQuickFind == TRUE) && (m_cList.GetItemCount() > 0))
 		m_cList.SetFocus();
+
+	if(strError.size() > 0)
+		MessageBox(strError.c_str(), PWM_PRODUCT_NAME_SHORT, MB_ICONWARNING | MB_OK);
 }
 
 void CPwSafeDlg::NotifyUserActivity()
@@ -11815,4 +11780,94 @@ void CPwSafeDlg::_UIBlockHints(bool bBlock)
 			}
 		}
 	}
+}
+
+void CPwSafeDlg::OnContextMenu(CWnd* pWnd, CPoint point)
+{
+	if(pWnd == &m_cList)
+	{
+		NotifyUserActivity();
+
+		if(m_bFileOpen == FALSE) return;
+		if(m_pPwListTrackableMenu == NULL) { ASSERT(FALSE); return; }
+
+		_SetDisplayDialog(true);
+		if(_CallPlugins(KPM_PWLIST_CONTEXTMENU, (LPARAM)m_pPwListTrackableMenu,
+			0) == FALSE)
+		{
+			_SetDisplayDialog(false);
+			return;
+		}
+
+		// When pressing the Apps key, point = (0, 0), thus we
+		// get the cursor position ourselves
+		POINT pt;
+		ZeroMemory(&pt, sizeof(POINT));
+		GetCursorPos(&pt);
+
+		_SetDisplayMenu(true);
+		m_pPwListTrackableMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON,
+			pt.x, pt.y, this);
+		_SetDisplayMenu(false);
+
+		_UpdateToolBar();
+		_SetDisplayDialog(false);
+	}
+	else if(pWnd == &m_cGroups)
+	{
+		NotifyUserActivity();
+
+		if(m_bFileOpen == FALSE) return;
+		if(m_pGroupListTrackableMenu == NULL) { ASSERT(FALSE); return; }
+
+		_SetDisplayDialog(true);
+		if(_CallPlugins(KPM_GROUPLIST_CONTEXTMENU, (LPARAM)m_pGroupListTrackableMenu,
+			0) == FALSE)
+		{
+			_SetDisplayDialog(false);
+			return;
+		}
+
+		// When pressing the Apps key, point = (0, 0), thus we
+		// get the cursor position ourselves
+		POINT pt;
+		ZeroMemory(&pt, sizeof(POINT));
+		GetCursorPos(&pt);
+
+		POINT ptClient = pt;
+		m_cGroups.ScreenToClient(&ptClient);
+		// HTREEITEM hItem = m_cGroups.HitTest(CPoint(ptClient), &uFlags);
+		// if(uFlags & (TVHT_ONITEM | TVHT_ONITEMINDENT)) m_cGroups.SelectItem(hItem);
+		// else m_cGroups.SelectItem(NULL);
+		CPoint cptClient(ptClient);
+		UINT uFlags = 0;
+		HTREEITEM h = m_cGroups.HitTest(cptClient, &uFlags);
+		if(h != NULL) m_cGroups.SelectItem(h);
+
+		_SetDisplayMenu(true);
+		m_pGroupListTrackableMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON,
+			pt.x, pt.y, this);
+		_SetDisplayMenu(false);
+
+		_UpdateToolBar();
+		_SetDisplayDialog(false);
+	}
+	else if(pWnd == &m_reEntryView)
+	{
+		// When pressing the Apps key, point = (0, 0), thus we
+		// get the cursor position ourselves
+		POINT pt;
+		ZeroMemory(&pt, sizeof(POINT));
+		GetCursorPos(&pt);
+
+		if(m_pEntryViewTrackableMenu != NULL)
+		{
+			_SetDisplayMenu(true);
+			m_pEntryViewTrackableMenu->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON,
+				pt.x, pt.y, this);
+			_SetDisplayMenu(false);
+		}
+		else { ASSERT(FALSE); }
+	}
+	else { CDialog::OnContextMenu(pWnd, point); }
 }

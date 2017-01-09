@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -57,9 +57,13 @@ void CKpInternetStream::EnsureInitialized()
 			&dwTimeOut, sizeof(DWORD)));
 	}
 
+	DWORD dwFlags = (INTERNET_FLAG_NO_CACHE_WRITE | INTERNET_FLAG_PRAGMA_NOCACHE |
+		INTERNET_FLAG_RELOAD);
+	if((m_strUrl.size() >= 6) && (_tcsnicmp(m_strUrl.c_str(), _T("https:"), 6) == 0))
+		dwFlags |= INTERNET_FLAG_SECURE;
+
 	m_hFile = InternetOpenUrl(m_hNet, m_strUrl.c_str(), NULL, 0,
-		INTERNET_FLAG_NO_CACHE_WRITE | INTERNET_FLAG_PRAGMA_NOCACHE |
-		INTERNET_FLAG_RELOAD, 0);
+		dwFlags, 0);
 }
 
 HRESULT CKpInternetStream::Close()

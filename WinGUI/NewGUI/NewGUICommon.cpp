@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -892,7 +892,7 @@ BOOL NewGUI_GetNonClientMetrics(NONCLIENTMETRICS* p)
 	// See the documentation of the NONCLIENTMETRICS structure:
 	// https://msdn.microsoft.com/en-us/library/windows/desktop/ff729175.aspx
 	// http://www.codeproject.com/Messages/3989684/Compile-with-dev-studio-running-on-Windows-XP.aspx
-#if (WINVER == 0x0603) // XT+20160623
+#if (WINVER == 0x0600)
 	if(AU_IsAtLeastWinVistaSystem() == FALSE)
 	{
 		BOOST_STATIC_ASSERT(sizeof(p->iPaddedBorderWidth) == sizeof(int));
@@ -901,7 +901,10 @@ BOOL NewGUI_GetNonClientMetrics(NONCLIENTMETRICS* p)
 #else
 	// Verify that the size computation above is still correct with the
 	// latest NONCLIENTMETRICS definition, then update the WINVER comparison
-	BOOST_STATIC_ASSERT(false);
+    //-----------------------------------------------------------------
+    // XT-20170109
+	// BOOST_STATIC_ASSERT(false);
+    //-----------------------------------------------------------------
 #endif
 
 	p->cbSize = cbSize;

@@ -575,14 +575,14 @@ BOOL CALLBACK CSendKeys::enumwindowsProc(HWND hwnd, LPARAM lParam)
 
   if (wclass)
   {
-    TCHAR szClass[300];
+    TCHAR szClass[300] = { 0 };
     if (::GetClassName(hwnd, szClass, sizeof(szClass)/sizeof(TCHAR)))
       bMatch |= (_tcsstr(szClass, wclass) != 0);
   }
 
   if (wtitle)
   {
-    TCHAR szTitle[300];
+    TCHAR szTitle[300] = { 0 };
     if (::GetWindowText(hwnd, szTitle, sizeof(szTitle)/sizeof(TCHAR)))
       bMatch |= (_tcsstr(szTitle, wtitle) != 0);
   }

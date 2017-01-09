@@ -34,9 +34,9 @@
 
 #include "StdAfx.h"        // Standard windows header file
 #include "BCMenu.h"        // BCMenu class declaration
-#include <afxpriv.h>       //SK: makes A2W and other spiffy AFX macros work
-#include "NewGUICommon.h"  //DR: for getting non-client metrics, ...
-#include "GradientUtil.h"  //DR: support for drawing gradients
+#include <afxpriv.h>       // SK: makes A2W and other spiffy AFX macros work
+#include "NewGUICommon.h"  // DR: for getting non-client metrics, ...
+#include "GradientUtil.h"  // DR: support for drawing gradients
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -1007,7 +1007,8 @@ void BCMenu::MeasureItem( LPMEASUREITEMSTRUCT lpMIS )
 				DT_SINGLELINE|DT_LEFT|DT_VCENTER|DT_CALCRECT);
 			//+3 makes at least three pixels space to the menu border
 			size.cx=rect.right-rect.left+3;
-			size.cx += 3*(size.cx/(LONG)wcslen(lpstrText));
+			if(wcslen(lpstrText) != 0) // DR: Added check
+				size.cx += 3*(size.cx/(LONG)wcslen(lpstrText));
 		}
 #endif
 
@@ -1821,7 +1822,7 @@ int BCMenu::GetMenuStart(void)
 	INT_PTR nummenu=GetMenuItemCount();
 
 	while(i<nummenu&&menuloc==-1){
-		GetMenuString (i, name, MF_BYPOSITION);
+		GetMenuString (static_cast<UINT>(i), name, MF_BYPOSITION); // DR: Added cast
 		if(name.GetLength()>0){
 			for(j=0;j<nummenulist;++j){
 				str=m_MenuList[j]->GetString();
@@ -1835,14 +1836,14 @@ int BCMenu::GetMenuStart(void)
 		++i;
 	}
 	if(menuloc>=0&&listloc>=0&&menuloc>=listloc)menustart=menuloc-listloc;
-	return(menustart);
+	return static_cast<int>(menustart); // DR: Added cast
 }
 
 void BCMenu::RemoveTopLevelOwnerDraw(void)
 {
 	CString str;
 	int i=0,j=0;
-	int nummenulist=m_MenuList.GetSize(),menustart;
+	int nummenulist=(int)m_MenuList.GetSize(),menustart; // DR: Added cast
 
 	menustart=GetMenuStart();
 	for(i=menustart,j=0;i<(int)GetMenuItemCount();++i,++j){
@@ -2677,19 +2678,21 @@ BOOL BCMenu::RemoveMenu(UINT uiId,UINT nFlags)
 				}
 			}
 			else{
-				int numSubMenus = (int)m_SubMenus.GetUpperBound();
-				for(int m = numSubMenus; m >= 0; m--){
+				// DR: Changed variable types from int to INT_PTR
+				INT_PTR numSubMenus = m_SubMenus.GetUpperBound();
+				for(INT_PTR m = numSubMenus; m >= 0; m--){
 					if(m_SubMenus[m]==pSubMenu->m_hMenu){
-						int numAllSubMenus = (int)m_AllSubMenus.GetUpperBound();
-						for(int n = numAllSubMenus; n>= 0; n--){
+						INT_PTR numAllSubMenus = m_AllSubMenus.GetUpperBound();
+						for(INT_PTR n = numAllSubMenus; n>= 0; n--){
 							if(m_AllSubMenus[n]==m_SubMenus[m])m_AllSubMenus.RemoveAt(n);
 						}
 						m_SubMenus.RemoveAt(m);
 					}
 				}
-				int num = pSubMenu->GetMenuItemCount(), i;
-				for(i=num-1;i>=0;--i)pSubMenu->RemoveMenu(i,MF_BYPOSITION);
-				for(i=(int)m_MenuList.GetUpperBound();i>=0;i--){
+				INT_PTR num = pSubMenu->GetMenuItemCount(), i;
+				for(i=num-1;i>=0;--i)
+					pSubMenu->RemoveMenu(static_cast<UINT>(i),MF_BYPOSITION);
+				for(i=m_MenuList.GetUpperBound();i>=0;i--){
 					if(m_MenuList[i]->nID==(UINT)pSubMenu->m_hMenu){
 						delete m_MenuList.GetAt(i);
 						m_MenuList.RemoveAt(i);
@@ -2740,19 +2743,21 @@ BOOL BCMenu::DeleteMenu(UINT uiId,UINT nFlags)
 				}
 			}
 			else{
-				int numSubMenus = (int)m_SubMenus.GetUpperBound();
-				for(int m = numSubMenus; m >= 0; m--){
+				// DR: Changed variable types from int to INT_PTR
+				INT_PTR numSubMenus = m_SubMenus.GetUpperBound();
+				for(INT_PTR m = numSubMenus; m >= 0; m--){
 					if(m_SubMenus[m]==pSubMenu->m_hMenu){
-						int numAllSubMenus = (int)m_AllSubMenus.GetUpperBound();
-						for(int n = numAllSubMenus; n>= 0; n--){
+						INT_PTR numAllSubMenus = m_AllSubMenus.GetUpperBound();
+						for(INT_PTR n = numAllSubMenus; n>= 0; n--){
 							if(m_AllSubMenus[n]==m_SubMenus[m])m_AllSubMenus.RemoveAt(n);
 						}
 						m_SubMenus.RemoveAt(m);
 					}
 				}
-				int num = pSubMenu->GetMenuItemCount(), i;
-				for(i=num-1;i>=0;--i)pSubMenu->DeleteMenu(i,MF_BYPOSITION);
-				for(i=(int)m_MenuList.GetUpperBound();i>=0;i--){
+				INT_PTR num = pSubMenu->GetMenuItemCount(), i;
+				for(i=num-1;i>=0;--i)
+					pSubMenu->DeleteMenu(static_cast<UINT>(i),MF_BYPOSITION);
+				for(i=m_MenuList.GetUpperBound();i>=0;i--){
 					if(m_MenuList[i]->nID==(UINT)pSubMenu->m_hMenu){
 						delete m_MenuList.GetAt(i);
 						m_MenuList.RemoveAt(i);

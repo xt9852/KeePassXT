@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -20,6 +20,7 @@
 #include "StdAfx.h"
 #include "../PwManager.h"
 #include "../Util/StrUtil.h"
+#include "../Util/TranslateEx.h"
 #include <algorithm>
 
 using boost::scoped_ptr;
@@ -34,8 +35,10 @@ static std::vector<std_string> g_vFindCachedSplitted;
 // }
 
 DWORD CPwManager::Find(const TCHAR *pszFindString, BOOL bCaseSensitive,
-	DWORD searchFlags, DWORD nStart, DWORD nEndExcl)
+	DWORD searchFlags, DWORD nStart, DWORD nEndExcl, std_string* pError)
 {
+	if(pError != NULL) pError->clear();
+
 	if(nEndExcl > m_dwNumEntries) nEndExcl = m_dwNumEntries;
 
 	if(nStart >= nEndExcl) return DWORD_MAX;
@@ -56,7 +59,17 @@ DWORD CPwManager::Find(const TCHAR *pszFindString, BOOL bCaseSensitive,
 			else
 				spRegex.reset(new boost::basic_regex<TCHAR>((LPCTSTR)strFind));
 		}
-		catch(...) { return DWORD_MAX; }
+		catch(...)
+		{
+			if(pError != NULL)
+			{
+				*pError = (LPCTSTR)strFind;
+				*pError += _T("\r\n\r\n");
+				*pError += TRL("The regular expression is invalid.");
+			}
+
+			return DWORD_MAX;
+		}
 	}
 	// #else
 	// #pragma message("No regular expression support in x64 library.")
@@ -135,11 +148,14 @@ DWORD CPwManager::Find(const TCHAR *pszFindString, BOOL bCaseSensitive,
 }
 
 DWORD CPwManager::FindEx(const TCHAR *pszFindString, BOOL bCaseSensitive,
-	DWORD searchFlags, DWORD nStart)
+	DWORD searchFlags, DWORD nStart, std_string* pError)
 {
+	if(pError != NULL) pError->clear();
+
 	if(((searchFlags & PWMS_REGEX) != 0) || (pszFindString == NULL) ||
 		(pszFindString[0] == 0))
-		return this->Find(pszFindString, bCaseSensitive, searchFlags, nStart, DWORD_MAX);
+		return this->Find(pszFindString, bCaseSensitive, searchFlags,
+			nStart, DWORD_MAX, pError);
 
 	const std_string strText = pszFindString;
 	if(strText != g_strFindCachedString)
@@ -159,7 +175,7 @@ DWORD CPwManager::FindEx(const TCHAR *pszFindString, BOOL bCaseSensitive,
 		{
 			const std_string& strTerm = (*pvTerms)[i];
 			const DWORD dwRes = this->Find(strTerm.c_str(), bCaseSensitive,
-				searchFlags, dwIndex, DWORD_MAX);
+				searchFlags, dwIndex, DWORD_MAX, pError);
 
 			if(dwRes > dwIndex)
 			{

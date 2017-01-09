@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -58,10 +58,10 @@ void CPluginsDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CPluginsDlg, CDialog)
 	//{{AFX_MSG_MAP(CPluginsDlg)
-	ON_NOTIFY(NM_RCLICK, IDC_PLUGINS_LIST, OnRClickPluginsList)
 	ON_COMMAND(ID_PLUGIN_CONFIG, OnPluginConfig)
 	ON_COMMAND(ID_PLUGIN_ABOUT, OnPluginAbout)
 	ON_BN_CLICKED(IDC_BTN_PLGHELP, &CPluginsDlg::OnBtnClickedPlgHelp)
+	ON_WM_CONTEXTMENU()
 	//}}AFX_MSG_MAP
 
 	ON_REGISTERED_MESSAGE(WM_XHYPERLINK_CLICKED, OnXHyperLinkClicked)
@@ -190,67 +190,6 @@ void CPluginsDlg::UpdateGUI()
 	}
 }
 
-void CPluginsDlg::OnRClickPluginsList(NMHDR* pNMHDR, LRESULT* pResult)
-{
-	DWORD dwID = GetSelectedPluginID();
-	KP_PLUGIN_INSTANCE *p = m_pPiMgr->GetPluginByID(dwID);
-
-	UNREFERENCED_PARAMETER(pNMHDR);
-
-	*pResult = 0;
-
-	POINT pt;
-	GetCursorPos(&pt);
-
-	m_popmenu.LoadMenu(IDR_PLUGINS_MENU);
-
-	m_popmenu.SetMenuDrawMode(BCMENU_DRAWMODE_XP); // <<<!=>>> BCMENU_DRAWMODE_ORIGINAL
-	m_popmenu.SetSelectDisableMode(FALSE);
-	m_popmenu.SetXPBitmap3D(TRUE);
-	m_popmenu.SetBitmapBackground(RGB(255, 0, 255));
-	m_popmenu.SetIconSize(16, 16);
-
-	m_popmenu.LoadToolbar(IDR_INFOICONS, IDB_INFOICONS_EX);
-
-	BCMenu* psub = NewGUI_GetBCMenu(m_popmenu.GetSubMenu(0));
-	if(psub == NULL) { ASSERT(FALSE); psub = &m_popmenu; }
-
-	// psub->ModifyODMenu(NULL, (UINT)ID_PLUGIN_ENABLE, m_pImgList, 2);
-	// psub->ModifyODMenu(NULL, (UINT)ID_PLUGIN_DISABLE, m_pImgList, 45);
-	psub->ModifyODMenu(NULL, (UINT)ID_PLUGIN_CONFIG, m_pImgList, 21);
-	psub->ModifyODMenu(NULL, (UINT)ID_PLUGIN_ABOUT, m_pImgList, 22);
-
-	CPwSafeDlg::_TranslateMenu(psub, FALSE, NULL);
-
-	if(p != NULL)
-	{
-		// if(p->bEnabled == FALSE)
-		// {
-		//	psub->EnableMenuItem(ID_PLUGIN_DISABLE, MF_BYCOMMAND | MF_GRAYED);
-		//	psub->EnableMenuItem(ID_PLUGIN_CONFIG, MF_BYCOMMAND | MF_GRAYED);
-		//	psub->EnableMenuItem(ID_PLUGIN_ABOUT, MF_BYCOMMAND | MF_GRAYED);
-		// }
-		// else psub->EnableMenuItem(ID_PLUGIN_ENABLE, MF_BYCOMMAND | MF_GRAYED);
-
-		if(p->hinstDLL == NULL)
-		{
-			psub->EnableMenuItem(ID_PLUGIN_CONFIG, MF_BYCOMMAND | MF_GRAYED);
-			psub->EnableMenuItem(ID_PLUGIN_ABOUT, MF_BYCOMMAND | MF_GRAYED);
-		}
-	}
-	else
-	{
-		// psub->EnableMenuItem(ID_PLUGIN_ENABLE, MF_BYCOMMAND | MF_GRAYED);
-		// psub->EnableMenuItem(ID_PLUGIN_DISABLE, MF_BYCOMMAND | MF_GRAYED);
-		psub->EnableMenuItem(ID_PLUGIN_CONFIG, MF_BYCOMMAND | MF_GRAYED);
-		psub->EnableMenuItem(ID_PLUGIN_ABOUT, MF_BYCOMMAND | MF_GRAYED);
-	}
-
-	psub->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, pt.x, pt.y, this);
-
-	m_popmenu.DestroyMenu();
-}
-
 DWORD CPluginsDlg::GetSelectedPluginID()
 {
 	for(int i = 0; i < m_cList.GetItemCount(); ++i)
@@ -306,4 +245,66 @@ LRESULT CPluginsDlg::OnXHyperLinkClicked(WPARAM wParam, LPARAM lParam)
 void CPluginsDlg::OnBtnClickedPlgHelp()
 {
 	WU_OpenAppHelp(PWM_HELP_PLUGINS, m_hWnd);
+}
+
+void CPluginsDlg::OnContextMenu(CWnd* pWnd, CPoint point)
+{
+	if(pWnd == &m_cList)
+	{
+		DWORD dwID = GetSelectedPluginID();
+		KP_PLUGIN_INSTANCE *p = m_pPiMgr->GetPluginByID(dwID);
+
+		POINT pt;
+		ZeroMemory(&pt, sizeof(POINT));
+		GetCursorPos(&pt);
+
+		m_popmenu.LoadMenu(IDR_PLUGINS_MENU);
+
+		m_popmenu.SetMenuDrawMode(BCMENU_DRAWMODE_XP); // <<<!=>>> BCMENU_DRAWMODE_ORIGINAL
+		m_popmenu.SetSelectDisableMode(FALSE);
+		m_popmenu.SetXPBitmap3D(TRUE);
+		m_popmenu.SetBitmapBackground(RGB(255, 0, 255));
+		m_popmenu.SetIconSize(16, 16);
+
+		m_popmenu.LoadToolbar(IDR_INFOICONS, IDB_INFOICONS_EX);
+
+		BCMenu* psub = NewGUI_GetBCMenu(m_popmenu.GetSubMenu(0));
+		if(psub == NULL) { ASSERT(FALSE); psub = &m_popmenu; }
+
+		// psub->ModifyODMenu(NULL, (UINT)ID_PLUGIN_ENABLE, m_pImgList, 2);
+		// psub->ModifyODMenu(NULL, (UINT)ID_PLUGIN_DISABLE, m_pImgList, 45);
+		psub->ModifyODMenu(NULL, (UINT)ID_PLUGIN_CONFIG, m_pImgList, 21);
+		psub->ModifyODMenu(NULL, (UINT)ID_PLUGIN_ABOUT, m_pImgList, 22);
+
+		CPwSafeDlg::_TranslateMenu(psub, FALSE, NULL);
+
+		if(p != NULL)
+		{
+			// if(p->bEnabled == FALSE)
+			// {
+			//	psub->EnableMenuItem(ID_PLUGIN_DISABLE, MF_BYCOMMAND | MF_GRAYED);
+			//	psub->EnableMenuItem(ID_PLUGIN_CONFIG, MF_BYCOMMAND | MF_GRAYED);
+			//	psub->EnableMenuItem(ID_PLUGIN_ABOUT, MF_BYCOMMAND | MF_GRAYED);
+			// }
+			// else psub->EnableMenuItem(ID_PLUGIN_ENABLE, MF_BYCOMMAND | MF_GRAYED);
+
+			if(p->hinstDLL == NULL)
+			{
+				psub->EnableMenuItem(ID_PLUGIN_CONFIG, MF_BYCOMMAND | MF_GRAYED);
+				psub->EnableMenuItem(ID_PLUGIN_ABOUT, MF_BYCOMMAND | MF_GRAYED);
+			}
+		}
+		else
+		{
+			// psub->EnableMenuItem(ID_PLUGIN_ENABLE, MF_BYCOMMAND | MF_GRAYED);
+			// psub->EnableMenuItem(ID_PLUGIN_DISABLE, MF_BYCOMMAND | MF_GRAYED);
+			psub->EnableMenuItem(ID_PLUGIN_CONFIG, MF_BYCOMMAND | MF_GRAYED);
+			psub->EnableMenuItem(ID_PLUGIN_ABOUT, MF_BYCOMMAND | MF_GRAYED);
+		}
+
+		psub->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, pt.x, pt.y, this);
+
+		m_popmenu.DestroyMenu();
+	}
+	else { CDialog::OnContextMenu(pWnd, point); }
 }

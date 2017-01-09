@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -608,12 +608,10 @@ protected:
 	afx_msg void OnPwlistAdd();
 	afx_msg void OnPwlistEdit();
 	afx_msg void OnPwlistDelete();
-	afx_msg void OnRclickPwlist(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnClickGroupList(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnPwlistCopyPw();
 	afx_msg void OnTimer(WPARAM nIDEvent);
 	afx_msg void OnDblclkPwlist(NMHDR* pNMHDR, LRESULT* pResult);
-	afx_msg void OnRclickGroupList(NMHDR* pNMHDR, LRESULT* pResult);
 	afx_msg void OnPwlistCopyUser();
 	afx_msg void OnPwlistVisitUrl();
 	afx_msg void OnFileNew();
@@ -832,6 +830,8 @@ protected:
 	afx_msg LRESULT OnWTSSessionChange(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnDwmSendIconicThumbnail(WPARAM wParam, LPARAM lParam);
 	afx_msg LRESULT OnDwmSendIconicLivePreviewBitmap(WPARAM wParam, LPARAM lParam);
+
+	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
 
 	DECLARE_MESSAGE_MAP()
 };

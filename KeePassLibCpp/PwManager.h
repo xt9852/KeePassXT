@@ -1,6 +1,6 @@
 ﻿/*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -38,12 +38,12 @@
 
 // When making a Windows build, don't forget to update the verinfo resource
 #ifndef _UNICODE
-#define PWM_VERSION_STR  _T("1.31")
+#define PWM_VERSION_STR  _T("1.32")
 #else
-#define PWM_VERSION_STR  _T("1.31 Unicode")
+#define PWM_VERSION_STR  _T("1.32 Unicode")
 #endif
-#define PWM_VERSION_DW   0x011F0000
-#define PWM_VERSION_QW   0x0001001F00000000ULL
+#define PWM_VERSION_DW   0x01200000
+#define PWM_VERSION_QW   0x0001002000000000ULL
 // #define PWM_DEVSNAPSHOT
 
 // Database file signature bytes
@@ -60,7 +60,8 @@
 #define PWM_HOMEPAGE     _T("http://keepass.info/")
 #define PWM_URL_TRL      _T("http://keepass.info/translations.html")
 #define PWM_URL_PLUGINS  _T("http://keepass.info/plugins.html")
-#define PWM_URL_VERSION  _T("http://keepass.info/update/version1x.txt")
+// #define PWM_URL_VERSION  _T("http://keepass.info/update/version1x.txt")
+#define PWM_URL_VERSION  _T("https://sslsites.de/keepass.info/update/version1x.txt")
 #define PWM_URL_DONATE   _T("http://keepass.info/donate.html")
 #define PWM_URL_HELP     _T("http://keepass.info/help/")
 
@@ -467,9 +468,9 @@ public:
 	// DWORD Find(const TCHAR *pszFindString, BOOL bCaseSensitive,
 	//	DWORD searchFlags, DWORD nStart);
 	DWORD Find(const TCHAR *pszFindString, BOOL bCaseSensitive,
-		DWORD searchFlags, DWORD nStart, DWORD nEndExcl);
+		DWORD searchFlags, DWORD nStart, DWORD nEndExcl, std_string* pError);
 	DWORD FindEx(const TCHAR *pszFindString, BOOL bCaseSensitive,
-		DWORD searchFlags, DWORD nStart);
+		DWORD searchFlags, DWORD nStart, std_string* pError);
 
 	// Get and set the algorithm used to encrypt the database
 	int GetAlgorithm() const;

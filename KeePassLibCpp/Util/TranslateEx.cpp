@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -148,8 +148,7 @@ BOOL LoadTranslationTable(LPCTSTR pszTableName)
 	{
 		LPCTSTR lpTestL = m_vDefStrings[iDupScan];
 		LPCTSTR lpTestR = m_vDefStrings[iDupScan + 1];
-        // XT-20160623
-		// ASSERT(_tcscmp(lpTestL, lpTestR) != 0); // Test for duplicate definitions
+		ASSERT(_tcscmp(lpTestL, lpTestR) != 0); // Test for duplicate definitions
 	}
 #endif
 

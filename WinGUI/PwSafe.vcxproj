@@ -586,6 +586,7 @@
     <ClCompile Include="..\KeePassLibCpp\Util\TranslateEx.cpp" />
     <ClCompile Include="AddEntryDlg.cpp" />
     <ClCompile Include="AddGroupDlg.cpp" />
+    <ClCompile Include="bio.cpp" />
     <ClCompile Include="CheckOptionsDlg.cpp" />
     <ClCompile Include="DbSettingsDlg.cpp" />
     <ClCompile Include="EntryListDlg.cpp" />
@@ -787,6 +788,7 @@
     <ClInclude Include="..\KeePassLibCpp\Util\TranslateEx.h" />
     <ClInclude Include="AddEntryDlg.h" />
     <ClInclude Include="AddGroupDlg.h" />
+    <ClInclude Include="bio.h" />
     <ClInclude Include="CheckOptionsDlg.h" />
     <ClInclude Include="DbSettingsDlg.h" />
     <ClInclude Include="EntryListDlg.h" />

@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -101,7 +101,7 @@ void CopyStringToClipboard(const TCHAR *lptString, PW_ENTRY *pEntryContext,
 	if(globalData == NULL) { ASSERT(FALSE); CloseClipboard(); return; }
 	_tcscpy_s((TCHAR *)globalData, cbDataSize / sizeof(TCHAR),
 		(LPCTSTR)strData); // Copy string plus null byte to global memory
-	GlobalUnlock(globalHandle); // Unlock before SetClipboardData!
+	GlobalUnlock(globalHandle);
 
 	VERIFY(SetClipboardData(CF_TTEXTEX, globalHandle) != NULL);
 	VERIFY(CloseClipboard());
@@ -196,7 +196,6 @@ void CopyDelayRenderedClipboardData(const TCHAR *lptString, CPwManager *pReferen
 	HGLOBAL hglb = GlobalAlloc(GMEM_MOVEABLE, (cch + 1) * sizeof(TCHAR));
 	ASSERT(hglb != NULL); if(hglb == NULL) return;
 
-	// Copy the text from pboxLocalClip
 	LPTSTR lptstr = (LPTSTR)GlobalLock(hglb);
 	if(cch > 1) memcpy(lptstr, (LPCTSTR)strData, cch * sizeof(TCHAR));
 	lptstr[cch] = (TCHAR)0;
@@ -1526,4 +1525,20 @@ std::basic_string<TCHAR> WU_GetEnv(LPCTSTR lpVarName, bool bExpand)
 	}
 
 	return str;
+}
+
+LONG WU_RegCreateKey(_In_ HKEY hKey, _In_opt_ LPCTSTR lpSubKey,
+	_Out_ PHKEY phkResult)
+{
+	// RegCreateKey supports NULL as lpSubKey; RegCreateKeyEx does not
+	if(lpSubKey == NULL)
+	{
+		if(phkResult != NULL) *phkResult = hKey;
+		return ERROR_SUCCESS;
+	}
+
+	// The RegCreateKey API function is for compatibility with 16-bit
+	// versions of Windows only, thus we call RegCreateKeyEx
+	return RegCreateKeyEx(hKey, lpSubKey, 0, NULL, REG_OPTION_NON_VOLATILE,
+		KEY_ALL_ACCESS, NULL, phkResult, NULL);
 }

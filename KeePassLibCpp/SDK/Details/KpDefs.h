@@ -1,5 +1,5 @@
 /*
-  Copyright (C) 2008-2016 Dominik Reichl
+  Copyright (C) 2008-2017 Dominik Reichl
   All rights reserved.
 
   Redistribution and use in source and binary forms, with or without
@@ -168,8 +168,8 @@ typedef HRESULT(KP_API *LPKPLIBFUNC)(IKpUnknown* pAPI);
 #define KPM_DELETE_TEMP_FILES_PRE 7
 #define KPM_WM_CANCEL 12
 
-#define KPM_PWLIST_RCLICK 18
-#define KPM_GROUPLIST_RCLICK 20
+#define KPM_PWLIST_CONTEXTMENU 18
+#define KPM_GROUPLIST_CONTEXTMENU 20
 
 #define KPM_OPENDB_PRE 25
 #define KPM_OPENDB_POST 26

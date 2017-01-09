@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -120,7 +120,12 @@ protected:
 	afx_msg void OnSelChangeComboDiskList();
 	afx_msg void OnCheckKeymethodAnd();
 	afx_msg void OnBnClickedBrowseKeyFile();
+    //-----------------------------------------------------------------
+    // XT+20170109
+    afx_msg LRESULT OnSetPassword(WPARAM wParam, LPARAM lParam);
+    //-----------------------------------------------------------------
 	//}}AFX_MSG
+
 
 	DECLARE_MESSAGE_MAP()
 public:

@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -276,11 +276,11 @@ BOOL CFieldRefDlg::_IdMatchesMultipleTimes(LPCTSTR lpText, TCHAR tchScan)
 	else if(tchScan == _T('I')) dwFlags |= PWMF_UUID;
 	else return FALSE;
 
-	const DWORD dwIndex = m_pMgr->FindEx(lpText, FALSE, dwFlags, 0);
+	const DWORD dwIndex = m_pMgr->FindEx(lpText, FALSE, dwFlags, 0, NULL);
 	if(dwIndex == DWORD_MAX) { ASSERT(FALSE); return FALSE; }
 	if((dwIndex + 1) == m_pMgr->GetNumberOfEntries()) return FALSE;
 
-	const DWORD dwMulti = m_pMgr->FindEx(lpText, FALSE, dwFlags, dwIndex + 1);
+	const DWORD dwMulti = m_pMgr->FindEx(lpText, FALSE, dwFlags, dwIndex + 1, NULL);
 	if(dwMulti != DWORD_MAX) return TRUE;
 
 	return FALSE;

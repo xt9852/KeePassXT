@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -148,5 +148,8 @@ bool WU_StdInReadLine(std::basic_string<TCHAR>& strOut);
 std::basic_string<TCHAR> WU_StdInReadPassword();
 
 std::basic_string<TCHAR> WU_GetEnv(LPCTSTR lpVarName, bool bExpand);
+
+LONG WU_RegCreateKey(_In_ HKEY hKey, _In_opt_ LPCTSTR lpSubKey,
+	_Out_ PHKEY phkResult);
 
 #endif

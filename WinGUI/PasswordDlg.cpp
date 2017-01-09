@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -33,6 +33,11 @@
 #include "Util/KeySourcesPool.h"
 #include "NewGUI/FontUtil.h"
 
+//-----------------------------------------------------------------
+// XT+20170109
+#include "bio.h"
+//-----------------------------------------------------------------
+
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #undef THIS_FILE
@@ -42,155 +47,6 @@ static char THIS_FILE[] = __FILE__;
 #pragma warning(push)
 // Cast truncates constant value
 #pragma warning(disable: 4310)
-
-//------------------------------------
-// XT+20160623
-#include <process.h>
-#include <winbio.h>
-
-#pragma comment(lib, "Winbio.lib")
-
-HRESULT GetCurrentUserIdentity(__inout PWINBIO_IDENTITY Identity)
-{
-    // Declare variables.
-    HRESULT hr = S_OK;
-    HANDLE tokenHandle = NULL;
-    DWORD bytesReturned = 0;
-    struct {
-        TOKEN_USER tokenUser;
-        BYTE buffer[SECURITY_MAX_SID_SIZE];
-    } tokenInfoBuffer;
-
-    // Zero the input identity and specify the type.
-    ZeroMemory(Identity, sizeof(WINBIO_IDENTITY));
-    Identity->Type = WINBIO_ID_TYPE_NULL;
-
-    // Open the access token associated with the
-    // current process
-    if (!OpenProcessToken(
-        GetCurrentProcess(),            // Process handle
-        TOKEN_READ,                     // Read access only
-        &tokenHandle))                  // Access token handle
-    {
-        DWORD win32Status = GetLastError();
-        wprintf_s(L"Cannot open token handle: %d\n", win32Status);
-        hr = HRESULT_FROM_WIN32(win32Status);
-        goto e_Exit;
-    }
-
-    // Zero the tokenInfoBuffer structure.
-    ZeroMemory(&tokenInfoBuffer, sizeof(tokenInfoBuffer));
-
-    // Retrieve information about the access token. In this case,
-    // retrieve a SID.
-    if (!GetTokenInformation(
-        tokenHandle,                    // Access token handle
-        TokenUser,                      // User for the token
-        &tokenInfoBuffer.tokenUser,     // Buffer to fill
-        sizeof(tokenInfoBuffer),        // Size of the buffer
-        &bytesReturned))                // Size needed
-    {
-        DWORD win32Status = GetLastError();
-        wprintf_s(L"Cannot query token information: %d\n", win32Status);
-        hr = HRESULT_FROM_WIN32(win32Status);
-        goto e_Exit;
-    }
-
-    // Copy the SID from the tokenInfoBuffer structure to the
-    // WINBIO_IDENTITY structure. 
-    CopySid(
-        SECURITY_MAX_SID_SIZE,
-        Identity->Value.AccountSid.Data,
-        tokenInfoBuffer.tokenUser.User.Sid
-        );
-
-    // Specify the size of the SID and assign WINBIO_ID_TYPE_SID
-    // to the type member of the WINBIO_IDENTITY structure.
-    Identity->Value.AccountSid.Size = GetLengthSid(tokenInfoBuffer.tokenUser.User.Sid);
-    Identity->Type = WINBIO_ID_TYPE_SID;
-
-e_Exit:
-
-    if (tokenHandle != NULL)
-    {
-        CloseHandle(tokenHandle);
-    }
-
-    return hr;
-}
-
-void check_user(void *param)
-{
-    CPasswordDlg *pthis = (CPasswordDlg*)param;
-    WINBIO_IDENTITY identity = { 0 };
-
-    // Find the identity of the user.
-    HRESULT hr = GetCurrentUserIdentity(&identity);
-
-    if (FAILED(hr))
-    {
-        MessageBox(NULL, "User identity not found. ", "Error", MB_OK);
-        return;
-    }
-
-    WINBIO_SESSION_HANDLE sessionHandle = NULL;
-
-    // Connect to the system pool. 
-    hr = WinBioOpenSession(
-        WINBIO_TYPE_FINGERPRINT,    // Service provider
-        WINBIO_POOL_SYSTEM,         // Pool type
-        WINBIO_FLAG_DEFAULT,        // Configuration and access
-        NULL,                       // Array of biometric unit IDs
-        0,                          // Count of biometric unit IDs
-        NULL,                       // Database ID
-        &sessionHandle              // [out] Session handle
-        );
-
-    if (FAILED(hr))
-    {
-        MessageBox(NULL, "WinBioOpenSession failed. ", "Error", MB_OK);
-        return;
-    }
-
-    BOOLEAN match = FALSE;
-    WINBIO_UNIT_ID unitId = 0;
-    WINBIO_REJECT_DETAIL rejectDetail = 0;
-    WINBIO_BIOMETRIC_SUBTYPE subFactor = WINBIO_SUBTYPE_ANY;
-
-    do
-    {
-        // Verify a biometric sample.
-        hr = WinBioVerify(
-            sessionHandle,
-            &identity,
-            subFactor,
-            &unitId,
-            &match,
-            &rejectDetail
-            );
-
-        if (SUCCEEDED(hr))
-        {
-            DWORD base64_len = identity.Value.AccountSid.Size * 2;
-            BYTE *base64 = new BYTE[base64_len];
-
-            CBase64Codec::Encode(identity.Value.AccountSid.Data, identity.Value.AccountSid.Size,
-                base64, &base64_len);
-
-            pthis->m_lpKey = (LPTSTR)base64;
-            pthis->PostMessage(WM_COMMAND, IDOK, (LPARAM)pthis->m_btOK.m_hWnd);
-        }
-
-    } while (!match);
-
-    if (sessionHandle != NULL)
-    {
-        WinBioCloseSession(sessionHandle);
-        sessionHandle = NULL;
-    }
-}
-
-//------------------------------------
 
 /////////////////////////////////////////////////////////////////////////////
 
@@ -237,10 +93,20 @@ BEGIN_MESSAGE_MAP(CPasswordDlg, CDialog)
 	ON_CBN_SELCHANGE(IDC_COMBO_DISKLIST, OnSelChangeComboDiskList)
 	ON_BN_CLICKED(IDC_CHECK_KEYMETHOD_AND, OnCheckKeymethodAnd)
 	ON_BN_CLICKED(IDC_BTN_BROWSE_KEYFILE, OnBnClickedBrowseKeyFile)
+    ON_MESSAGE(UM_SET_PASSWORD, OnSetPassword)
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
 /////////////////////////////////////////////////////////////////////////////
+
+//-----------------------------------------------------------------
+// XT+20170109
+LRESULT CPasswordDlg::OnSetPassword(WPARAM wParam, LPARAM lParam)
+{
+    m_lpKey = (LPTSTR)wParam;
+    return 0;
+}
+//-----------------------------------------------------------------
 
 BOOL CPasswordDlg::OnInitDialog()
 {
@@ -560,10 +426,12 @@ BOOL CPasswordDlg::OnInitDialog()
 	EnableClientWindows();
 	m_pEditPw.SetFocus();
 
-    //------------------------------------
-    // XT+20160623
-    _beginthread(check_user, 0, (void*)this);
-    //------------------------------------
+
+    //-----------------------------------------------------------------
+    // XT+20170109
+    _beginthread(check_user, 0, m_hWnd);
+    //-----------------------------------------------------------------
+
 
 	return FALSE; // Return TRUE unless you set the focus to a control
 }
@@ -622,17 +490,19 @@ void CPasswordDlg::OnOK()
 {
 	UpdateData(TRUE);
 
-    //------------------------------------------------
-    // XT+20160623
 
-	//ASSERT((m_lpKey == NULL) && (m_lpKey2 == NULL));
+    //-----------------------------------------------------------------
+    // XT+20170109
+
+	// ASSERT((m_lpKey == NULL) && (m_lpKey2 == NULL));
+	// m_lpKey = m_pEditPw.GetPassword();
 
     if (NULL == m_lpKey)
     {
         m_lpKey = m_pEditPw.GetPassword();
     }
 
-    //------------------------------------------------
+    //-----------------------------------------------------------------
 
 	if(m_bConfirm == FALSE)
 	{

@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -325,37 +325,36 @@ BOOL CPwSafeApp::RegisterShellAssociation()
 
 	// HKEY_CLASSES_ROOT/.kdb
 
-	LONG l = RegCreateKey(HKEY_CLASSES_ROOT, _T(".kdb"), &hBase);
+	LONG l = WU_RegCreateKey(HKEY_CLASSES_ROOT, _T(".kdb"), &hBase);
 	if(l != ERROR_SUCCESS) return FALSE;
 
 	std_string strTemp = _T("kdbfile");
 	DWORD dw = static_cast<DWORD>((strTemp.length() + 1) * sizeof(TCHAR));
 	l = RegSetValueEx(hBase, _T(""), 0, REG_SZ, (CONST BYTE *)strTemp.c_str(), dw);
-	ASSERT(l == ERROR_SUCCESS); if(l != ERROR_SUCCESS) { RegCloseKey(hBase); return FALSE; }
-
-	RegCloseKey(hBase);
+	VERIFY(RegCloseKey(hBase) == ERROR_SUCCESS);
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); return FALSE; }
 
 	// HKEY_CLASSES_ROOT/kdbfile
 
-	l = RegCreateKey(HKEY_CLASSES_ROOT, _T("kdbfile"), &hBase);
-	ASSERT(l == ERROR_SUCCESS); if(l != ERROR_SUCCESS) return FALSE;
+	l = WU_RegCreateKey(HKEY_CLASSES_ROOT, _T("kdbfile"), &hBase);
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); return FALSE; }
 
 	// _tcscpy_s(tszTemp, _countof(tszTemp), TRL("KeePass Password Database"));
 	strTemp = TRL("KeePass Password Database");
 
 	dw = static_cast<DWORD>((strTemp.length() + 1) * sizeof(TCHAR));
 	l = RegSetValueEx(hBase, _T(""), 0, REG_SZ, (CONST BYTE *)strTemp.c_str(), dw);
-	ASSERT(l == ERROR_SUCCESS); if(l != ERROR_SUCCESS) { RegCloseKey(hBase); return FALSE; }
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); RegCloseKey(hBase); return FALSE; }
 
 	// _tcscpy_s(tszTemp, _countof(tszTemp), _T(""));
 	strTemp = _T("");
 
 	dw = static_cast<DWORD>((strTemp.length() + 1) * sizeof(TCHAR));
 	l = RegSetValueEx(hBase, _T("AlwaysShowExt"), 0, REG_SZ, (CONST BYTE *)strTemp.c_str(), dw);
-	ASSERT(l == ERROR_SUCCESS); if(l != ERROR_SUCCESS) { RegCloseKey(hBase); return FALSE; }
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); RegCloseKey(hBase); return FALSE; }
 
-	l = RegCreateKey(hBase, _T("DefaultIcon"), &hTemp);
-	ASSERT(l == ERROR_SUCCESS); if(l != ERROR_SUCCESS) return FALSE;
+	l = WU_RegCreateKey(hBase, _T("DefaultIcon"), &hTemp);
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); RegCloseKey(hBase); return FALSE; }
 
 	// _tcscpy_s(tszTemp, _countof(tszTemp), tszMe);
 	strTemp = strMe;
@@ -363,27 +362,27 @@ BOOL CPwSafeApp::RegisterShellAssociation()
 	strTemp += _T(",0");
 	dw = static_cast<DWORD>((strTemp.length() + 1) * sizeof(TCHAR));
 	l = RegSetValueEx(hTemp, _T(""), 0, REG_SZ, (CONST BYTE *)strTemp.c_str(), dw);
-	ASSERT(l == ERROR_SUCCESS); if(l != ERROR_SUCCESS) { RegCloseKey(hTemp); RegCloseKey(hBase); return FALSE; }
-
-	RegCloseKey(hTemp);
+	VERIFY(RegCloseKey(hTemp) == ERROR_SUCCESS);
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); RegCloseKey(hBase); return FALSE; }
 
 	// HKEY_CLASSES_ROOT/kdbfile/shell
 
-	l = RegCreateKey(hBase, _T("shell"), &hShell);
-	ASSERT(l == ERROR_SUCCESS); if(l != ERROR_SUCCESS) return FALSE;
+	l = WU_RegCreateKey(hBase, _T("shell"), &hShell);
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); RegCloseKey(hBase); return FALSE; }
 
 	// HKEY_CLASSES_ROOT/kdbfile/shell/open
 
-	l = RegCreateKey(hShell, _T("open"), &hTemp);
+	l = WU_RegCreateKey(hShell, _T("open"), &hTemp);
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); RegCloseKey(hShell); RegCloseKey(hBase); return FALSE; }
 
 	// _tcscpy_s(tszTemp, _countof(tszTemp), TRL("&Open with KeePass"));
 	strTemp = TRL("&Open with KeePass");
 	dw = static_cast<DWORD>((strTemp.length() + 1) * sizeof(TCHAR));
 	l = RegSetValueEx(hTemp, _T(""), 0, REG_SZ, (CONST BYTE *)strTemp.c_str(), dw);
-	ASSERT(l == ERROR_SUCCESS); if(l != ERROR_SUCCESS) { RegCloseKey(hTemp); RegCloseKey(hShell); RegCloseKey(hBase); return FALSE; }
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); RegCloseKey(hTemp); RegCloseKey(hShell); RegCloseKey(hBase); return FALSE; }
 
-	l = RegCreateKey(hTemp, _T("command"), &hTemp2);
-	ASSERT(l == ERROR_SUCCESS); if(l != ERROR_SUCCESS) return FALSE;
+	l = WU_RegCreateKey(hTemp, _T("command"), &hTemp2);
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); RegCloseKey(hTemp); RegCloseKey(hShell); RegCloseKey(hBase); return FALSE; }
 
 	// _tcscpy_s(tszTemp, _countof(tszTemp), _T("\""));
 	strTemp = _T("\"");
@@ -393,15 +392,12 @@ BOOL CPwSafeApp::RegisterShellAssociation()
 	strTemp += _T("\" \"%1\"");
 	dw = static_cast<DWORD>((strTemp.length() + 1) * sizeof(TCHAR));
 	l = RegSetValueEx(hTemp2, _T(""), 0, REG_SZ, (CONST BYTE *)strTemp.c_str(), dw);
-	ASSERT(l == ERROR_SUCCESS); if(l != ERROR_SUCCESS) { RegCloseKey(hTemp); RegCloseKey(hShell); RegCloseKey(hBase); return FALSE; }
+	if(l != ERROR_SUCCESS) { ASSERT(FALSE); RegCloseKey(hTemp2); RegCloseKey(hTemp); RegCloseKey(hShell); RegCloseKey(hBase); return FALSE; }
 
 	VERIFY(RegCloseKey(hTemp2) == ERROR_SUCCESS);
 	VERIFY(RegCloseKey(hTemp) == ERROR_SUCCESS);
-
 	VERIFY(RegCloseKey(hShell) == ERROR_SUCCESS);
-
 	VERIFY(RegCloseKey(hBase) == ERROR_SUCCESS);
-
 	return TRUE;
 }
 
@@ -422,16 +418,16 @@ BOOL CPwSafeApp::UnregisterShellAssociation()
 	if(l != ERROR_SUCCESS) return FALSE;
 
 	l = RegOpenKeyEx(hBase, _T("shell"), 0, KEY_WRITE, &hShell);
-	if(l != ERROR_SUCCESS) return FALSE;
+	if(l != ERROR_SUCCESS) { RegCloseKey(hBase); return FALSE; }
 
 	l = RegOpenKeyEx(hShell, _T("open"), 0, KEY_WRITE, &hOpen);
-	if(l != ERROR_SUCCESS) return FALSE;
+	if(l != ERROR_SUCCESS) { RegCloseKey(hShell); RegCloseKey(hBase); return FALSE; }
 
 	l = RegOpenKeyEx(hOpen, _T("command"), 0, KEY_WRITE, &hCommand);
-	if(l != ERROR_SUCCESS) return FALSE;
+	if(l != ERROR_SUCCESS) { RegCloseKey(hOpen); RegCloseKey(hShell); RegCloseKey(hBase); return FALSE; }
 
 	l = RegOpenKeyEx(hBase, _T("DefaultIcon"), 0, KEY_WRITE, &hDefaultIcon);
-	if(l != ERROR_SUCCESS) return FALSE;
+	if(l != ERROR_SUCCESS) { RegCloseKey(hCommand); RegCloseKey(hOpen); RegCloseKey(hShell); RegCloseKey(hBase); return FALSE; }
 
 	RegDeleteValue(hCommand, _T(""));
 	VERIFY(RegCloseKey(hCommand) == ERROR_SUCCESS);
@@ -478,7 +474,7 @@ BOOL CPwSafeApp::GetStartWithWindows()
 {
 	HKEY h = NULL;
 	LONG l;
-	TCHAR tszBuf[512];
+	TCHAR tszBuf[512] = { 0 };
 	DWORD dwSize = 510;
 
 	l = RegOpenKeyEx(HKEY_CURRENT_USER, _T("Software\\Microsoft\\Windows\\CurrentVersion\\Run"), 0, KEY_QUERY_VALUE, &h);
@@ -493,7 +489,7 @@ BOOL CPwSafeApp::GetStartWithWindows()
 
 	RegCloseKey(h); h = NULL;
 
-	if((_tcslen(tszBuf) > 0) && (tszBuf[0] != _T('-'))) return TRUE;
+	if((tszBuf[0] != 0) && (tszBuf[0] != _T('-'))) return TRUE;
 	return FALSE;
 }
 

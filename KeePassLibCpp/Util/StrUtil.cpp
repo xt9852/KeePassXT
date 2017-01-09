@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -394,7 +394,7 @@ void _StringToUuid(const TCHAR *ptszSource, BYTE *pUuid)
 		else if(tchScan == _T('I')) dwFlags |= PWMF_UUID;
 		else break;
 
-		const DWORD dwIndex = pDataSource->FindEx(strID, FALSE, dwFlags, 0);
+		const DWORD dwIndex = pDataSource->FindEx(strID, FALSE, dwFlags, 0, NULL);
 		if(dwIndex != DWORD_MAX)
 		{
 			PW_ENTRY *pFound = pDataSource->GetEntry(dwIndex);

@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -29,22 +29,18 @@
 #define _SECURE_ATL 1
 #endif
 
-//-----------------------------------------
-// XT-20160623
-// #ifndef WINVER
-// #define WINVER 0x0600
-// #endif
-// #ifndef _WIN32_WINNT
-// #define _WIN32_WINNT 0x0600
-// #endif						
-// #ifndef _WIN32_WINDOWS
-// #define _WIN32_WINDOWS 0x0410
-// #endif
-// #ifndef _WIN32_IE
-// #define _WIN32_IE 0x0600
-// #endif
-//-----------------------------------------
-
+#ifndef WINVER
+#define WINVER 0x0600
+#endif
+#ifndef _WIN32_WINNT
+#define _WIN32_WINNT 0x0600
+#endif						
+#ifndef _WIN32_WINDOWS
+#define _WIN32_WINDOWS 0x0410
+#endif
+#ifndef _WIN32_IE
+#define _WIN32_IE 0x0600
+#endif
 #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS
 #define _AFX_ALL_WARNINGS
 

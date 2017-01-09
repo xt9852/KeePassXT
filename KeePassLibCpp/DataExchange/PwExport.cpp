@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -488,48 +488,71 @@ BOOL CPwExport::ExportGroup(const TCHAR *pszFile, DWORD dwGroupId, const PWEXPOR
 		_ExpLine(_T("</h2>"));
 		_ExpLine(_T("<table><tr>"));
 
-		DWORD dwCols = 0;
-		if(pOptions->bGroup != FALSE) ++dwCols;
-		if(pOptions->bGroupTree != FALSE) ++dwCols;
-		if(pOptions->bTitle != FALSE) ++dwCols;
-		if(pOptions->bUserName != FALSE) ++dwCols;
-		if(pOptions->bURL != FALSE) ++dwCols;
-		if(pOptions->bPassword != FALSE) ++dwCols;
-		if(pOptions->bNotes != FALSE) ++dwCols;
-		if(pOptions->bUUID != FALSE) ++dwCols;
-		if(pOptions->bImage != FALSE) ++dwCols;
-		if(pOptions->bCreationTime != FALSE) ++dwCols;
-		if(pOptions->bLastAccTime != FALSE) ++dwCols;
-		if(pOptions->bLastModTime != FALSE) ++dwCols;
-		if(pOptions->bExpireTime != FALSE) ++dwCols;
-		if(pOptions->bAttachment != FALSE) ++dwCols; // Description
-		if(pOptions->bAttachment != FALSE) ++dwCols; // Data
+		DWORD dwEquiCols = 0;
+		if(pOptions->bGroup != FALSE) ++dwEquiCols;
+		if(pOptions->bGroupTree != FALSE) ++dwEquiCols;
+		if(pOptions->bTitle != FALSE) ++dwEquiCols;
+		if(pOptions->bUserName != FALSE) ++dwEquiCols;
+		if(pOptions->bURL != FALSE) ++dwEquiCols;
+		if(pOptions->bPassword != FALSE) ++dwEquiCols;
+		if(pOptions->bNotes != FALSE) dwEquiCols += 2;
+		if(pOptions->bUUID != FALSE) ++dwEquiCols;
+		if(pOptions->bImage != FALSE) ++dwEquiCols;
+		if(pOptions->bCreationTime != FALSE) ++dwEquiCols;
+		if(pOptions->bLastAccTime != FALSE) ++dwEquiCols;
+		if(pOptions->bLastModTime != FALSE) ++dwEquiCols;
+		if(pOptions->bExpireTime != FALSE) ++dwEquiCols;
+		if(pOptions->bAttachment != FALSE) ++dwEquiCols; // Description
+		if(pOptions->bAttachment != FALSE) dwEquiCols += 2; // Data
 
-		if(dwCols == 0) dwCols = 1;
-		int nWidth = 10000 / static_cast<int>(dwCols);
+		if(dwEquiCols == 0) dwEquiCols = 1;
+		int nWidth = 10000 / static_cast<int>(dwEquiCols);
+
 		std::basic_string<TCHAR> strWidth =
 			boost::lexical_cast<std::basic_string<TCHAR> >(nWidth / 100);
 		strWidth += _T(".");
 		strWidth += boost::lexical_cast<std::basic_string<TCHAR> >(nWidth % 100);
 
+		std::basic_string<TCHAR> strWidth2 =
+			boost::lexical_cast<std::basic_string<TCHAR> >((nWidth * 2) / 100);
+		strWidth2 += _T(".");
+		strWidth2 += boost::lexical_cast<std::basic_string<TCHAR> >((nWidth * 2) % 100);
+
 		std::basic_string<TCHAR> strTH = _T("<th class=\"field_name\" style=\"width: ");
 		strTH += strWidth;
 		strTH += _T("%;\">");
+
+		std::basic_string<TCHAR> strTH2 = _T("<th class=\"field_name\" style=\"width: ");
+		strTH2 += strWidth2;
+		strTH2 += _T("%;\">");
 
 		std::basic_string<TCHAR> strClTH = _T("</th>");
 		strClTH += m_pszNewLine;
 		strClTH += strTH;
 
-		_ExpStr(strTH.c_str());
+		std::basic_string<TCHAR> strClTH2 = _T("</th>");
+		strClTH2 += m_pszNewLine;
+		strClTH2 += strTH2;
+
+		if((pOptions->bGroup | pOptions->bGroupTree | pOptions->bTitle |
+			pOptions->bUserName | pOptions->bURL | pOptions->bPassword) != FALSE)
+			_ExpStr(strTH.c_str());
+		else _ExpStr(strTH2.c_str());
+
 		_ExpSetSep(strClTH.c_str());
 		_ExpResetSkip();
+
 		_ExpXmlStrIf(pOptions->bGroup, TRL("Group"));
 		_ExpXmlStrIf(pOptions->bGroupTree, TRL("Group Tree"));
 		_ExpXmlStrIf(pOptions->bTitle, TRL("Title"));
 		_ExpXmlStrIf(pOptions->bUserName, TRL("User Name"));
 		_ExpXmlStrIf(pOptions->bURL, TRL("URL"));
 		_ExpXmlStrIf(pOptions->bPassword, TRL("Password"));
+
+		_ExpSetSep(strClTH2.c_str());
 		_ExpXmlStrIf(pOptions->bNotes, TRL("Notes"));
+		_ExpSetSep(strClTH.c_str());
+
 		_ExpXmlStrIf(pOptions->bUUID, TRL("UUID"));
 		_ExpXmlStrIf(pOptions->bImage, TRL("Icon"));
 		_ExpXmlStrIf(pOptions->bCreationTime, TRL("Creation Time"));
@@ -537,7 +560,10 @@ BOOL CPwExport::ExportGroup(const TCHAR *pszFile, DWORD dwGroupId, const PWEXPOR
 		_ExpXmlStrIf(pOptions->bLastModTime, TRL("Last Modification"));
 		_ExpXmlStrIf(pOptions->bExpireTime, TRL("Expires"));
 		_ExpXmlStrIf(pOptions->bAttachment, TRL("Attachment Description"));
+
+		_ExpSetSep(strClTH2.c_str());
 		_ExpXmlStrIf(pOptions->bAttachment, TRL("Attachment"));
+		_ExpSetSep(strClTH.c_str());
 
 		_ExpLine(_T("</th></tr>"));
 		_ExpSetSep(NULL); // Release strClTH

@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -56,7 +56,7 @@ CString SprTagSimString(LPCTSTR lpString)
 			case _T('^'): sb += _T("%({NUMPAD0}{NUMPAD9}{NUMPAD4})"); break;
 			case _T('\''): sb += _T("%({NUMPAD0}{NUMPAD3}{NUMPAD9})"); break;
 			case _T('"'): sb += _T("%({NUMPAD0}{NUMPAD3}{NUMPAD4})"); break;
-			case _T('\x3f'): sb += _T("%({NUMPAD0}{NUMPAD1}{NUMPAD8}{NUMPAD0})"); break; // XT + 20160623
+			case _T('?'): sb += _T("%({NUMPAD0}{NUMPAD1}{NUMPAD8}{NUMPAD0})"); break;
 			case _T('`'): sb += _T("%({NUMPAD0}{NUMPAD9}{NUMPAD6})"); break;
 			case _T('%'): sb += _T("{PERCENT}"); break;
 			case _T('{'): sb += _T("{LEFTBRACE}"); break;

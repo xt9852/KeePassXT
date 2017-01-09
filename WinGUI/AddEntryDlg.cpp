@@ -1,6 +1,6 @@
 /*
   KeePass Password Safe - The Open-Source Password Manager
-  Copyright (C) 2003-2016 Dominik Reichl <dominik.reichl@t-online.de>
+  Copyright (C) 2003-2017 Dominik Reichl <dominik.reichl@t-online.de>
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -159,6 +159,7 @@ BEGIN_MESSAGE_MAP(CAddEntryDlg, CDialog)
 	ON_COMMAND(ID_INSERTFIELDREFERENCE_INPASSWORDFIELD, &CAddEntryDlg::OnInsertFieldReferenceInPasswordField)
 	ON_COMMAND(ID_INSERTFIELDREFERENCE_INURLFIELD, &CAddEntryDlg::OnInsertFieldReferenceInUrlField)
 	ON_COMMAND(ID_INSERTFIELDREFERENCE_INNOTESFIELD, &CAddEntryDlg::OnInsertFieldReferenceInNotesField)
+	ON_WM_CONTEXTMENU()
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -760,38 +761,6 @@ void CAddEntryDlg::OnReUndo()
 void CAddEntryDlg::OnUpdateReUndo(CCmdUI* pCmdUI)
 {
 	pCmdUI->Enable(m_reNotes.CanUndo());
-}
-
-BOOL CAddEntryDlg::OnNotify(WPARAM wParam, LPARAM lParam, LRESULT* pResult) 
-{
-	MSGFILTER *lpMsgFilter = (MSGFILTER *)lParam;
-
-	if((wParam == IDC_RE_NOTES) && (lpMsgFilter->nmhdr.code == EN_MSGFILTER)
-		&& (lpMsgFilter->msg == WM_RBUTTONDOWN))
-	{
-		POINT pt;
-		GetCursorPos(&pt);
-
-		BCMenu menu;
-		menu.LoadMenu(IDR_RECTX_MENU);
-
-		menu.SetMenuDrawMode(BCMENU_DRAWMODE_XP); // <<<!=>>> BCMENU_DRAWMODE_ORIGINAL
-		menu.SetSelectDisableMode(FALSE);
-		menu.SetXPBitmap3D(TRUE);
-		menu.SetBitmapBackground(RGB(255, 0, 255));
-		menu.SetIconSize(16, 16);
-
-		menu.LoadToolbar(IDR_INFOICONS, IDB_INFOICONS_EX);
-
-		BCMenu *pSub = NewGUI_GetBCMenu(menu.GetSubMenu(0));
-		if(pSub == NULL) { ASSERT(FALSE); pSub = &menu; }
-		CPwSafeDlg::_TranslateMenu(pSub, TRUE, NULL);
-
-		pSub->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, pt.x, pt.y, this);
-		menu.DestroyMenu();
-	}
-	
-	return CDialog::OnNotify(wParam, lParam, pResult);
 }
 
 void CAddEntryDlg::OnSetAttachBtn() 
@@ -1417,6 +1386,35 @@ void CAddEntryDlg::_TryCloseForm()
 	}
 
 	--m_uTryingToClose;
+}
+
+void CAddEntryDlg::OnContextMenu(CWnd* pWnd, CPoint point)
+{
+	if(pWnd == &m_reNotes)
+	{
+		POINT pt;
+		ZeroMemory(&pt, sizeof(POINT));
+		GetCursorPos(&pt);
+
+		BCMenu menu;
+		menu.LoadMenu(IDR_RECTX_MENU);
+
+		menu.SetMenuDrawMode(BCMENU_DRAWMODE_XP); // <<<!=>>> BCMENU_DRAWMODE_ORIGINAL
+		menu.SetSelectDisableMode(FALSE);
+		menu.SetXPBitmap3D(TRUE);
+		menu.SetBitmapBackground(RGB(255, 0, 255));
+		menu.SetIconSize(16, 16);
+
+		menu.LoadToolbar(IDR_INFOICONS, IDB_INFOICONS_EX);
+
+		BCMenu *pSub = NewGUI_GetBCMenu(menu.GetSubMenu(0));
+		if(pSub == NULL) { ASSERT(FALSE); pSub = &menu; }
+		CPwSafeDlg::_TranslateMenu(pSub, TRUE, NULL);
+
+		pSub->TrackPopupMenu(TPM_LEFTALIGN | TPM_RIGHTBUTTON, pt.x, pt.y, this);
+		menu.DestroyMenu();
+	}
+	else { CDialog::OnContextMenu(pWnd, point); }
 }
 
 #pragma warning(pop)
