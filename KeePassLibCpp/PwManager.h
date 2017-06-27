@@ -38,12 +38,12 @@
 
 // When making a Windows build, don't forget to update the verinfo resource
 #ifndef _UNICODE
-#define PWM_VERSION_STR  _T("1.32")
+#define PWM_VERSION_STR  _T("1.33")
 #else
-#define PWM_VERSION_STR  _T("1.32 Unicode")
+#define PWM_VERSION_STR  _T("1.33 Unicode")
 #endif
-#define PWM_VERSION_DW   0x01200000
-#define PWM_VERSION_QW   0x0001002000000000ULL
+#define PWM_VERSION_DW   0x01210000
+#define PWM_VERSION_QW   0x0001002100000000ULL
 // #define PWM_DEVSNAPSHOT
 
 // Database file signature bytes

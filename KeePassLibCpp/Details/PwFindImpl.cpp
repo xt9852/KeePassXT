@@ -105,16 +105,11 @@ DWORD CPwManager::Find(const TCHAR *pszFindString, BOOL bCaseSensitive,
 		if((searchFlags & PWMF_PASSWORD) != 0)
 		{
 			UnlockEntryPassword(&m_pEntries[i]);
-			CString strPassword = m_pEntries[i].pszPassword;
+			const bool bMatch = StrMatchText(m_pEntries[i].pszPassword, lpSearch,
+				bCaseSensitive, spRegex.get());
 			LockEntryPassword(&m_pEntries[i]);
 
-			if(StrMatchText(strPassword, lpSearch, bCaseSensitive, spRegex.get()))
-			{
-				EraseCString(&strPassword);
-				return i;
-			}
-
-			EraseCString(&strPassword);
+			if(bMatch) return i;
 		}
 
 		if((searchFlags & PWMF_ADDITIONAL) != 0)

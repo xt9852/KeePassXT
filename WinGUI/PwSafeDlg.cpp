@@ -712,6 +712,7 @@ BOOL CPwSafeDlg::OnInitDialog()
 	m_menu.SetXPBitmap3D(TRUE);
 	m_menu.SetBitmapBackground(RGB(255,0,255));
 	m_menu.SetIconSize(16, 16);
+	// m_menu.LoadCheckmarkBitmap(IDB_CANCEL, IDB_OK);
 
 	// Insert the group list and entry list menus to the edit menu
 
@@ -8029,22 +8030,24 @@ void CPwSafeDlg::ShowEntryDetails(PW_ENTRY *p)
 
 		crURL.cpMin += static_cast<LONG>(_tcslen(TRL("Password:")) + 3);
 
-		// Do not dereference the password here; if dereferencing should
-		// be implemented here in the future, make sure to make local
-		// copy of the password in order to not conflict with in-memory
-		// protection and the Spr engine
-		CString strTempPassword = _MakeRtfString(p->pszPassword);
 		if(m_bPasswordStars == FALSE)
 		{
+			// Do not dereference the password here; if dereferencing should
+			// be implemented here in the future, make sure to make local
+			// copy of the password in order to not conflict with in-memory
+			// protection and the Spr engine
+			CString strTempPassword = _MakeRtfString(p->pszPassword);
+
 			str += strTempPassword;
 			crURL.cpMin += static_cast<LONG>(_tcslen(p->pszPassword));
+
+			EraseCString(&strTempPassword);
 		}
 		else
 		{
 			str += _T("********");
 			crURL.cpMin += 8;
 		}
-		EraseCString(&strTempPassword);
 	}
 	m_mgr.LockEntryPassword(p);
 
@@ -8684,7 +8687,7 @@ void CPwSafeDlg::OnInfoTranslation()
 	NotifyUserActivity();
 	_SetDisplayDialog(true);
 
-	CString str = TRL("Currently Used Language"); str += _T(": ");
+	CString str = TRL("Currently Used Language"); str += _T(":\r\n");
 	if(_tcscmp(TRL("~LANGUAGENAME"), _T("~LANGUAGENAME")) != 0)
 	{
 		str += TRL("~LANGUAGENAME");
@@ -8696,24 +8699,27 @@ void CPwSafeDlg::OnInfoTranslation()
 	else str += _T("Unknown or English version");
 	str += _T("\r\n\r\n");
 
-	str += TRL("Language File Version"); str += _T(": ");
+	str += TRL("Language File Version"); str += _T(":\r\n");
 	if(_tcscmp(TRL("~LANGUAGEVERSION"), _T("~LANGUAGEVERSION")) != 0)
 		str += TRL("~LANGUAGEVERSION");
 	else str += _T("Unknown or English version");
-	str += _T("\r\n");
+	str += _T("\r\n\r\n");
 
-	str += TRL("Author"); str += _T(": ");
+	str += TRL("Author"); str += _T(":\r\n");
 	if(_tcscmp(TRL("~LANGUAGEAUTHOR"), _T("~LANGUAGEAUTHOR")) != 0)
 		str += TRL("~LANGUAGEAUTHOR");
 	else str += _T("Unknown or English version");
-	str += _T("\r\n");
+	str += _T("\r\n\r\n");
 
-	str += TRL("Translation Author Contact"); str += _T(": ");
+	str += TRL("Translation Author Contact"); str += _T(":\r\n");
 	if(_tcscmp(TRL("~LANGUAGEAUTHOREMAIL"), _T("~LANGUAGEAUTHOREMAIL")) != 0)
 		str += TRL("~LANGUAGEAUTHOREMAIL");
 	else str += _T("Unknown or English version");
 
-	MessageBox(str, TRL("Translation information"), MB_OK | MB_ICONINFORMATION);
+	// if(CVistaTaskDialog::ShowMessageBox(this->m_hWnd, TRL("Translation Information"),
+	//	str, TD_INFORMATION_ICON, TRL("OK"), IDCANCEL, NULL, 0) < 0)
+	MessageBox(str, TRL("Translation Information"), MB_OK | MB_ICONINFORMATION);
+
 	_SetDisplayDialog(false);
 }
 

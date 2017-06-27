@@ -2,49 +2,49 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{6159cbc2-37b5-4c27-93eb-43c940f50466}</UniqueIdentifier>
+      <UniqueIdentifier>{3329d18b-251a-4144-b2b4-45624f113969}</UniqueIdentifier>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{bd0f7a41-8bee-404d-819e-55f0352b6c58}</UniqueIdentifier>
+      <UniqueIdentifier>{4548bdea-4f98-4481-96b3-998a6a70853b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{613bc0c8-3d13-4f93-9536-4a2b699f7032}</UniqueIdentifier>
+      <UniqueIdentifier>{4bb956bc-f34c-42fc-9db6-531fae974805}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp">
-      <UniqueIdentifier>{c1608d53-8f50-43c4-95e0-d726b0b0a058}</UniqueIdentifier>
+      <UniqueIdentifier>{be8da245-620c-44d0-ab7f-ad2d767c6f6a}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\Crypto">
-      <UniqueIdentifier>{9bbb553e-fefa-45ac-a239-cbd0af5130f1}</UniqueIdentifier>
+      <UniqueIdentifier>{46731fc5-7efa-4da2-80e9-4ec9a6e83e27}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\Crypto\SHA2">
-      <UniqueIdentifier>{1be8dd74-c6a3-443a-b560-2618f2597671}</UniqueIdentifier>
+      <UniqueIdentifier>{df7e4423-f767-4250-bf72-7e2f14969748}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\DataExchange">
-      <UniqueIdentifier>{7272512e-9fd7-403b-9371-f208aeb61951}</UniqueIdentifier>
+      <UniqueIdentifier>{5b2a7522-4f21-4c2a-a15e-fcd9e02015d2}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\SysSpec_Windows">
-      <UniqueIdentifier>{d0fa3635-32c9-45b6-9804-6029f2085f29}</UniqueIdentifier>
+      <UniqueIdentifier>{1c29857a-10d3-4b8a-9ddd-c491c123510e}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\Util">
-      <UniqueIdentifier>{7857d25d-565f-435a-8d11-4925d6627939}</UniqueIdentifier>
+      <UniqueIdentifier>{b910245e-7c19-44d5-b0e8-b1f870882ab5}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\PasswordGenerator">
-      <UniqueIdentifier>{2ae398c2-7d58-460a-ab2a-c9c8ae08352c}</UniqueIdentifier>
+      <UniqueIdentifier>{03ebf991-8f29-4a0f-92f6-aa75110a6122}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\Details">
-      <UniqueIdentifier>{d975564e-681f-4257-82c5-e776d2ae2bce}</UniqueIdentifier>
+      <UniqueIdentifier>{c5836779-dc1b-4c17-8794-86d7fc495684}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\SDK">
-      <UniqueIdentifier>{f38e08c0-e2db-442c-9f5a-7ee62657b717}</UniqueIdentifier>
+      <UniqueIdentifier>{04d9aec8-56df-4cbb-b7ae-b46348cd3796}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\SDK\Details">
-      <UniqueIdentifier>{1c20d827-1b24-43eb-ad68-be97f52714b3}</UniqueIdentifier>
+      <UniqueIdentifier>{45b20d58-1955-4707-88f8-3d3c2c0a9cd0}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\IO">
-      <UniqueIdentifier>{bee7c818-053c-4af6-a658-36f70dd1a747}</UniqueIdentifier>
+      <UniqueIdentifier>{78679996-fb6b-428d-8e78-bc44b6719781}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassAPI">
-      <UniqueIdentifier>{0c430075-b837-4b5d-a96f-e9cebfc9b8e3}</UniqueIdentifier>
+      <UniqueIdentifier>{dce47c1c-02bd-40b4-b23c-ae31a364b523}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

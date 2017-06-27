@@ -141,19 +141,12 @@ void CPwExport::_ExpLine(LPCTSTR lpString)
 
 void CPwExport::_ExpXmlStr(LPCTSTR lpString)
 {
-	if((lpString != NULL) && (_tcslen(lpString) > 0))
-	{
-		TCHAR *pXmlString = MakeSafeXmlString(lpString);
-		
-		ASSERT(pXmlString != NULL);
-		if(pXmlString != NULL)
-		{
-			UTF8_BYTE *pUtf8String = _StringToUTF8(pXmlString);
-			fwrite(pUtf8String, 1, strlen((char *)pUtf8String), m_fp);
-			SAFE_DELETE_ARRAY(pUtf8String);
-			SAFE_DELETE_ARRAY(pXmlString);
-		}
-	}
+	std::basic_string<TCHAR> str = MakeSafeXmlString(lpString);
+	if(str.size() == 0) return;
+	
+	UTF8_BYTE *pUtf8String = _StringToUTF8(str.c_str());
+	fwrite(pUtf8String, 1, strlen((char *)pUtf8String), m_fp);
+	SAFE_DELETE_ARRAY(pUtf8String);
 }
 
 void CPwExport::_ExpHtmlStr(LPCTSTR lpString)
@@ -280,9 +273,8 @@ CString CPwExport::MakeGroupTreeString(DWORD dwGroupId, bool bXmlEncode) const
 				CString strTemp;
 				if(bXmlEncode)
 				{
-					TCHAR *tszSafeGroup = MakeSafeXmlString(pg->pszGroupName);
-					strTemp = tszSafeGroup;
-					SAFE_DELETE_ARRAY(tszSafeGroup);
+					std::basic_string<TCHAR> strGrp = MakeSafeXmlString(pg->pszGroupName);
+					strTemp = strGrp.c_str();
 				}
 				else strTemp = pg->pszGroupName;
 

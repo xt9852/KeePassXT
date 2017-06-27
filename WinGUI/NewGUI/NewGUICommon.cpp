@@ -901,10 +901,7 @@ BOOL NewGUI_GetNonClientMetrics(NONCLIENTMETRICS* p)
 #else
 	// Verify that the size computation above is still correct with the
 	// latest NONCLIENTMETRICS definition, then update the WINVER comparison
-    //-----------------------------------------------------------------
-    // XT-20170109
-	// BOOST_STATIC_ASSERT(false);
-    //-----------------------------------------------------------------
+	//BOOST_STATIC_ASSERT(false);
 #endif
 
 	p->cbSize = cbSize;

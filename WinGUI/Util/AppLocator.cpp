@@ -93,28 +93,23 @@ void AppLocator::GetPaths()
 
 void AppLocator::FindInternetExplorer()
 {
-	LPCTSTR lpIEDef = _T("SOFTWARE\\Clients\\StartMenuInternet\\IEXPLORE.EXE\\shell\\open\\command");
-	LPCTSTR lpIEWow = _T("SOFTWARE\\Wow6432Node\\Clients\\StartMenuInternet\\IEXPLORE.EXE\\shell\\open\\command");
+	LPCTSTR lpIE = _T("SOFTWARE\\Clients\\StartMenuInternet\\IEXPLORE.EXE\\shell\\open\\command");
 
-	for(int i = 0; i < 6; ++i)
+	for(int i = 0; i < 4; ++i)
 	{
 		std::basic_string<TCHAR> str;
 
 		// https://msdn.microsoft.com/en-us/library/windows/desktop/dd203067.aspx
 		if(i == 0)
-			str = GetRegStrEx(HKEY_CURRENT_USER, lpIEDef, _T(""), 0);
+			str = WU_GetRegStr(HKEY_CURRENT_USER, lpIE, _T(""));
 		else if(i == 1)
-			str = GetRegStrEx(HKEY_CURRENT_USER, lpIEWow, _T(""), 0);
+			str = WU_GetRegStr(HKEY_LOCAL_MACHINE, lpIE, _T(""));
 		else if(i == 2)
-			str = GetRegStrEx(HKEY_LOCAL_MACHINE, lpIEDef, _T(""), 0);
-		else if(i == 3)
-			str = GetRegStrEx(HKEY_LOCAL_MACHINE, lpIEWow, _T(""), 0);
-		else if(i == 4)
-			str = GetRegStrEx(HKEY_CLASSES_ROOT,
-				_T("IE.AssocFile.HTM\\shell\\open\\command"), _T(""), 0);
+			str = WU_GetRegStr(HKEY_CLASSES_ROOT,
+				_T("IE.AssocFile.HTM\\shell\\open\\command"), _T(""));
 		else
-			str = GetRegStrEx(HKEY_CLASSES_ROOT,
-				_T("Applications\\iexplore.exe\\shell\\open\\command"), _T(""), 0);
+			str = WU_GetRegStr(HKEY_CLASSES_ROOT,
+				_T("Applications\\iexplore.exe\\shell\\open\\command"), _T(""));
 
 		str = AppLocator::Fix(str);
 		if(str.size() == 0) continue;
@@ -129,45 +124,29 @@ void AppLocator::FindInternetExplorer()
 void AppLocator::FindFirefox()
 {
 	LPCTSTR lpRoot = _T("SOFTWARE\\Mozilla\\Mozilla Firefox");
-	LPCTSTR lpRoot32 = _T("SOFTWARE\\Wow6432Node\\Mozilla\\Mozilla Firefox");
 	LPCTSTR lpRootESR = _T("SOFTWARE\\Mozilla\\Mozilla Firefox ESR");
-	LPCTSTR lpRootESR32 = _T("SOFTWARE\\Wow6432Node\\Mozilla\\Mozilla Firefox ESR");
 
-	std::basic_string<TCHAR> strVer = GetRegStrEx(HKEY_LOCAL_MACHINE,
-		lpRoot, _T("CurrentVersion"), 0);
+	std_string strVer = WU_GetRegStr(HKEY_LOCAL_MACHINE, lpRoot, _T("CurrentVersion"));
 	LPCTSTR lpInfoRoot = lpRoot;
-
-	if(strVer.size() == 0)
-	{
-		strVer = GetRegStrEx(HKEY_LOCAL_MACHINE, lpRoot32, _T("CurrentVersion"), 0);
-		lpInfoRoot = lpRoot32;
-	}
 
 	// The ESR version stores the 'CurrentVersion' value under
 	// 'Mozilla Firefox ESR', but the version-specific info
 	// under 'Mozilla Firefox\\<Version>' (without 'ESR')
-
 	if(strVer.size() == 0)
 	{
-		strVer = GetRegStrEx(HKEY_LOCAL_MACHINE, lpRootESR, _T("CurrentVersion"), 0);
+		strVer = WU_GetRegStr(HKEY_LOCAL_MACHINE, lpRootESR, _T("CurrentVersion"));
 		lpInfoRoot = lpRoot; // Not 'ESR'
-	}
-
-	if(strVer.size() == 0)
-	{
-		strVer = GetRegStrEx(HKEY_LOCAL_MACHINE, lpRootESR32, _T("CurrentVersion"), 0);
-		lpInfoRoot = lpRoot32; // Not 'ESR'
 	}
 
 	if(strVer.size() == 0) return;
 
-	std::basic_string<TCHAR> strCur = lpInfoRoot;
+	std_string strCur = lpInfoRoot;
 	strCur += _T("\\");
 	strCur += strVer;
 	strCur += _T("\\Main");
 
-	m_strFirefoxPath = AppLocator::Fix(GetRegStrEx(HKEY_LOCAL_MACHINE,
-		strCur.c_str(), _T("PathToExe"), 0));
+	std_string str = WU_GetRegStr(HKEY_LOCAL_MACHINE, strCur.c_str(), _T("PathToExe"));
+	m_strFirefoxPath = AppLocator::Fix(str);
 }
 
 void AppLocator::FindOpera()
@@ -183,13 +162,13 @@ void AppLocator::FindOpera()
 
 		// https://msdn.microsoft.com/en-us/library/windows/desktop/dd203067.aspx
 		if(i == 0)
-			str = GetRegStrEx(HKEY_CURRENT_USER, lpOp20, _T(""), 0);
+			str = WU_GetRegStr(HKEY_CURRENT_USER, lpOp20, _T(""));
 		else if(i == 1)
-			str = GetRegStrEx(HKEY_CURRENT_USER, lpOp12, _T(""), 0);
+			str = WU_GetRegStr(HKEY_CURRENT_USER, lpOp12, _T(""));
 		else if(i == 2)
-			str = GetRegStrEx(HKEY_LOCAL_MACHINE, lpOp20, _T(""), 0);
+			str = WU_GetRegStr(HKEY_LOCAL_MACHINE, lpOp20, _T(""));
 		else
-			str = GetRegStrEx(HKEY_LOCAL_MACHINE, lpOp12, _T(""), 0);
+			str = WU_GetRegStr(HKEY_LOCAL_MACHINE, lpOp12, _T(""));
 
 		str = AppLocator::Fix(str);
 		if(str.size() == 0) continue;
@@ -202,8 +181,8 @@ void AppLocator::FindOpera()
 void AppLocator::FindChrome()
 {
 	LPCTSTR lpPath = _T("ChromeHTML\\shell\\open\\command");
-	m_strChromePath = AppLocator::Fix(GetRegStrEx(HKEY_CLASSES_ROOT,
-		lpPath, _T(""), 0));
+	std_string str = WU_GetRegStr(HKEY_CLASSES_ROOT, lpPath, _T(""));
+	m_strChromePath = AppLocator::Fix(str);
 	if(m_strChromePath.size() > 0) return;
 
 	const size_t ccNameBuf = MAX_PATH + 2;
@@ -226,22 +205,22 @@ void AppLocator::FindChrome()
 			std_string strKey = &tszName[0];
 			strKey += _T("\\shell\\open\\command");
 
-			m_strChromePath = AppLocator::Fix(GetRegStrEx(HKEY_CLASSES_ROOT,
-				strKey.c_str(), _T(""), 0));
+			str = WU_GetRegStr(HKEY_CLASSES_ROOT, strKey.c_str(), _T(""));
+			m_strChromePath = AppLocator::Fix(str);
 			if(m_strChromePath.size() > 0) return;
 		}
 	}
 
 	lpPath = _T("Applications\\chrome.exe\\shell\\open\\command");
-	m_strChromePath = AppLocator::Fix(GetRegStrEx(HKEY_CLASSES_ROOT,
-		lpPath, _T(""), 0));
+	str = WU_GetRegStr(HKEY_CLASSES_ROOT, lpPath, _T(""));
+	m_strChromePath = AppLocator::Fix(str);
 }
 
 void AppLocator::FindSafari()
 {
 	LPCTSTR lpPath = _T("SOFTWARE\\Apple Computer, Inc.\\Safari");
-	m_strSafariPath = AppLocator::Fix(GetRegStrEx(HKEY_LOCAL_MACHINE,
-		lpPath, _T("BrowserExe"), 0));
+	std_string str = WU_GetRegStr(HKEY_LOCAL_MACHINE, lpPath, _T("BrowserExe"));
+	m_strSafariPath = AppLocator::Fix(str);
 }
 
 std::basic_string<TCHAR> AppLocator::Fix(const std::basic_string<TCHAR>& strPath)

@@ -317,60 +317,120 @@ CString GetShortestAbsolutePath(LPCTSTR lpFilePath)
 #pragma warning(push)
 #pragma warning(disable: 4996) // _tcscpy deprecated
 
-BOOL GetRegKeyEx(HKEY hkeyBase, LPCTSTR lpSubKey, LPTSTR lpRetData)
+BOOL GetRegKeyEx(HKEY hKey, LPCTSTR lpSubKey, LPTSTR lpRetData)
 {
-	HKEY hkey = hkeyBase;
-	LONG lRetVal = RegOpenKeyEx(hkeyBase, lpSubKey, 0, KEY_QUERY_VALUE, &hkey);
+	if(lpRetData == NULL) { ASSERT(FALSE); return FALSE; }
 
-	if(lRetVal == ERROR_SUCCESS)
+	HKEY h = NULL;
+	LONG lRet = RegOpenKeyEx(hKey, lpSubKey, 0, KEY_QUERY_VALUE, &h);
+
+	if(lRet == ERROR_SUCCESS)
 	{
-		LONG lDataSize = MAX_PATH * 4;
-		TCHAR tszData[MAX_PATH * 4];
+		const DWORD ccAlloc = MAX_PATH * 4;
 
-		lRetVal = RegQueryValue(hkey, NULL, tszData, &lDataSize);
-		_tcscpy(lpRetData, tszData);
-		VERIFY(RegCloseKey(hkey) == ERROR_SUCCESS);
+		TCHAR tszData[ccAlloc];
+		ZeroMemory(tszData, ccAlloc * sizeof(TCHAR));
+		LONG cbData = static_cast<LONG>((ccAlloc - 2) * sizeof(TCHAR));
+
+		lRet = RegQueryValue(h, NULL, tszData, &cbData);
+		if(lRet == ERROR_SUCCESS) _tcscpy(lpRetData, tszData);
+		else *lpRetData = _T('\0');
+
+		VERIFY(RegCloseKey(h) == ERROR_SUCCESS);
 	}
+	else *lpRetData = _T('\0');
 
-	return ((lRetVal == ERROR_SUCCESS) ? TRUE : FALSE);
+	return ((lRet == ERROR_SUCCESS) ? TRUE : FALSE);
 }
 
 #pragma warning(pop)
 
-std::basic_string<TCHAR> GetRegStrEx(HKEY hkeyBase, LPCTSTR lpSubKey,
-	LPCTSTR lpValueName, DWORD dwMaxValueSize)
+bool WU_GetRegStrPriv(HKEY hKey, LPCTSTR lpSubKey, LPCTSTR lpValueName,
+	REGSAM rsAdd, std::basic_string<TCHAR>& strOut)
 {
-	std::basic_string<TCHAR> str;
+	REGSAM rs = (KEY_QUERY_VALUE | rsAdd);
+	HKEY h = NULL;
 
-	HKEY hKey = NULL;
-	if(RegOpenKeyEx(hkeyBase, lpSubKey, 0, KEY_QUERY_VALUE, &hKey) != ERROR_SUCCESS)
-		return str;
+	if(RegOpenKeyEx(hKey, lpSubKey, 0, rs, &h) != ERROR_SUCCESS)
+	{
+		strOut.clear();
+		return false;
+	}
 
-	if(dwMaxValueSize == 0) dwMaxValueSize = MAX_PATH * 8;
-
-	const DWORD dwAllocSize = dwMaxValueSize + 2;
-	scoped_array<TCHAR> pData(new TCHAR[dwAllocSize]);
-	DWORD dwDataSize = dwAllocSize - 2;
+	DWORD ccAlloc = MAX_PATH * 4 + 2;
+	DWORD cbData = (ccAlloc - 2) * sizeof(TCHAR);
 	DWORD dwDataType = 0;
 
-	ZeroMemory(pData.get(), sizeof(TCHAR) * dwAllocSize);
+	scoped_array<TCHAR> aData(new TCHAR[ccAlloc]);
+	ZeroMemory(aData.get(), ccAlloc * sizeof(TCHAR));
 
-	const LONG lQuery = RegQueryValueEx(hKey, lpValueName, NULL, &dwDataType,
-		(LPBYTE)pData.get(), &dwDataSize);
+	const LONG l = RegQueryValueEx(h, lpValueName, NULL, &dwDataType,
+		(LPBYTE)aData.get(), &cbData);
+	bool bRet = true;
 
-	VERIFY(RegCloseKey(hKey) == ERROR_SUCCESS);
+	if(l == ERROR_SUCCESS) strOut = aData.get();
+	else if(l == ERROR_MORE_DATA)
+	{
+		if(cbData > 0xFFFFFFU) { ASSERT(FALSE); bRet = false; }
+		else
+		{
+			ccAlloc = (cbData / sizeof(TCHAR)) + 3;
 
-	if(lQuery != ERROR_SUCCESS) return str;
+			aData.reset(new TCHAR[ccAlloc]);
+			ZeroMemory(aData.get(), ccAlloc * sizeof(TCHAR));
+
+			if(RegQueryValueEx(h, lpValueName, NULL, &dwDataType,
+				(LPBYTE)aData.get(), &cbData) == ERROR_SUCCESS)
+				strOut = aData.get();
+			else { ASSERT(FALSE); bRet = false; }
+		}
+	}
+	else bRet = false;
+
+	VERIFY(RegCloseKey(h) == ERROR_SUCCESS);
+	if(!bRet) { strOut.clear(); return false; }
 
 	if((dwDataType != REG_EXPAND_SZ) && (dwDataType != REG_SZ))
 	{
 		ASSERT(FALSE);
-		return str;
+		strOut.clear();
+		return false;
 	}
 
-	pData.get()[dwAllocSize - 2] = 0;
-	pData.get()[dwAllocSize - 1] = 0;
-	str = pData.get();
+	return true;
+}
+
+std::basic_string<TCHAR> WU_GetRegStr(HKEY hKey, LPCTSTR lpSubKey,
+	LPCTSTR lpValueName)
+{
+	return WU_GetRegStrEx(hKey, lpSubKey, lpValueName, WU_REG_ALL);
+}
+
+std::basic_string<TCHAR> WU_GetRegStrEx(HKEY hKey, LPCTSTR lpSubKey,
+	LPCTSTR lpValueName, DWORD dwFlags)
+{
+	std::basic_string<TCHAR> str;
+
+	const bool b32 = ((dwFlags & WU_REG_32) != 0);
+	const bool b64 = ((dwFlags & WU_REG_64) != 0);
+
+	if(!b32 && !b64)
+		WU_GetRegStrPriv(hKey, lpSubKey, lpValueName, 0, str);
+	else
+	{
+		if(b64)
+		{
+			if(WU_GetRegStrPriv(hKey, lpSubKey, lpValueName, KEY_WOW64_64KEY, str))
+				return str;
+		}
+
+		if(b32)
+		{
+			if(WU_GetRegStrPriv(hKey, lpSubKey, lpValueName, KEY_WOW64_32KEY, str))
+				return str;
+		}
+	}
+
 	return str;
 }
 
@@ -379,11 +439,11 @@ BOOL OpenUrlInNewBrowser(LPCTSTR lpURL)
 	ASSERT(lpURL != NULL); if(lpURL == NULL) return FALSE;
 
 	TCHAR tszKey[MAX_PATH * 4];
+	ZeroMemory(tszKey, MAX_PATH * 4 * sizeof(TCHAR));
 	UINT uResult = 0;
 
-	_tcscpy_s(tszKey, _countof(tszKey), _T("http\\shell\\open\\command"));
-
-	if(GetRegKeyEx(HKEY_CLASSES_ROOT, tszKey, tszKey) == TRUE)
+	if(GetRegKeyEx(HKEY_CLASSES_ROOT, _T("http\\shell\\open\\command"),
+		tszKey) == TRUE)
 	{
 		TCHAR *pos = _tcsstr(tszKey, _T("\"%1\""));
 		if(pos == NULL) // No quotes found

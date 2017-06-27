@@ -216,7 +216,7 @@ int CVistaTaskDialog::ShowMessageBox(HWND hParent, LPCTSTR lpMainInstruction,
 {
 	CVistaTaskDialog dlg(hParent, AfxGetInstanceHandle(), false);
 	dlg.AddButton(lpButton1, NULL, nResult1);
-	dlg.AddButton(lpButton2, NULL, nResult2);
+	if(lpButton2 != NULL) dlg.AddButton(lpButton2, NULL, nResult2);
 	dlg.SetContent(lpContent);
 	dlg.SetIcon(tdIcon);
 	dlg.SetMainInstruction(lpMainInstruction);
@@ -231,7 +231,7 @@ int CVistaTaskDialog::ShowMessageBox(HWND hParent, LPCTSTR lpMainInstruction,
 {
 	CVistaTaskDialog dlg(hParent, AfxGetInstanceHandle(), false);
 	dlg.AddButton(lpButton1, NULL, nResult1);
-	dlg.AddButton(lpButton2, NULL, nResult2);
+	if(lpButton2 != NULL) dlg.AddButton(lpButton2, NULL, nResult2);
 	dlg.SetContent(lpContent);
 	dlg.SetIcon(lpIcon);
 	dlg.SetMainInstruction(lpMainInstruction);

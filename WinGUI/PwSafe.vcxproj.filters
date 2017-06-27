@@ -2,73 +2,73 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{5ecbc8f4-5103-49d7-9247-fbb4cccc9c28}</UniqueIdentifier>
+      <UniqueIdentifier>{290ed387-4419-41fe-a9aa-3eed3517f676}</UniqueIdentifier>
       <Extensions>cpp;c;cxx;rc;def;r;odl;idl;hpj;bat</Extensions>
     </Filter>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{79331589-1fe7-4858-b68e-508a9995da2d}</UniqueIdentifier>
+      <UniqueIdentifier>{6b74b0fb-be71-4967-8f8a-6e6e142a2593}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl</Extensions>
     </Filter>
     <Filter Include="Resource Files">
-      <UniqueIdentifier>{065511b3-f511-473f-8590-517c0f5b2b9b}</UniqueIdentifier>
+      <UniqueIdentifier>{6c258f67-7df7-463a-9c70-e4036a0d84fb}</UniqueIdentifier>
       <Extensions>ico;cur;bmp;dlg;rc2;rct;bin;cnt;rtf;gif;jpg;jpeg;jpe;png</Extensions>
     </Filter>
     <Filter Include="Util">
-      <UniqueIdentifier>{33de4f1f-0bf3-43dc-86fd-ca587b861451}</UniqueIdentifier>
+      <UniqueIdentifier>{f9e1fd22-8abb-4723-ae46-a12a8c42d3ca}</UniqueIdentifier>
     </Filter>
     <Filter Include="Util\CmdLine">
-      <UniqueIdentifier>{5204ad8e-f793-48c9-841b-2e28a7cee21e}</UniqueIdentifier>
+      <UniqueIdentifier>{65ee63c5-6cb7-4d62-bf0f-d03480369e98}</UniqueIdentifier>
     </Filter>
     <Filter Include="Util\SprEngine">
-      <UniqueIdentifier>{13fa7db0-ce60-4113-968d-453cf2ba3f8d}</UniqueIdentifier>
+      <UniqueIdentifier>{0ec901b4-4f1f-4b7d-890e-1e2295c258cc}</UniqueIdentifier>
     </Filter>
     <Filter Include="NewGUI">
-      <UniqueIdentifier>{6bfb2523-4bb7-4a13-aac5-441d44df87df}</UniqueIdentifier>
+      <UniqueIdentifier>{982899e8-0ab8-4cdc-8bb6-6bebb84b83a6}</UniqueIdentifier>
     </Filter>
     <Filter Include="NewGUI\TaskDialog">
-      <UniqueIdentifier>{f1c0b427-3c3a-4e1e-9343-0302dc41b5d5}</UniqueIdentifier>
+      <UniqueIdentifier>{d4186fb9-33ce-491b-9ab8-78c221edc0bd}</UniqueIdentifier>
     </Filter>
     <Filter Include="NewGUI\TaskbarListEx">
-      <UniqueIdentifier>{a9f6fec7-2f1b-4fe8-ad69-dd866d2cb31f}</UniqueIdentifier>
+      <UniqueIdentifier>{39c2825d-af6e-47b0-88c9-d6dcfbe7f82e}</UniqueIdentifier>
     </Filter>
     <Filter Include="NewGUI\VistaMenu">
-      <UniqueIdentifier>{22b1de5c-0dc1-4ded-a35f-b6ce63072451}</UniqueIdentifier>
+      <UniqueIdentifier>{377f2e1e-400b-43fd-b306-812bea946b28}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp">
-      <UniqueIdentifier>{9a4e7e85-4db1-4d1a-af13-fdf40b7ad2e7}</UniqueIdentifier>
+      <UniqueIdentifier>{95a7fece-6ece-41e4-8443-860cec47b614}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\Crypto">
-      <UniqueIdentifier>{249ff6d0-545f-4fa3-b2e9-b67851ffa953}</UniqueIdentifier>
+      <UniqueIdentifier>{e5a36da3-8519-459b-bcb5-1516211e639e}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\Crypto\SHA2">
-      <UniqueIdentifier>{31f21304-e9db-41d3-90e5-56477efd9c9c}</UniqueIdentifier>
+      <UniqueIdentifier>{e7dcac04-716d-49f3-84eb-55feac8539e9}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\SysSpec_Windows">
-      <UniqueIdentifier>{a7103497-1231-4674-8c1b-e28e6f675a5c}</UniqueIdentifier>
+      <UniqueIdentifier>{6fd0e829-32bb-43ff-9648-96bb16416a7d}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\DataExchange">
-      <UniqueIdentifier>{98741219-52c5-4e12-9fe8-4072a745a808}</UniqueIdentifier>
+      <UniqueIdentifier>{eacc817b-5fb9-469c-9d91-525998a4596c}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\Util">
-      <UniqueIdentifier>{14a6b318-1e07-4737-b810-3f69a3b4ec1c}</UniqueIdentifier>
+      <UniqueIdentifier>{4ce01b1e-4b7c-4747-98bb-32e6d9113a19}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\PasswordGenerator">
-      <UniqueIdentifier>{a7ac9bed-e69a-44bd-8c9b-c572325e9e07}</UniqueIdentifier>
+      <UniqueIdentifier>{eb62e0c9-4722-463b-bf07-0b528871753e}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\Details">
-      <UniqueIdentifier>{db86e487-5132-41bb-9373-7d5503cd89b0}</UniqueIdentifier>
+      <UniqueIdentifier>{c15c15f1-eee3-44a8-a941-266ced84891c}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\SDK">
-      <UniqueIdentifier>{acf18f75-b5cf-48d9-8374-a43b8a7f6c20}</UniqueIdentifier>
+      <UniqueIdentifier>{f61eeada-2575-4fbc-9b83-b16f68f10248}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\SDK\Details">
-      <UniqueIdentifier>{7cf1d1d6-d87d-4d4b-b011-b6228d021865}</UniqueIdentifier>
+      <UniqueIdentifier>{61a30eaf-b6c8-4765-8eae-62ab23265414}</UniqueIdentifier>
     </Filter>
     <Filter Include="KeePassLibCpp\IO">
-      <UniqueIdentifier>{41e7b230-6b55-40bb-bf91-8a8b22e68795}</UniqueIdentifier>
+      <UniqueIdentifier>{3dd2869a-f556-4f96-99d5-76a5a6ec5f2b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Plugins">
-      <UniqueIdentifier>{dcc668d1-e86b-4a63-92a3-7f072d327988}</UniqueIdentifier>
+      <UniqueIdentifier>{439395ff-863a-4da9-a0fe-f4d0f9b7ae03}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -448,7 +448,7 @@
       <Filter>Plugins</Filter>
     </ClCompile>
     <ClCompile Include="bio.cpp">
-      <Filter>NewGUI</Filter>
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -897,9 +897,6 @@
     </ClInclude>
     <ClInclude Include="Plugins\PluginMgr.h">
       <Filter>Plugins</Filter>
-    </ClInclude>
-    <ClInclude Include="bio.h">
-      <Filter>NewGUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

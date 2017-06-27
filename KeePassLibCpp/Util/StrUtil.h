@@ -95,8 +95,8 @@ void _StringToUuid(const TCHAR *ptszSource, BYTE *pUuid);
 // Get the filename of the file in psFilePath
 CString CsFileOnly(const CString *psFilePath);
 
-// Convert ptString into a XML string
-TCHAR *MakeSafeXmlString(const TCHAR *ptString);
+// TCHAR *MakeSafeXmlString(const TCHAR *ptString);
+std::basic_string<TCHAR> MakeSafeXmlString(LPCTSTR lpString);
 
 // Our own simple string functions which do some additional memory checks
 DWORD szlen(const char *pszString);
@@ -134,6 +134,7 @@ void SU_Split(std::vector<std::basic_string<TCHAR> >& vOut,
 std::basic_string<TCHAR> SU_CompactWith3Dots(LPCTSTR lpString, size_t uMaxChars);
 
 int SU_FindUnescapedCharW(LPCWSTR lpw, WCHAR wch);
+void SU_AppendW(std::vector<WCHAR>& v, LPCWSTR lp);
 
 /////////////////////////////////////////////////////////////////////////////
 // Natural string comparison API

@@ -39,6 +39,10 @@
 #define APPHS_LOCAL  0
 #define APPHS_ONLINE 1
 
+#define WU_REG_32 1
+#define WU_REG_64 2
+#define WU_REG_ALL (WU_REG_32 | WU_REG_64)
+
 typedef struct _AV_APP_INFO
 {
 	std::basic_string<TCHAR> strDisplayName;
@@ -64,9 +68,12 @@ void SetClipboardIgnoreFormat();
 CString MakeRelativePathEx(LPCTSTR lpBaseFile, LPCTSTR lpTargetFile);
 CString GetShortestAbsolutePath(LPCTSTR lpFilePath);
 
-BOOL GetRegKeyEx(HKEY hkey, LPCTSTR lpSubKey, LPTSTR lpRetData);
-std::basic_string<TCHAR> GetRegStrEx(HKEY hkeyBase, LPCTSTR lpSubKey,
-	LPCTSTR lpValueName, DWORD dwMaxValueSize);
+BOOL GetRegKeyEx(HKEY hKey, LPCTSTR lpSubKey, LPTSTR lpRetData);
+std::basic_string<TCHAR> WU_GetRegStr(HKEY hKey, LPCTSTR lpSubKey,
+	LPCTSTR lpValueName);
+std::basic_string<TCHAR> WU_GetRegStrEx(HKEY hKey, LPCTSTR lpSubKey,
+	LPCTSTR lpValueName, DWORD dwFlags);
+
 BOOL OpenUrlInNewBrowser(LPCTSTR lpURL);
 BOOL OpenUrlUsingPutty(LPCTSTR lpURL, LPCTSTR lpUser);
 

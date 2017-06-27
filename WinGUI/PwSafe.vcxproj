@@ -129,7 +129,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup>
-    <_ProjectFileVersion>14.0.24730.2</_ProjectFileVersion>
+    <_ProjectFileVersion>14.0.25431.1</_ProjectFileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug Unicode|Win32'">
     <OutDir>..\Build\WinGUI_Bin\Debug_Unicode\</OutDir>
@@ -496,7 +496,6 @@
       <DataExecutionPrevention />
       <TargetMachine>MachineX86</TargetMachine>
       <AdditionalLibraryDirectories>E:\OpenSource\boost_1_61_0\stage\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <OutputFile>$(OutDir)KeePass.exe</OutputFile>
     </Link>
     <Bscmake>
       <SuppressStartupBanner>true</SuppressStartupBanner>
@@ -788,7 +787,6 @@
     <ClInclude Include="..\KeePassLibCpp\Util\TranslateEx.h" />
     <ClInclude Include="AddEntryDlg.h" />
     <ClInclude Include="AddGroupDlg.h" />
-    <ClInclude Include="bio.h" />
     <ClInclude Include="CheckOptionsDlg.h" />
     <ClInclude Include="DbSettingsDlg.h" />
     <ClInclude Include="EntryListDlg.h" />

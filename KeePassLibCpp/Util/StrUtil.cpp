@@ -478,11 +478,7 @@ CString CsFileOnly(const CString *psFilePath)
 	return psFilePath->Right(psFilePath->GetLength() - k - 1);
 }
 
-#define LOCAL_NUMXMLCONV 7
-
-#pragma warning(push)
-#pragma warning(disable: 4996) // _tcscpy deprecated
-
+/* #define LOCAL_NUMXMLCONV 7
 TCHAR *MakeSafeXmlString(const TCHAR *ptString)
 {
 	size_t i, j;
@@ -550,7 +546,72 @@ TCHAR *MakeSafeXmlString(const TCHAR *ptString)
 	ASSERT(_tcslen(pFinal) == dwNeededChars);
 
 	return pFinal;
+} */
+
+std::basic_string<TCHAR> MakeSafeXmlString(LPCTSTR lpString)
+{
+	std::basic_string<TCHAR> strRet;
+	if(lpString == NULL) { ASSERT(FALSE); return strRet; }
+	if(*lpString == _T('\0')) return strRet;
+
+	std::basic_string<WCHAR> strOrgW = _StringToUnicodeStl(lpString);
+	std::vector<WCHAR> vRet;
+
+	// const size_t cchBufW = 8;
+	// WCHAR vBufW[cchBufW];
+
+	for(std::basic_string<WCHAR>::const_iterator it = strOrgW.begin();
+		it != strOrgW.end(); ++it)
+	{
+		WCHAR wch = *it;
+		ASSERT(wch != L'\0');
+
+		// Encode XML characters
+		if(wch == L'<')
+			SU_AppendW(vRet, L"&lt;");
+		else if(wch == L'>')
+			SU_AppendW(vRet, L"&gt;");
+		else if(wch == L'&')
+			SU_AppendW(vRet, L"&amp;");
+		else if(wch == L'\"')
+			SU_AppendW(vRet, L"&quot;");
+		else if(wch == L'\'')
+			SU_AppendW(vRet, L"&#39;");
+		else if(wch == L'\r')
+			SU_AppendW(vRet, L"&#xD;");
+		else if(wch == L'\n')
+			SU_AppendW(vRet, L"&#xA;");
+		// https://www.w3.org/TR/xml/#charsets
+		else if((wch < L'\x09') || (wch == L'\x0B') || (wch == L'\x0C') ||
+			((wch > L'\x0D') && (wch < L'\x20')))
+		{
+			// _itow_s((int)(DWORD)wch, vBufW, cchBufW, 16);
+			// SU_AppendW(vRet, L"&#x");
+			// SU_AppendW(vRet, vBufW);
+			// vRet.push_back(L';');
+
+			// Skip the character
+		}
+		else vRet.push_back(wch);
+	}
+	vRet.push_back(L'\0'); // Terminate string
+
+#ifdef _UNICODE
+	strRet = &vRet[0];
+#else
+	LPSTR lpAnsi = _StringToAnsi(&vRet[0]);
+	if(lpAnsi != NULL)
+	{
+		strRet = lpAnsi;
+		SAFE_DELETE_ARRAY(lpAnsi);
+	}
+	else { ASSERT(FALSE); }
+#endif
+	return strRet;
 }
+
+#pragma warning(push)
+#pragma warning(disable: 4996) // strcpy deprecated
 
 char *szcpy(char *szDestination, const char *szSource)
 {
@@ -559,7 +620,7 @@ char *szcpy(char *szDestination, const char *szSource)
 	return strcpy(szDestination, szSource);
 }
 
-#pragma warning(pop) // _tcscpy / strcpy deprecated
+#pragma warning(pop) // strcpy deprecated
 
 DWORD szlen(const char *pszString)
 {
@@ -857,6 +918,14 @@ int SU_FindUnescapedCharW(LPCWSTR lpw, WCHAR wch)
 	}
 
 	return -1;
+}
+
+void SU_AppendW(std::vector<WCHAR>& v, LPCWSTR lp)
+{
+	if(lp == NULL) { ASSERT(FALSE); return; }
+
+	LPCWSTR lpCur = lp;
+	while(*lpCur != L'\0') { v.push_back(*lpCur); ++lpCur; }
 }
 
 /////////////////////////////////////////////////////////////////////////////

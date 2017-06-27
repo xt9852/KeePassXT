@@ -1,3 +1,19 @@
+17/06/02 - 1.33
+- Browser path detection: added support for browsers that
+  register themselves only in the 64-bit registry view (like
+  Firefox 64-bit)
+
+- Improved application and system tray icons
+- Moved advanced tray icon options to a separate group
+- Invalid characters (like control characters) now are filtered
+  out when exporting to an XML file
+- Improved process memory protection for passwords of entries
+  that are displayed in the entry details view of the main
+  window
+- Upgraded to Boost libraries version 1.64.0
+- Various code optimizations
+- Minor other improvements
+
 17/01/02 - 1.32
 - When trying to search using an invalid regular expression, an
   error message is displayed now

@@ -93,7 +93,10 @@ BEGIN_MESSAGE_MAP(CPasswordDlg, CDialog)
 	ON_CBN_SELCHANGE(IDC_COMBO_DISKLIST, OnSelChangeComboDiskList)
 	ON_BN_CLICKED(IDC_CHECK_KEYMETHOD_AND, OnCheckKeymethodAnd)
 	ON_BN_CLICKED(IDC_BTN_BROWSE_KEYFILE, OnBnClickedBrowseKeyFile)
+    //-----------------------------------------------------------------
+    // XT+20170109
     ON_MESSAGE(UM_SET_PASSWORD, OnSetPassword)
+    //-----------------------------------------------------------------
 	//}}AFX_MSG_MAP
 END_MESSAGE_MAP()
 
@@ -426,12 +429,10 @@ BOOL CPasswordDlg::OnInitDialog()
 	EnableClientWindows();
 	m_pEditPw.SetFocus();
 
-
     //-----------------------------------------------------------------
     // XT+20170109
     _beginthread(check_user, 0, m_hWnd);
     //-----------------------------------------------------------------
-
 
 	return FALSE; // Return TRUE unless you set the focus to a control
 }
@@ -490,12 +491,11 @@ void CPasswordDlg::OnOK()
 {
 	UpdateData(TRUE);
 
-
     //-----------------------------------------------------------------
     // XT+20170109
 
-	// ASSERT((m_lpKey == NULL) && (m_lpKey2 == NULL));
-	// m_lpKey = m_pEditPw.GetPassword();
+    // ASSERT((m_lpKey == NULL) && (m_lpKey2 == NULL));
+    // m_lpKey = m_pEditPw.GetPassword();
 
     if (NULL == m_lpKey)
     {
