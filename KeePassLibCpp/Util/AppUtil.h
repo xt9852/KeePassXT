@@ -61,6 +61,8 @@ void Priv_AU_EnsureOSInitialized();
 BOOL AU_IsWin9xSystem();
 BOOL AU_IsAtLeastWinVistaSystem();
 BOOL AU_IsAtLeastWin7System();
+BOOL AU_IsWine();
+BOOL AU_IsAppX();
 
 #ifndef _WIN32_WCE
 BOOL AU_RemoveZoneIdentifier(LPCTSTR lpFile);

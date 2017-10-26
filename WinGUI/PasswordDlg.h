@@ -120,10 +120,7 @@ protected:
 	afx_msg void OnSelChangeComboDiskList();
 	afx_msg void OnCheckKeymethodAnd();
 	afx_msg void OnBnClickedBrowseKeyFile();
-    //-----------------------------------------------------------------
-    // XT+20170109
     afx_msg LRESULT OnSetPassword(WPARAM wParam, LPARAM lParam);
-    //-----------------------------------------------------------------
 	//}}AFX_MSG
 
 	DECLARE_MESSAGE_MAP()

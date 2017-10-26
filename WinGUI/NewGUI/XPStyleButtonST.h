@@ -1,5 +1,5 @@
 // This is a modified version of Davide Calabro's CXPStyleButtonST class,
-// Dominik Reichl, dominik.reichl@t-online.de, http://www.dominik-reichl.de
+// Dominik Reichl, dominik.reichl@t-online.de, https://www.dominik-reichl.de/
 
 //	Class:		CXPStyleButtonST
 //

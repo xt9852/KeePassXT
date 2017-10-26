@@ -56,7 +56,7 @@ CString SprTagSimString(LPCTSTR lpString)
 			case _T('^'): sb += _T("%({NUMPAD0}{NUMPAD9}{NUMPAD4})"); break;
 			case _T('\''): sb += _T("%({NUMPAD0}{NUMPAD3}{NUMPAD9})"); break;
 			case _T('"'): sb += _T("%({NUMPAD0}{NUMPAD3}{NUMPAD4})"); break;
-//			case _T('?): sb += _T("%({NUMPAD0}{NUMPAD1}{NUMPAD8}{NUMPAD0})"); break;
+			// case _T('?): sb += _T("%({NUMPAD0}{NUMPAD1}{NUMPAD8}{NUMPAD0})"); break;
 			case _T('`'): sb += _T("%({NUMPAD0}{NUMPAD9}{NUMPAD6})"); break;
 			case _T('%'): sb += _T("{PERCENT}"); break;
 			case _T('{'): sb += _T("{LEFTBRACE}"); break;

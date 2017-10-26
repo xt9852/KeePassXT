@@ -26,7 +26,7 @@
 #include "NewGUI/XPStyleButtonST.h"
 
 #define PWMX_ENGLISH_AUTHOR  _T("Dominik Reichl")
-#define PWMX_ENGLISH_CONTACT _T("dominik.reichl@t-online.de, http://www.dominik-reichl.de/")
+#define PWMX_ENGLISH_CONTACT _T("dominik.reichl@t-online.de, https://www.dominik-reichl.de/")
 
 class CLanguagesDlg : public CDialog
 {

@@ -550,6 +550,8 @@ private:
 	inline void _SetAutoLockTimeout(long lSeconds);
 	inline UINT64 _GetCurrentTimeUtc();
 
+	void _ReportAttachError(int e, LPCTSTR lpFile);
+
 	LONG m_lNormalWndPosX;
 	LONG m_lNormalWndPosY;
 	LONG m_lNormalWndSizeW;

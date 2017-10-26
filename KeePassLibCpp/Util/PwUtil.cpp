@@ -161,7 +161,7 @@ CString CPwUtil::FormatError(int nErrorCode, DWORD dwFlags)
 		str += TRL("Invalid parameter");
 		break;
 	case PWE_NO_MEM:
-		str += TRL("Too little memory (RAM) available");
+		str += TRL("Out of memory");
 		break;
 	case PWE_INVALID_KEY:
 		str += TRL("Invalid/wrong key");
@@ -217,6 +217,9 @@ CString CPwUtil::FormatError(int nErrorCode, DWORD dwFlags)
 		break;
 	case PWE_DB_EMPTY:
 		str += TRL("The database is empty");
+		break;
+	case PWE_ATTACH_TOOLARGE:
+		str += TRL("The attachment is too large");
 		break;
 	default:
 		ASSERT(FALSE);
@@ -432,67 +435,76 @@ void CPwUtil::HashStringWithTerm(LPCTSTR lp, sha256_ctx& sha32)
 	}
 }
 
-BOOL CPwUtil::AttachFileAsBinaryData(_Inout_ PW_ENTRY *pEntry,
+int CPwUtil::AttachFileAsBinaryData(_Inout_ PW_ENTRY *pEntry,
 	const TCHAR *lpFile)
 {
+	ASSERT_ENTRY(pEntry); if(pEntry == NULL) return PWE_INVALID_PARAM;
+	ASSERT(lpFile != NULL); if(lpFile == NULL) return PWE_INVALID_PARAM;
+
 	FILE *fp = NULL;
-	LPTSTR pBinaryDesc;
-
-	ASSERT_ENTRY(pEntry); if(pEntry == NULL) return FALSE;
-	ASSERT(lpFile != NULL); if(lpFile == NULL) return FALSE;
-
 	_tfopen_s(&fp, lpFile, _T("rb"));
-	if(fp == NULL) return FALSE;
+	if(fp == NULL) return PWE_NOFILEACCESS_READ;
 
-	fseek(fp, 0, SEEK_END);
-	const DWORD dwFileLen = static_cast<DWORD>(ftell(fp));
-	fseek(fp, 0, SEEK_SET);
+	_fseeki64(fp, 0, SEEK_END);
+	const INT64 qwFileLen = _ftelli64(fp);
+	_fseeki64(fp, 0, SEEK_SET);
 
-	if(dwFileLen == 0) { fclose(fp); fp = NULL; return FALSE; }
-	ASSERT(dwFileLen > 0);
+	if(qwFileLen <= 0) { fclose(fp); return PWE_FILEERROR_READ; }
 
-	SAFE_DELETE_ARRAY(pEntry->pszBinaryDesc);
-	SAFE_DELETE_ARRAY(pEntry->pBinaryData);
+	// Use the same maximum as KeePass 2.x;
+	// https://sourceforge.net/p/keepass/discussion/329221/thread/42ddc71a/
+	const INT64 qwMax = 512 * 1024 * 1024;
+	if(qwFileLen > qwMax) { fclose(fp); return PWE_ATTACH_TOOLARGE; }
 
-	DWORD i = static_cast<DWORD>(_tcslen(lpFile)) - 1;
-	while(1)
+	int i = static_cast<int>(_tcslen(lpFile)) - 1;
+	while(i >= 0)
 	{
-		if(i == (DWORD)(-1)) break;
 		if((lpFile[i] == '/') || (lpFile[i] == '\\')) break;
 		--i;
 	}
-	pBinaryDesc = (LPTSTR)&lpFile[i + 1];
+	LPCTSTR lpBinaryDesc = &lpFile[i + 1];
 
-	const DWORD dwPathLen = static_cast<DWORD>(_tcslen(pBinaryDesc));
+	int e = PWE_SUCCESS;
+	try
+	{
+		// CPwUtil::RemoveBinaryData(pEntry); // Doesn't free desc.
+		SAFE_DELETE_ARRAY(pEntry->pszBinaryDesc);
+		SAFE_DELETE_ARRAY(pEntry->pBinaryData);
 
-	pEntry->pszBinaryDesc = new TCHAR[dwPathLen + 1];
-	_tcscpy_s(pEntry->pszBinaryDesc, dwPathLen + 1, pBinaryDesc);
+		const size_t dwPathLen = _tcslen(lpBinaryDesc);
+		pEntry->pszBinaryDesc = new TCHAR[dwPathLen + 1];
+		_tcscpy_s(pEntry->pszBinaryDesc, dwPathLen + 1, lpBinaryDesc);
 
-	pEntry->pBinaryData = new BYTE[dwFileLen];
-	fread(pEntry->pBinaryData, 1, dwFileLen, fp);
+		const DWORD dwFileLen = static_cast<DWORD>(qwFileLen);
+		pEntry->pBinaryData = new BYTE[dwFileLen];
+		if(fread(pEntry->pBinaryData, 1, dwFileLen, fp) != dwFileLen)
+			e = PWE_FILEERROR_READ;
 
-	pEntry->uBinaryDataLen = dwFileLen;
+		pEntry->uBinaryDataLen = dwFileLen;
+	}
+	catch(...) { e = PWE_NO_MEM; }
 
-	fclose(fp); fp = NULL;
-	return TRUE;
+	if(e != PWE_SUCCESS) CPwUtil::RemoveBinaryData(pEntry);
+
+	fclose(fp);
+	return e;
 }
 
 BOOL CPwUtil::SaveBinaryData(_In_ const PW_ENTRY *pEntry,
 	const TCHAR *lpFile)
 {
-	FILE *fp = NULL;
-
 	ASSERT_ENTRY(pEntry); if(pEntry == NULL) return FALSE;
 	ASSERT(lpFile != NULL); if(lpFile == NULL) return FALSE;
-	if(_tcslen(pEntry->pszBinaryDesc) == 0) return FALSE;
+	if(pEntry->pszBinaryDesc[0] == _T('\0')) return FALSE;
 
+	FILE *fp = NULL;
 	_tfopen_s(&fp, lpFile, _T("wb"));
 	if(fp == NULL) return FALSE;
 
 	if(pEntry->uBinaryDataLen != 0)
 		fwrite(pEntry->pBinaryData, 1, pEntry->uBinaryDataLen, fp);
 
-	fclose(fp); fp = NULL;
+	fclose(fp);
 	return TRUE;
 }
 
@@ -503,7 +515,7 @@ BOOL CPwUtil::RemoveBinaryData(_Inout_ PW_ENTRY *pEntry)
 	SAFE_DELETE_ARRAY(pEntry->pBinaryData);
 	SAFE_DELETE_ARRAY(pEntry->pszBinaryDesc);
 	pEntry->pszBinaryDesc = new TCHAR[1];
-	pEntry->pszBinaryDesc[0] = 0;
+	pEntry->pszBinaryDesc[0] = _T('\0');
 	pEntry->uBinaryDataLen = 0;
 	return TRUE;
 }

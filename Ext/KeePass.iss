@@ -6,14 +6,14 @@
 #define MyAppName "KeePass"
 #define MyAppFullName "KeePass Password Safe"
 #define MyAppPublisher "Dominik Reichl"
-#define MyAppURL "http://keepass.info/"
+#define MyAppURL "https://keepass.info/"
 #define MyAppExeName "KeePass.exe"
 #define MyAppUrlName "KeePass.url"
 #define MyAppHelpName "KeePass.chm"
 
-#define KeeVersionStr "1.33"
-#define KeeVersionWin "1.33.0.0"
-#define KeeVersionWinShort "1.33"
+#define KeeVersionStr "1.34"
+#define KeeVersionWin "1.34.0.0"
+#define KeeVersionWinShort "1.34"
 
 #define KeeDevPeriod "2003-2017"
 
@@ -108,7 +108,7 @@ Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\{#MyAppName}; Filen
 
 [Run]
 Filename: {app}\{#MyAppExeName}; Description: {cm:LaunchProgram,{#MyAppName}}; Flags: postinstall nowait skipifsilent unchecked
-Filename: http://keepass.info/plugins.html; Description: Visit &plugins web page (browser integration, ...); Flags: postinstall shellexec skipifsilent
+Filename: https://keepass.info/plugins.html; Description: Visit &plugins web page (browser integration, ...); Flags: postinstall shellexec skipifsilent
 
 ; Delete old files when upgrading
 [InstallDelete]

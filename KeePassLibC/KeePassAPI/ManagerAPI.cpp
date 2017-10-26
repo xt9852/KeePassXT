@@ -383,7 +383,8 @@ KP_SHARE void SubstEntryGroupIds(void *pMgr, DWORD dwExistingId, DWORD dwNewId)
 
 KP_SHARE BOOL AttachFileAsBinaryData(PW_ENTRY *pEntry, const TCHAR *lpFile)
 {
-	return CPwUtil::AttachFileAsBinaryData(pEntry, lpFile);
+	return ((CPwUtil::AttachFileAsBinaryData(pEntry, lpFile) == PWE_SUCCESS) ?
+		TRUE : FALSE);
 }
 
 KP_SHARE BOOL SaveBinaryData(const PW_ENTRY *pEntry, const TCHAR *lpFile)

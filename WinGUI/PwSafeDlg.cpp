@@ -3250,9 +3250,12 @@ void CPwSafeDlg::OnPwlistAdd()
 		if(nAttachLen > nEscapeLen)
 		{
 			if(dlg.m_strAttachment.Left(nEscapeLen) == CString(PWS_NEW_ATTACHMENT))
-				CPwUtil::AttachFileAsBinaryData(pNew,
-					dlg.m_strAttachment.Right(dlg.m_strAttachment.GetLength() -
-					nEscapeLen));
+			{
+				CString strFile = dlg.m_strAttachment.Right(
+					dlg.m_strAttachment.GetLength() - nEscapeLen);
+				const int e = CPwUtil::AttachFileAsBinaryData(pNew, strFile);
+				if(e != PWE_SUCCESS) _ReportAttachError(e, strFile);
+			}
 		}
 
 		// Add the password to the GUI, but only if it's visible
@@ -3425,8 +3428,13 @@ void CPwSafeDlg::OnPwlistEdit()
 		else if(nAttachLen > nEscapeLen)
 		{
 			if(dlg.m_strAttachment.Left(nEscapeLen) == CString(PWS_NEW_ATTACHMENT))
-				CPwUtil::AttachFileAsBinaryData(m_mgr.GetEntry(dwEntryIndex),
-					dlg.m_strAttachment.Right(dlg.m_strAttachment.GetLength() - nEscapeLen));
+			{
+				CString strFile = dlg.m_strAttachment.Right(
+					dlg.m_strAttachment.GetLength() - nEscapeLen);
+				const int e = CPwUtil::AttachFileAsBinaryData(m_mgr.GetEntry(
+					dwEntryIndex), strFile);
+				if(e != PWE_SUCCESS) _ReportAttachError(e, strFile);
+			}
 		}
 
 		PW_ENTRY *pBase = m_mgr.GetEntry(dwEntryIndex); ASSERT_ENTRY(pBase);
@@ -5926,8 +5934,7 @@ void CPwSafeDlg::_PrintGroup(DWORD dwGroupId)
 		return;
 	}
 
-	ShellExecute(m_hWnd, _T("print"), tszFile.c_str(), NULL, NULL, SW_SHOW);
-
+	WU_PrintHtmlFile(tszFile.c_str(), m_hWnd);
 	m_vTempFiles.push_back(tszFile);
 }
 
@@ -11876,4 +11883,20 @@ void CPwSafeDlg::OnContextMenu(CWnd* pWnd, CPoint point)
 		else { ASSERT(FALSE); }
 	}
 	else { CDialog::OnContextMenu(pWnd, point); }
+}
+
+void CPwSafeDlg::_ReportAttachError(int e, LPCTSTR lpFile)
+{
+	CString str;
+	if((lpFile != NULL) && (lpFile[0] != _T('\0')))
+	{
+		str += TRL("Failed to attach file:");
+		str += _T("\r\n\r\n");
+		str += lpFile;
+		str += _T("\r\n\r\n");
+	}
+
+	str += CPwUtil::FormatError(e, PWFF_NO_INTRO | PWFF_MAIN_TEXT_ONLY);
+
+	MessageBox(str, PWM_PRODUCT_NAME_SHORT, MB_OK | MB_ICONWARNING);
 }

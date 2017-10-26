@@ -90,7 +90,8 @@ BOOL CPwSafeApp::InitInstance()
 
 	AU_EnsureInitialized();
 
-	if(ProcessControlCommands() == TRUE)
+	// Do not run as AppX, because of compatibility problems
+	if((AU_IsAppX() == TRUE) || (ProcessControlCommands() == TRUE))
 	{
 		this->_App_CleanUp();
 		return FALSE;

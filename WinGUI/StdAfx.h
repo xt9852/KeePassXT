@@ -33,24 +33,24 @@
 #ifndef WIN32_LEAN_AND_MEAN
 #define WIN32_LEAN_AND_MEAN
 #endif
-/*
+
 // Using the Windows Headers:
 // https://msdn.microsoft.com/en-us/library/windows/desktop/aa383745.aspx
-#ifndef WINVER
-#define WINVER 0x0600
-#endif
-#ifndef _WIN32_WINNT
-#define _WIN32_WINNT 0x0600
-#endif						
-#ifndef _WIN32_WINDOWS
-#define _WIN32_WINDOWS 0x0410
-#endif
-#ifndef _WIN32_IE
-#define _WIN32_IE 0x0600
-#endif
-#define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS
-#define _AFX_ALL_WARNINGS
-*/
+// #ifndef WINVER
+// #define WINVER 0x0600
+// #endif
+// #ifndef _WIN32_WINNT
+// #define _WIN32_WINNT 0x0600
+// #endif						
+// #ifndef _WIN32_WINDOWS
+// #define _WIN32_WINDOWS 0x0410
+// #endif
+// #ifndef _WIN32_IE
+// #define _WIN32_IE 0x0600
+// #endif
+// #define _ATL_CSTRING_EXPLICIT_CONSTRUCTORS
+// #define _AFX_ALL_WARNINGS
+
 #ifndef MMNOMIDI
 #define MMNOMIDI
 #endif
@@ -95,15 +95,15 @@
 
 #include <afxdisp.h>
 #include <afxole.h>
-/*
+
 // #ifdef _WIN32_WINNT
 // #undef _WIN32_WINNT
 // #endif
 // #define _WIN32_WINNT 0x0600
-#if (_WIN32_WINNT != 0x0600)
-#error _WIN32_WINNT has been redefined by MFC headers!
-#endif
-*/
+// #if (_WIN32_WINNT != 0x0600)
+// #error _WIN32_WINNT has been redefined by MFC headers!
+// #endif
+
 // Redefine the buggy version of AFXASSUME if we are being compiled on
 // VC 2005 which generates the compiler warning "C4189: '__afx_condVal' :
 // local variable is initialized but not referenced"; this bug was fixed

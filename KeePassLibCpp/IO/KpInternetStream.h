@@ -38,7 +38,7 @@ public:
 		// Do not call Internet* functions within the constructor,
 		// because the object might be global and Internet* functions
 		// cannot be called safely within constructors of global objects:
-		// http://msdn.microsoft.com/en-us/library/windows/desktop/aa385098.aspx
+		// https://msdn.microsoft.com/en-us/library/windows/desktop/aa385098.aspx
 	}
 
 	virtual ~CKpInternetStream() { Close(); }

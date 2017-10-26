@@ -891,7 +891,7 @@ BOOL NewGUI_GetNonClientMetrics(NONCLIENTMETRICS* p)
 
 	// See the documentation of the NONCLIENTMETRICS structure:
 	// https://msdn.microsoft.com/en-us/library/windows/desktop/ff729175.aspx
-	// http://www.codeproject.com/Messages/3989684/Compile-with-dev-studio-running-on-Windows-XP.aspx
+	// https://www.codeproject.com/Messages/3989684/Compile-with-dev-studio-running-on-Windows-XP.aspx
 #if (WINVER == 0x0600)
 	if(AU_IsAtLeastWinVistaSystem() == FALSE)
 	{
@@ -901,7 +901,7 @@ BOOL NewGUI_GetNonClientMetrics(NONCLIENTMETRICS* p)
 #else
 	// Verify that the size computation above is still correct with the
 	// latest NONCLIENTMETRICS definition, then update the WINVER comparison
-	//BOOST_STATIC_ASSERT(false);
+	// BOOST_STATIC_ASSERT(false);
 #endif
 
 	p->cbSize = cbSize;

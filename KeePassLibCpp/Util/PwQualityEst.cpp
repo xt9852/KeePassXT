@@ -399,7 +399,7 @@ WCHAR QeDecodeLeetChar(WCHAR chLeet)
 		case L'\x00D1':
 		case L'\x00F1': ch = L'n'; break;
 		case L'0':
-//		case L'?:
+		// case L'?':
 		case L'*':
 		case L'\x00A4':
 		case L'\x00D8':

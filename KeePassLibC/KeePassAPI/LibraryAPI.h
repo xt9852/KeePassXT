@@ -23,7 +23,7 @@
 #include "APIDefEx.h"
 
 // Library build number (independent of underlying KeePass version)
-#define KEEPASS_LIBRARY_BUILD 0x0000019C
+#define KEEPASS_LIBRARY_BUILD 0x0000019F
 
 KP_SHARE DWORD GetKeePassVersion();
 KP_SHARE LPCTSTR GetKeePassVersionString();

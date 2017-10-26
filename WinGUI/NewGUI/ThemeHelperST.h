@@ -1,5 +1,5 @@
 // This is a modified version of Davide Calabro's CThemeHelperST class,
-// by Dominik Reichl, dominik.reichl@t-online.de, http://www.dominik-reichl.de
+// Dominik Reichl, dominik.reichl@t-online.de, https://www.dominik-reichl.de/
 // See below for his original header and disclaimer.
 
 //

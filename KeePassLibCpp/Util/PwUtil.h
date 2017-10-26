@@ -98,7 +98,7 @@ public:
 
 	static void HashKpEntry(const KP_ENTRY* pEntry, BYTE* pHash32);
 
-	static BOOL AttachFileAsBinaryData(_Inout_ PW_ENTRY *pEntry,
+	static int AttachFileAsBinaryData(_Inout_ PW_ENTRY *pEntry,
 		const TCHAR *lpFile);
 	static BOOL SaveBinaryData(_In_ const PW_ENTRY *pEntry,
 		const TCHAR *lpFile);

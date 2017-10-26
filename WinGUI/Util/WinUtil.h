@@ -58,7 +58,7 @@ void RegisterOwnClipboardData(unsigned char* pData, unsigned long dwDataSize);
 
 // Thanks to Gabe Martin for the contribution of the following
 // two secure clipboard functions!
-// http://sourceforge.net/tracker/index.php?func=detail&aid=1102906&group_id=95013&atid=609910
+// https://sourceforge.net/p/keepass/patches/6/
 BOOL MakeClipboardDelayRender(HWND hOwner, HWND *phNextCB);
 void CopyDelayRenderedClipboardData(const TCHAR *lptString, CPwManager *pReferenceSource);
 
@@ -158,5 +158,7 @@ std::basic_string<TCHAR> WU_GetEnv(LPCTSTR lpVarName, bool bExpand);
 
 LONG WU_RegCreateKey(_In_ HKEY hKey, _In_opt_ LPCTSTR lpSubKey,
 	_Out_ PHKEY phkResult);
+
+void WU_PrintHtmlFile(LPCTSTR lpFile, HWND hParent);
 
 #endif

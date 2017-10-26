@@ -38,12 +38,12 @@
 
 // When making a Windows build, don't forget to update the verinfo resource
 #ifndef _UNICODE
-#define PWM_VERSION_STR  _T("1.33")
+#define PWM_VERSION_STR  _T("1.34")
 #else
-#define PWM_VERSION_STR  _T("1.33 Unicode")
+#define PWM_VERSION_STR  _T("1.34 Unicode")
 #endif
-#define PWM_VERSION_DW   0x01210000
-#define PWM_VERSION_QW   0x0001002100000000ULL
+#define PWM_VERSION_DW   0x01220000
+#define PWM_VERSION_QW   0x0001002200000000ULL
 // #define PWM_DEVSNAPSHOT
 
 // Database file signature bytes
@@ -57,13 +57,12 @@
 #define PWM_DBSIG_1_KDBX_R 0x9AA2D903
 #define PWM_DBSIG_2_KDBX_R 0xB54BFB67
 
-#define PWM_HOMEPAGE     _T("http://keepass.info/")
-#define PWM_URL_TRL      _T("http://keepass.info/translations.html")
-#define PWM_URL_PLUGINS  _T("http://keepass.info/plugins.html")
-// #define PWM_URL_VERSION  _T("http://keepass.info/update/version1x.txt")
-#define PWM_URL_VERSION  _T("https://sslsites.de/keepass.info/update/version1x.txt")
-#define PWM_URL_DONATE   _T("http://keepass.info/donate.html")
-#define PWM_URL_HELP     _T("http://keepass.info/help/")
+#define PWM_HOMEPAGE     _T("https://keepass.info/")
+#define PWM_URL_TRL      _T("https://keepass.info/translations.html")
+#define PWM_URL_PLUGINS  _T("https://keepass.info/plugins.html")
+#define PWM_URL_DONATE   _T("https://keepass.info/donate.html")
+#define PWM_URL_HELP     _T("https://keepass.info/help/")
+#define PWM_URL_VERSION  _T("https://www.dominik-reichl.de/update/version1x.txt")
 
 #define PWM_EXENAME       _T("KeePass")
 
@@ -246,7 +245,7 @@
 
 #define PWM_SESSION_KEY_SIZE     12
 
-#define PWM_STD_KEYENCROUNDS     6000
+#define PWM_STD_KEYENCROUNDS     60000
 
 #define PWM_STD_ICON_GROUP       48
 #define PWM_STD_ICON_GROUP_OPEN  49
@@ -305,6 +304,7 @@
 #define PWE_UNSUPPORTED_KDBX       18
 #define PWE_GETLASTERROR           19
 #define PWE_DB_EMPTY               20
+#define PWE_ATTACH_TOOLARGE        21
 
 // Format flags
 #define PWFF_NO_INTRO               1

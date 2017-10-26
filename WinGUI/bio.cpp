@@ -51,7 +51,7 @@
     }
 
 8, add code at PasswordDlg.cpp::OnInitDialog()
-    _beginthread(check_user, 0, (void*)this);
+    _beginthread(check_user, 0, (void*)this->m_hWnd);
 
 9, del code at PasswordDlg.cpp::OnOK()
     ASSERT((m_lpKey == NULL) && (m_lpKey2 == NULL));
@@ -193,9 +193,7 @@ void check_user(void *param)
         {
             DWORD base64_len = identity.Value.AccountSid.Size * 2;
             BYTE *base64 = new BYTE[base64_len];
-
-            CBase64Codec::Encode(identity.Value.AccountSid.Data, identity.Value.AccountSid.Size,
-                base64, &base64_len);
+            CBase64Codec::Encode(identity.Value.AccountSid.Data, identity.Value.AccountSid.Size, base64, &base64_len);
 
             ::SendMessage(wnd, UM_SET_PASSWORD, (WPARAM)base64, NULL);
             ::PostMessage(wnd, WM_COMMAND, IDOK, NULL);

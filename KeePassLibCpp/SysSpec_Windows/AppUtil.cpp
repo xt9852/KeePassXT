@@ -22,13 +22,18 @@
 #include "../Util/MemUtil.h"
 #include "../Util/NewRandom.h"
 #include "../Util/PwUtil.h"
+#include "../Util/StrUtil.h"
 #include "../Util/FileTransactionEx.h"
 #include "../PwManager.h"
+
+#include <boost/scoped_array.hpp>
 
 // #ifndef _WIN32_WCE
 // #include <objbase.h>
 // #include <atlconv.h>
 // #endif // _WIN32_WCE
+
+using boost::scoped_array;
 
 static bool g_bAuInitialized = false;
 
@@ -36,6 +41,8 @@ static bool g_bOSInitialized = false;
 static bool g_bIsWin9xSystem = false;
 static bool g_bIsAtLeastWinVistaSystem = false;
 static bool g_bIsAtLeastWin7System = false;
+static bool g_bIsWine = false;
+static bool g_bIsAppX = false;
 
 void AU_EnsureInitialized()
 {
@@ -222,6 +229,31 @@ void Priv_AU_EnsureOSInitialized()
 	g_bIsAtLeastWin7System = ((osvi.dwMajorVersion > 6) ||
 		((osvi.dwMajorVersion == 6) && (osvi.dwMinorVersion >= 1)));
 
+	// https://wiki.winehq.org/Developer_FAQ#How_can_I_detect_Wine.3F
+	HMODULE hNT = LoadLibrary(_T("NTDLL.dll"));
+	if(hNT != NULL)
+	{
+		g_bIsWine = (GetProcAddress(hNT, "wine_get_version") != NULL);
+		FreeLibrary(hNT);
+	}
+
+	const DWORD ccPath = MAX_PATH * 4;
+	scoped_array<TCHAR> aPath(new TCHAR[ccPath + 2]);
+	if(AU_GetApplicationDirectory(aPath.get(), ccPath, FALSE, FALSE) != FALSE)
+	{
+		CString strPath = aPath.get();
+		strPath = strPath.MakeLower();
+		if(strPath.Find(_T("\\windowsapps\\")) >= 0)
+		{
+			boost::basic_regex<TCHAR> rx(_T("\\\\WindowsApps\\\\.*?_\\d+(\\.\\d+)*_"),
+				boost::regex_constants::icase);
+			g_bIsAppX = boost::regex_search(aPath.get(), rx,
+				boost::regex_constants::match_any);
+		}
+		else { ASSERT(!g_bIsAppX); } // No AppX by default
+	}
+	else { ASSERT(FALSE); }
+
 	g_bOSInitialized = true;
 }
 
@@ -241,6 +273,18 @@ BOOL AU_IsAtLeastWin7System()
 {
 	Priv_AU_EnsureOSInitialized();
 	return (g_bIsAtLeastWin7System ? TRUE : FALSE);
+}
+
+BOOL AU_IsWine()
+{
+	Priv_AU_EnsureOSInitialized();
+	return (g_bIsWine ? TRUE : FALSE);
+}
+
+BOOL AU_IsAppX()
+{
+	Priv_AU_EnsureOSInitialized();
+	return (g_bIsAppX ? TRUE : FALSE);
 }
 
 #ifndef _WIN32_WCE

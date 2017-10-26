@@ -53,8 +53,9 @@ public:
 
 	void SetRTF(LPCTSTR lpRTF, int nStreamType);
 	CString GetRTF();
-
 	CString GetTXT();
+
+	void PasteTextOnly();
 
 	virtual BOOL PreTranslateMessage(MSG* pMsg);
 

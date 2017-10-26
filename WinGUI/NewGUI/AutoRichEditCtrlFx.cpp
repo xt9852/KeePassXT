@@ -19,6 +19,7 @@
 
 #include "StdAfx.h"
 #include "AutoRichEditCtrlFx.h"
+#include "../../KeePassLibCpp/Util/AppUtil.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -228,9 +229,33 @@ bool CAutoRichEditCtrlFx::_HandleKey(int vk, bool bDown)
 		(bShift && !bAlt && (vk == VK_INSERT)))) // Ctrl may be pressed
 		// (!bCtrl && bShift && !bAlt && !bNumLock && (vk == VK_NUMPAD0))))
 	{
-		if(bDown) PasteSpecial(CF_TEXT);
+		if(bDown) PasteTextOnly();
 		return true;
 	}
 
 	return false;
+}
+
+void CAutoRichEditCtrlFx::PasteTextOnly()
+{
+	// Wine doesn't support EM_PASTESPECIAL:
+	// https://bugs.winehq.org/show_bug.cgi?id=14530
+	if(AU_IsWine() != FALSE)
+	{
+		CHARRANGE crOld, crNew;
+		ZeroMemory(&crOld, sizeof(CHARRANGE));
+		ZeroMemory(&crNew, sizeof(CHARRANGE));
+
+		GetSel(crOld);
+		CString strOld = GetTXT();
+
+		PasteSpecial(CF_TEXT); // Future Wine version may support it
+
+		GetSel(crNew);
+		CString strNew = GetTXT();
+
+		if((strOld == strNew) && (memcmp(&crOld, &crNew, sizeof(CHARRANGE)) == 0))
+			Paste();
+	}
+	else PasteSpecial(CF_TEXT);
 }

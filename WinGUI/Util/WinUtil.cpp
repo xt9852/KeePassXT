@@ -160,7 +160,7 @@ void ClearClipboardIfOwner()
 
 // Thanks to Gabe Martin for the contribution of the following
 // two secure clipboard functions!
-// http://sourceforge.net/tracker/index.php?func=detail&aid=1102906&group_id=95013&atid=609910
+// https://sourceforge.net/p/keepass/patches/6/
 
 BOOL MakeClipboardDelayRender(HWND hOwner, HWND *phNextCB)
 {
@@ -1601,4 +1601,38 @@ LONG WU_RegCreateKey(_In_ HKEY hKey, _In_opt_ LPCTSTR lpSubKey,
 	// versions of Windows only, thus we call RegCreateKeyEx
 	return RegCreateKeyEx(hKey, lpSubKey, 0, NULL, REG_OPTION_NON_VOLATILE,
 		KEY_ALL_ACCESS, NULL, phkResult, NULL);
+}
+
+void WU_PrintHtmlFile(LPCTSTR lpFile, HWND hParent)
+{
+	if((lpFile == NULL) || (*lpFile == _T('\0'))) { ASSERT(FALSE); return; }
+
+	CString str = WU_GetRegStr(HKEY_CLASSES_ROOT,
+		_T("htmlfile\\shell\\print\\command"), _T("")).c_str();
+	if(str.GetLength() > 0)
+	{
+		CString strOrg = str;
+		str.Replace(_T("%1"), lpFile);
+		str.Replace(_T("%L"), lpFile);
+		str.Replace(_T("%l"), lpFile);
+		str.Replace(_T("%*"), lpFile);
+
+		if(str != strOrg)
+		{
+			VERIFY(str.Replace(_T("%0"), _T("")) == 0);
+			VERIFY(str.Replace(_T("%2"), _T("")) == 0);
+			VERIFY(str.Replace(_T("%3"), _T("")) == 0);
+			VERIFY(str.Replace(_T("%4"), _T("")) == 0);
+
+			CString strUrl = _T("cmd://");
+			strUrl += str;
+
+			OpenUrlEx(strUrl, hParent);
+			return;
+		}
+	}
+
+	ASSERT(FALSE);
+	// Not all browsers support the "print" shell verb
+	ShellExecute(hParent, _T("print"), lpFile, NULL, NULL, SW_SHOW);
 }

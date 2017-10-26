@@ -730,7 +730,7 @@ void CAddEntryDlg::OnUpdateReDelete(CCmdUI* pCmdUI)
 void CAddEntryDlg::OnRePaste()
 {
 	// m_reNotes.Paste();
-	m_reNotes.PasteSpecial(CF_TEXT);
+	m_reNotes.PasteTextOnly();
 }
 
 void CAddEntryDlg::OnUpdateRePaste(CCmdUI* pCmdUI)

@@ -373,8 +373,7 @@ int CPwManager::OpenDatabase(const TCHAR *pszFile, _Out_opt_ PWDB_REPAIR_INFO *p
 
 int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 {
-	DWORD uEncryptedPartSize, uAllocated, i, pos, dwFieldSize;
-	PW_DBHEADER hdr;
+	DWORD uEncryptedPartSize, i, pos, dwFieldSize;
 	UINT8 uFinalKey[32];
 	sha256_ctx sha32;
 	USHORT usFieldType;
@@ -389,22 +388,22 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 
 	_AddAllMetaStreams();
 
-	DWORD uFileSize = sizeof(PW_DBHEADER);
+	UINT64 qwFileSize = sizeof(PW_DBHEADER);
 	BYTE *pbt;
 
 	// Create a dummy ext data structure for computing its size
 	m_vHeaderHash.resize(32);
 	CKpMemoryStream msExtDataSize(true);
 	WriteExtData(msExtDataSize);
-	uFileSize += 2 + 4 + static_cast<DWORD>(msExtDataSize.GetSize());
+	qwFileSize += 2 + 4 + msExtDataSize.GetSize();
 
 	// Get the size of all groups
 	for(i = 0; i < m_dwNumGroups; ++i)
 	{
-		uFileSize += 94; // 6+4+6+6+5+6+5+6+5+6+5+6+4+6+6+2+6+4 = 94
+		qwFileSize += 94; // 6+4+6+6+5+6+5+6+5+6+5+6+4+6+6+2+6+4 = 94
 
 		pbt = _StringToUTF8(m_pGroups[i].pszGroupName);
-		uFileSize += szlen((char *)pbt) + 1;
+		qwFileSize += szlen((char *)pbt) + 1;
 		SAFE_DELETE_ARRAY(pbt);
 	}
 
@@ -415,47 +414,51 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 
 		UnlockEntryPassword(&m_pEntries[i]);
 
-		uFileSize += 134; // 6+16+6+4+6+4+6+6+6+6+6+6+5+6+5+6+5+6+5+6 = 122
+		qwFileSize += 134; // 6+16+6+4+6+4+6+6+6+6+6+6+5+6+5+6+5+6+5+6 = 122
 
 		pbt = _StringToUTF8(m_pEntries[i].pszTitle);
-		uFileSize += szlen((char *)pbt) + 1;
+		qwFileSize += szlen((char *)pbt) + 1;
 		SAFE_DELETE_ARRAY(pbt);
 
 		pbt = _StringToUTF8(m_pEntries[i].pszUserName);
-		uFileSize += szlen((char *)pbt) + 1;
+		qwFileSize += szlen((char *)pbt) + 1;
 		SAFE_DELETE_ARRAY(pbt);
 
 		pbt = _StringToUTF8(m_pEntries[i].pszURL);
-		uFileSize += szlen((char *)pbt) + 1;
+		qwFileSize += szlen((char *)pbt) + 1;
 		SAFE_DELETE_ARRAY(pbt);
 
 		pbt = _StringToUTF8(m_pEntries[i].pszPassword);
-		uFileSize += szlen((char *)pbt) + 1;
+		qwFileSize += szlen((char *)pbt) + 1;
 		SAFE_DELETE_ARRAY(pbt);
 
 		pbt = _StringToUTF8(m_pEntries[i].pszAdditional);
-		uFileSize += szlen((char *)pbt) + 1;
+		qwFileSize += szlen((char *)pbt) + 1;
 		SAFE_DELETE_ARRAY(pbt);
 
 		pbt = _StringToUTF8(m_pEntries[i].pszBinaryDesc);
-		uFileSize += szlen((char *)pbt) + 1;
+		qwFileSize += szlen((char *)pbt) + 1;
 		SAFE_DELETE_ARRAY(pbt);
 
-		uFileSize += m_pEntries[i].uBinaryDataLen;
+		qwFileSize += m_pEntries[i].uBinaryDataLen;
 
 		LockEntryPassword(&m_pEntries[i]);
 	}
 
-	// Round up filesize to 16-byte boundary for Rijndael/Twofish
-	uFileSize = (uFileSize + 16) - (uFileSize % 16);
+	// Round up file size to 16-byte boundary for Rijndael/Twofish
+	qwFileSize = (qwFileSize + 16) - (qwFileSize % 16);
 
-	// Allocate enough memory
-	uAllocated = uFileSize + 16;
-	char *pVirtualFile = new char[uAllocated];
-	ASSERT(pVirtualFile != NULL);
+	const UINT64 qwAlloc = qwFileSize + 16;
+	if(qwAlloc > 0xFFFFFFFFULL) { _LoadAndRemoveAllMetaStreams(false); return PWE_NO_MEM; }
+
+	const DWORD uAlloc = static_cast<DWORD>(qwAlloc);
+	char *pVirtualFile = NULL;
+	try { pVirtualFile = new char[uAlloc]; }
+	catch(...) { }
 	if(pVirtualFile == NULL) { _LoadAndRemoveAllMetaStreams(false); return PWE_NO_MEM; }
 
 	// Build header structure
+	PW_DBHEADER hdr;
 	hdr.dwSignature1 = PWM_DBSIG_1;
 	hdr.dwSignature2 = PWM_DBSIG_2;
 
@@ -506,7 +509,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 		usFieldType = 0x0002; dwFieldSize = szlen((char *)pb) + 1;
 		memcpy(&pVirtualFile[pos], &usFieldType, 2); pos += 2;
 		memcpy(&pVirtualFile[pos], &dwFieldSize, 4); pos += 4;
-		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= uAllocated));
+		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= qwAlloc));
 		szcpy(&pVirtualFile[pos], (char *)pb); pos += dwFieldSize;
 		SAFE_DELETE_ARRAY(pb);
 
@@ -579,7 +582,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 		dwFieldSize = szlen((char *)pb) + 1; // Add terminating NULL character space
 		memcpy(&pVirtualFile[pos], &usFieldType, 2); pos += 2;
 		memcpy(&pVirtualFile[pos], &dwFieldSize, 4); pos += 4;
-		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= uAllocated));
+		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= qwAlloc));
 		szcpy(&pVirtualFile[pos], (char *)pb); pos += dwFieldSize;
 		SAFE_DELETE_ARRAY(pb);
 
@@ -588,7 +591,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 		dwFieldSize = szlen((char *)pb) + 1; // Add terminating NULL character space
 		memcpy(&pVirtualFile[pos], &usFieldType, 2); pos += 2;
 		memcpy(&pVirtualFile[pos], &dwFieldSize, 4); pos += 4;
-		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= uAllocated));
+		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= qwAlloc));
 		szcpy(&pVirtualFile[pos], (char *)pb); pos += dwFieldSize;
 		SAFE_DELETE_ARRAY(pb);
 
@@ -597,7 +600,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 		dwFieldSize = szlen((char *)pb) + 1; // Add terminating NULL character space
 		memcpy(&pVirtualFile[pos], &usFieldType, 2); pos += 2;
 		memcpy(&pVirtualFile[pos], &dwFieldSize, 4); pos += 4;
-		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= uAllocated));
+		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= qwAlloc));
 		szcpy(&pVirtualFile[pos], (char *)pb); pos += dwFieldSize;
 		SAFE_DELETE_ARRAY(pb);
 
@@ -606,7 +609,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 		dwFieldSize = szlen((char *)pb) + 1; // Add terminating NULL character space
 		memcpy(&pVirtualFile[pos], &usFieldType, 2); pos += 2;
 		memcpy(&pVirtualFile[pos], &dwFieldSize, 4); pos += 4;
-		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= uAllocated));
+		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= qwAlloc));
 		szcpy(&pVirtualFile[pos], (char *)pb); pos += dwFieldSize;
 		if(pb != NULL) mem_erase((unsigned char *)pb, szlen((char *)pb));
 		SAFE_DELETE_ARRAY(pb);
@@ -616,7 +619,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 		dwFieldSize = szlen((char *)pb) + 1; // Add terminating NULL character space
 		memcpy(&pVirtualFile[pos], &usFieldType, 2); pos += 2;
 		memcpy(&pVirtualFile[pos], &dwFieldSize, 4); pos += 4;
-		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= uAllocated));
+		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= qwAlloc));
 		szcpy(&pVirtualFile[pos], (char *)pb); pos += dwFieldSize;
 		SAFE_DELETE_ARRAY(pb);
 
@@ -649,7 +652,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 		dwFieldSize = szlen((char *)pb) + 1;
 		memcpy(&pVirtualFile[pos], &usFieldType, 2); pos += 2;
 		memcpy(&pVirtualFile[pos], &dwFieldSize, 4); pos += 4;
-		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= uAllocated));
+		ASSERT((pb != NULL) && (szlen((char *)pb) == (dwFieldSize - 1)) && ((pos + dwFieldSize) <= qwAlloc));
 		szcpy(&pVirtualFile[pos], (char *)pb); pos += dwFieldSize;
 		SAFE_DELETE_ARRAY(pb);
 
@@ -666,7 +669,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 
 		LockEntryPassword(&m_pEntries[i]);
 	}
-	ASSERT((pos <= uFileSize) && ((pos + 33) > uAllocated));
+	ASSERT((pos <= qwFileSize) && ((pos + 33) > qwAlloc));
 
 	sha256_begin(&sha32);
 	sha256_hash((unsigned char *)pVirtualFile + sizeof(PW_DBHEADER), pos - sizeof(PW_DBHEADER), &sha32);
@@ -698,7 +701,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 	// tstrClear += _T(".plaintext.bin");
 	// FILE *fpClear = NULL;
 	// _tfopen_s(&fpClear, tstrClear.c_str(), _T("wb"));
-	// fwrite(pVirtualFile, 1, uFileSize, fpClear);
+	// fwrite(pVirtualFile, 1, static_cast<size_t>(qwFileSize), fpClear);
 	// fclose(fpClear); fpClear = NULL;
 #endif
 
@@ -709,6 +712,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 			CRijndael::Key32Bytes, hdr.aEncryptionIV) != RIJNDAEL_SUCCESS)
 		{
 			SAFE_DELETE_ARRAY(pVirtualFile);
+			_LoadAndRemoveAllMetaStreams(false);
 			return PWE_CRYPT_ERROR;
 		}
 
@@ -733,7 +737,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 	else
 	{
 		ASSERT(FALSE);
-		_OPENDB_FAIL_LIGHT;
+		SAFE_DELETE_ARRAY(pVirtualFile);
 		_LoadAndRemoveAllMetaStreams(false);
 		return PWE_INVALID_PARAM;
 	}
@@ -756,7 +760,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 		m_bUseTransactedFileWrites);
 	if(nWriteRes != PWE_SUCCESS)
 	{
-		mem_erase((unsigned char *)pVirtualFile, uAllocated);
+		mem_erase((unsigned char *)pVirtualFile, uAlloc);
 		SAFE_DELETE_ARRAY(pVirtualFile);
 		_LoadAndRemoveAllMetaStreams(false);
 		return nWriteRes;
@@ -772,7 +776,7 @@ int CPwManager::SaveDatabase(const TCHAR *pszFile, BYTE *pWrittenDataHash32)
 
 	memcpy(&m_dbLastHeader, &hdr, sizeof(PW_DBHEADER)); // Backup last database header
 
-	mem_erase((unsigned char *)pVirtualFile, uAllocated);
+	mem_erase((unsigned char *)pVirtualFile, uAlloc);
 	SAFE_DELETE_ARRAY(pVirtualFile);
 	_LoadAndRemoveAllMetaStreams(false);
 
